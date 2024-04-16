@@ -17,7 +17,7 @@ on:
       - '.github/workflows/**'
 jobs:
   check_coding_style:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image:  ghcr.io/epitech/coding-style-checker:latest
     steps:
@@ -41,7 +41,7 @@ jobs:
           fi
 
   check_program_compilation:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     needs: check_coding_style
@@ -66,7 +66,7 @@ jobs:
           done
 
   push_to_mirror:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: github.event_name == 'push'
     needs: check_program_compilation
     container:
