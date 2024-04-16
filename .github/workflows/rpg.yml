@@ -68,7 +68,7 @@ jobs:
   push_to_mirror:
     runs-on: self-hosted
     if: github.event_name == 'push'
-
+    needs: check_program_compilation
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
