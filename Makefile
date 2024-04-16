@@ -9,7 +9,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g #-Werror
 LFLAGS = -Llib/ -lmy
 CSFMLFLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-system
-SRC = main.c
+SRC = src/main.c
 OBJS = $(SRC:.c=.o)
 NAME = my_rpg
 
