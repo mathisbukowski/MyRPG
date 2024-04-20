@@ -92,5 +92,6 @@ typedef struct rpg_s {
 
 // Utils
 int check_tty(char **env);
+void free_rpg(rpg_t *rpg);
 
 #endif //RPG_H
