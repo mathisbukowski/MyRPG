@@ -14,6 +14,8 @@ static void help(void)
 
 int print_help(int ac, char **av)
 {
+    if (!av[1])
+        return 1;
     if (strcmp(av[1], "-h") == 0) {
         help();
         return 1;

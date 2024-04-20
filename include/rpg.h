@@ -81,17 +81,43 @@ typedef struct event_s {
     struct event_s *next;
 } event_t;
 
+// Window Structure
+typedef struct window_s {
+    sfRenderWindow *window;
+    sfTexture *texture;
+    sfVideoMode mode;
+    char *title;
+    unsigned int style;
+    sfBool isFullscreen;
+    sfBool isActive;
+} window_t;
+
+// Main
 typedef struct rpg_s {
     player_t *player;
     mob_t *mobs;
     object_t *objs;
     quest_t *quests;
     event_t *events;
+    window_t *window;
 } rpg_t;
 
+// Main Category
+int game_loop(int ac, char **av);
 
 // Utils
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
+rpg_t *init_structure(void);
+
+// Window Manager
+void create_window(unsigned int width, unsigned int height,
+    const char *title, rpg_t *main);
+void event_manager(rpg_t *main);
+void display_window(rpg_t *main);
+void destroy_window(rpg_t *main);
+
+// Help Category
+int print_help(int ac, char **av);
 
 #endif //RPG_H
