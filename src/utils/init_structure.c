@@ -27,7 +27,7 @@ static mob_t *init_mobs(void)
 
 static object_t *init_object(void)
 {
-    object_t *new_object = (object_t *)malloc(sizeof(object_t));
+    object_t *new_object = malloc(sizeof(object_t));
 
     if (new_object != NULL)
         memset(new_object, 0, sizeof(object_t));
@@ -36,7 +36,7 @@ static object_t *init_object(void)
 
 static quest_t *init_quest(void)
 {
-    quest_t *new_quest = (quest_t *)malloc(sizeof(quest_t));
+    quest_t *new_quest = malloc(sizeof(quest_t));
 
     if (new_quest != NULL)
         memset(new_quest, 0, sizeof(quest_t));
@@ -45,11 +45,20 @@ static quest_t *init_quest(void)
 
 static event_t *init_event(void)
 {
-    event_t *new_event = (event_t *)malloc(sizeof(event_t));
+    event_t *new_event = malloc(sizeof(event_t));
 
     if (new_event != NULL)
         memset(new_event, 0, sizeof(event_t));
     return new_event;
+}
+
+window_t *init_window(void)
+{
+    window_t *new_window = malloc(sizeof(window_t));
+
+    if (new_window != NULL)
+        memset(new_window, 0, sizeof(window_t));
+    return new_window;
 }
 
 rpg_t *init_structure(void)
@@ -62,6 +71,7 @@ rpg_t *init_structure(void)
         main->mobs = init_mobs();
         main->objs = init_object();
         main->quests = init_quest();
+        main->window = init_window();
     } else
         free_rpg(main);
     return main;

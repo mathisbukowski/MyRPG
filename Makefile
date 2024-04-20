@@ -5,8 +5,12 @@
 ## Makefile for minishell project
 ##
 
-SRC = src/main.c src/utils/check_tty.c \
-		src/utils/print_help.c
+SRC = src/main.c src/rpg.c src/utils/check_tty.c \
+		src/utils/print_help.c src/utils/init_structure.c \
+		src/utils/free_project.c \
+		src/events/event_manager.c \
+		src/window_manager/create_window.c src/window_manager/display_window.c \
+		src/window_manager/destroy_window.c
 
 OBJ = $(SRC:.c=.o)
 
