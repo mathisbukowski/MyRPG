@@ -5,7 +5,9 @@
 ## Makefile for minishell project
 ##
 
-SRC = src/main.c
+SRC = src/main.c src/utils/check_tty.c \
+		src/utils/print_help.c
+
 OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg
