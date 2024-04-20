@@ -5,20 +5,19 @@
 ## Makefile for minishell project
 ##
 
-SRC = src/main.c\
-
+SRC = src/main.c
+OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg
 
 LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
+CFLAGS = -Wall -Wextra  -I./include -g #-Werror
 
-CFLAGS =  -g
+all: $(NAME)
 
-all : $(NAME)
-
-$(NAME) :
+$(NAME): $(OBJ)
 	make -C lib/my
-	gcc $(CFLAGS) $(SRC) -o $(NAME) $(LIB)
+	gcc $(CFLAGS) $(OBJ) -o $(NAME) $(LIB)
 	make clean -C lib/my
 
 clean:
@@ -29,3 +28,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: libmy
+libmy:
+	make -C lib/my

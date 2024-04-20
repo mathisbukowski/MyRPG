@@ -53,20 +53,23 @@ SRC = d_i_s_c_o_flags.c \
         my_strrchr.c\
 
 OBJ = $(SRC:.c=.o)
+LIB = libmy.a
 
-MY_LIB = libmy.a
+CFLAGS = -Wall -Wextra  -I./include -g #-Werror
 
-MY_H = my.h
+all: $(LIB)
 
-all: $(MY_LIB)
+$(LIB): $(OBJ)
+	ar rcs $@ $^
 
-$(MY_LIB): $(OBJ)
-	ar rc $(MY_LIB) $(OBJ)
+%.o: %.c
+	gcc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(LIB)
 
 fclean: clean
-	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

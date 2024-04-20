@@ -1,12 +1,10 @@
 /*
-** EPITECH PROJECT, 2023
-** bsmypaint
+** EPITECH PROJECT, 2024
+** RPG_H
 ** File description:
 ** main.c
 */
 
-#include "../include/my.h"
-#include "../include/my_printf.h"
 #include "../include/rpg.h"
 
 int check_tty(char **env)
@@ -20,7 +18,7 @@ int check_tty(char **env)
 
 static void help(void)
 {
-    my_printf("Help Panel of Paint");
+    printf("Help Panel of RPG");
 }
 
 int print_help(int ac, char **av)
