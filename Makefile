@@ -1,29 +1,31 @@
 ##
-## EPITECH PROJECT, 2023
-## B-MUL-100-LIL-1-1-myrpg-raphael.richaud
+## EPITECH PROJECT, 2024
+## shell1
 ## File description:
-## Makefile
+## Makefile for minishell project
 ##
 
-CC = gcc
-CFLAGS = -Wall -Wextra -g #-Werror
-LFLAGS = -Llib/ -lmy
-CSFMLFLAGS = -lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-system
-SRC = src/main.c
-OBJS = $(SRC:.c=.o)
+SRC = src/main.c\
+
+
 NAME = my_rpg
 
-all: $(NAME)
+LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
 
-$(NAME): $(OBJS)
-	make -C lib/
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFLAGS) $(CSFMLFLAGS)
+CFLAGS =  -g
+
+all : $(NAME)
+
+$(NAME) :
+	make -C lib/my
+	gcc $(CFLAGS) $(SRC) -o $(NAME) $(LIB)
+	make clean -C lib/my
 
 clean:
-	make clean -C lib/
-	rm -f $(OBJS)
+	rm -f $(OBJ)
 
 fclean: clean
+	rm -f vgcore.*
 	rm -f $(NAME)
 
-re:	fclean all
+re: fclean all
