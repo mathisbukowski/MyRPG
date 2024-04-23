@@ -5,7 +5,7 @@
 ** event_manager.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 void close_window(rpg_t *main)
 {

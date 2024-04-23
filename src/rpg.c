@@ -5,7 +5,7 @@
 ** rpg.c
 */
 
-#include "../include/rpg.h"
+#include "rpg.h"
 
 
 void screen_manager(rpg_t *main)

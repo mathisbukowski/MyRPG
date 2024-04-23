@@ -5,7 +5,7 @@
 ** init_structure.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 static player_t *init_player(void)
 {

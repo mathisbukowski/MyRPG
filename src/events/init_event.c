@@ -5,7 +5,7 @@
 ** init_event.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 static event_t *create_new_event(event_t **head, event_t *prev,
     sfEventType type, void (*function)(rpg_t *))

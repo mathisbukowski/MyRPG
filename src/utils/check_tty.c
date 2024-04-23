@@ -5,7 +5,7 @@
 ** check_tty.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 int check_tty(char **env)
 {

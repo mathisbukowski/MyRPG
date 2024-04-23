@@ -5,7 +5,7 @@
 ** main.c
 */
 
-#include "../include/rpg.h"
+#include "rpg.h"
 
 int main(int ac, char **av, char **env)
 {

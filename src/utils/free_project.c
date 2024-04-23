@@ -5,7 +5,7 @@
 ** free_project.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 
 static void free_players(player_t *player)

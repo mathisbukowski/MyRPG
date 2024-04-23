@@ -5,7 +5,7 @@
 ** execute_event.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 void execute_event(rpg_t *main, sfEventType type)
 {
