@@ -10,6 +10,7 @@
 keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *))
 {
     keymap_t *new_node = malloc(sizeof(keymap_t));
+
     if (new_node == NULL) {
         fprintf(stderr, "Failed to allocate memory for keymap node.\n");
         return NULL;
@@ -20,9 +21,11 @@ keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *))
     return new_node;
 }
 
-void add_key_to_keymap(keymap_t **head, sfKeyCode key, void (*function)(rpg_t *))
+void add_key_to_keymap(keymap_t **head, sfKeyCode key,
+    void (*function)(rpg_t *))
 {
     keymap_t *current = *head;
+
     if (current == NULL) {
         *head = create_keymap_node(key, function);
         return;
