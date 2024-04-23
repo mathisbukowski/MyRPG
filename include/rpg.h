@@ -75,10 +75,17 @@ typedef struct quest_s {
     struct quest_s *next;
 } quest_t;
 
+// Keymap
+typedef struct keymap_s {
+    sfKeyCode key;
+    void (*function)(rpg_t *);
+    struct keymap_s *next;
+} keymap_t;
+
+
 // Events List
 typedef struct event_s {
     sfEventType type;
-    sfEvent event;
     void (*function)(rpg_t *);
     struct event_s *next;
 } event_t;
@@ -123,6 +130,8 @@ void destroy_window(rpg_t *main);
 int print_help(int ac, char **av);
 
 // Event Manager
-void add_event_to_list(rpg_t *main, void (*function)(rpg_t *), sfEvent event);
+void add_event_to_list(rpg_t *main, void (*function)(rpg_t *), sfEventType type);
+void execute_event(rpg_t *main, sfEventType type);
+void close_window(rpg_t *main);
 
 #endif //RPG_H

@@ -10,6 +10,7 @@
 
 void screen_manager(rpg_t *main)
 {
+    add_event_to_list(main, &close_window, sfEvtKeyPressed);
     while (sfRenderWindow_isOpen(main->window->window)) {
         event_manager(main);
         display_window(main);
