@@ -61,6 +61,15 @@ window_t *init_window(void)
     return new_window;
 }
 
+keymap_t *init_keymap(void)
+{
+    keymap_t *new_keymap = malloc(sizeof(keymap_t));
+
+    if (new_keymap != NULL)
+        memset(new_keymap, 0, sizeof(keymap_t));
+    return new_keymap;
+}
+
 rpg_t *init_structure(void)
 {
     rpg_t *main = malloc(sizeof(rpg_t));
@@ -72,6 +81,7 @@ rpg_t *init_structure(void)
         main->objs = init_object();
         main->quests = init_quest();
         main->window = init_window();
+        main->keymap = init_keymap();
     } else
         free_rpg(main);
     return main;
