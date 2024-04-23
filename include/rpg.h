@@ -109,6 +109,7 @@ struct rpg_s {
     quest_t *quests;
     event_t *events;
     window_t *window;
+    keymap_t *keymap;
 };
 
 // Main Category
@@ -134,5 +135,10 @@ void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
     sfEventType type);
 void execute_event(rpg_t *main, sfEventType type);
 void close_window(rpg_t *main);
+
+// Keymap
+keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
+void add_key_to_keymap(keymap_t **head, sfKeyCode key, void (*function)(rpg_t *));
+void handle_key_press(rpg_t *main, sfKeyCode key);
 
 #endif //RPG_H
