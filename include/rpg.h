@@ -130,7 +130,8 @@ void destroy_window(rpg_t *main);
 int print_help(int ac, char **av);
 
 // Event Manager
-void add_event_to_list(rpg_t *main, void (*function)(rpg_t *), sfEventType type);
+void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
+    sfEventType type);
 void execute_event(rpg_t *main, sfEventType type);
 void close_window(rpg_t *main);
 

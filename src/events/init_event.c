@@ -39,7 +39,8 @@ static int already_define_event(event_t *current, event_t **prev,
     return 1;
 }
 
-void add_event_to_list(rpg_t *main, void (*function)(rpg_t *), sfEventType type)
+void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
+    sfEventType type)
 {
     event_t *current = main->events;
     event_t *prev = NULL;
