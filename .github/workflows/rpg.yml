@@ -8,13 +8,15 @@ env:
 
 on:
   push:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
+
   pull_request:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
     paths:
       - '.github/workflows/**'
+
 jobs:
   check_coding_style:
     runs-on: ubuntu-latest
