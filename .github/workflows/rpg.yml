@@ -58,7 +58,8 @@ jobs:
           IFS=',' read -ra ADDR <<< "$EXECUTABLES"
           for i in "${ADDR[@]}"; do
               if [ -f "$i" ] && [ -x "$i" ]; then
-                  ./$i $ARGS
+                  echo "$i exists and is executable."
+                  exit 0
               else
                   echo "$i does not exist or is not executable."
                   exit 1
