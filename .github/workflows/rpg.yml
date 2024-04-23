@@ -91,14 +91,20 @@ jobs:
           target_repo_url: ${{ env.MIRROR_URL }}
           ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY  }}
 
-  get-repo-size:
+  check_repo_size:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Repository Size
+      - name: Check size of the repository
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         run: |
           REPO_SIZE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
                        "https://api.github.com/repos/${{ github.repository }}/git/trees/main?recursive=1" \
                        | jq '.tree | map(select(.type == "blob")) | map(.size) | add')
-          echo "Repository Size: $REPO_SIZE bytes"
+          if [[ "$REPO_SIZE" -ge "30000000" ]]; then
+            echo "Error: Size of the repository is too high."
+            exit 1
+          else
+            echo "Size is great: $REPO_SIZE"
+            exit 0
+          fi
