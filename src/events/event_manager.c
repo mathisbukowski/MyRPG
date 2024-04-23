@@ -17,5 +17,8 @@ void event_manager(rpg_t *main)
     sfEvent event;
 
     while (sfRenderWindow_pollEvent(main->window->window, &event))
-        execute_event(main, event.type);
+        if (event.type == sfEvtKeyPressed)
+            handle_key_press(main, event.key.code);
+        else
+            execute_event(main, event.type);
 }
