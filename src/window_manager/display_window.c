@@ -5,7 +5,7 @@
 ** display_window.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 void display_window(rpg_t *main)
 {

@@ -5,7 +5,7 @@
 ** free_project.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 
 static void free_players(player_t *player)
@@ -57,6 +57,17 @@ static void free_events(event_t *event)
     }
 }
 
+void free_keymap(keymap_t *keymap)
+{
+    keymap_t *tmp = NULL;
+
+    while (keymap != NULL) {
+        tmp = keymap;
+        keymap = keymap->next;
+        free(tmp);
+    }
+}
+
 void free_rpg(rpg_t *rpg)
 {
     if (rpg != NULL) {
@@ -65,6 +76,7 @@ void free_rpg(rpg_t *rpg)
         free_objects(rpg->objs);
         free_quests(rpg->quests);
         free_events(rpg->events);
+        free_keymap(rpg->keymap);
         free(rpg);
     }
 }

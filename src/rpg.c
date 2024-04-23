@@ -5,11 +5,12 @@
 ** rpg.c
 */
 
-#include "../include/rpg.h"
+#include "rpg.h"
 
 
 void screen_manager(rpg_t *main)
 {
+    add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     while (sfRenderWindow_isOpen(main->window->window)) {
         event_manager(main);
         display_window(main);

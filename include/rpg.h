@@ -29,6 +29,8 @@
     #include "../include/my.h"
     #include "../include/my_printf.h"
 
+typedef struct rpg_s rpg_t;
+
 // Player Structure
 typedef struct player_t {
     char name[128];
@@ -73,11 +75,18 @@ typedef struct quest_s {
     struct quest_s *next;
 } quest_t;
 
+// Keymap
+typedef struct keymap_s {
+    sfKeyCode key;
+    void (*function)(rpg_t *);
+    struct keymap_s *next;
+} keymap_t;
+
+
 // Events List
 typedef struct event_s {
     sfEventType type;
-    sfEvent event;
-    void (*function)(sfEventType, sfEvent);
+    void (*function)(rpg_t *);
     struct event_s *next;
 } event_t;
 
@@ -93,14 +102,15 @@ typedef struct window_s {
 } window_t;
 
 // Main
-typedef struct rpg_s {
+struct rpg_s {
     player_t *player;
     mob_t *mobs;
     object_t *objs;
     quest_t *quests;
     event_t *events;
     window_t *window;
-} rpg_t;
+    keymap_t *keymap;
+};
 
 // Main Category
 int game_loop(int ac, char **av);
@@ -119,5 +129,17 @@ void destroy_window(rpg_t *main);
 
 // Help Category
 int print_help(int ac, char **av);
+
+// Event Manager
+void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
+    sfEventType type);
+void execute_event(rpg_t *main, sfEventType type);
+void close_window(rpg_t *main);
+
+// Keymap
+keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
+void add_key_to_keymap(keymap_t **head, sfKeyCode key,
+    void (*function)(rpg_t *));
+void handle_key_press(rpg_t *main, sfKeyCode key);
 
 #endif //RPG_H
