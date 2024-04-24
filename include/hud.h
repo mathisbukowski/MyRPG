@@ -59,9 +59,7 @@ void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
 void handle_menu_hover(menu_t *menu);
-void define_tools_menus(rpg_t *params, sfFont *font);
-void define_colors_menus(rpg_t *params, sfFont *font);
-void define_sizes_menus(rpg_t *params, sfFont *font);
+void define_main_menus(rpg_t *params, sfFont *font);
 
 //buttons
 typedef struct button_s {
