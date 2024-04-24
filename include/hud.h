@@ -59,7 +59,6 @@ void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
 void handle_menu_hover(menu_t *menu);
-
 //buttons
 typedef struct button_s {
     sfRectangleShape *rect;
