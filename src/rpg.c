@@ -10,6 +10,7 @@
 
 void screen_manager(rpg_t *main)
 {
+    add_event_to_list(main, &close_window, sfEvtClosed);
     add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     while (sfRenderWindow_isOpen(main->window->window)) {
         event_manager(main);
