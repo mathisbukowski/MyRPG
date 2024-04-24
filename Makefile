@@ -12,14 +12,17 @@ SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/events/execute_event.c \
 		src/events/create_keymap.c \
 		src/window_manager/create_window.c src/window_manager/display_window.c\
-		src/window_manager/destroy_window.c
+		src/window_manager/destroy_window.c \
+		src/menus/menu.c src/menus/sort_menus.c \
+		src/buttons/buttons.c src/buttons/buttons_creator.c \
+		src/hud_renderer.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg
 
 LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
-CFLAGS = -Wall -Wextra  -I./include -g #-Werror
+CFLAGS = -Wall -Wextra -I./include -g #-Werror
 
 all: $(NAME)
 

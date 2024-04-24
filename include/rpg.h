@@ -15,19 +15,11 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-    #include <stdbool.h>
     #include <math.h>
-    #include <time.h>
-    #include <ctype.h>
-    #include <limits.h>
-    #include <float.h>
-    #include <errno.h>
-    #include <assert.h>
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include "../include/my.h"
-    #include "../include/my_printf.h"
+    #include <stdbool.h>
+    #include "hud.h"
+    #include "my.h"
+    #include "my_printf.h"
 
 typedef struct rpg_s rpg_t;
 
@@ -110,6 +102,7 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
+    menu_node_t *menus;
 };
 
 // Main Category
@@ -141,5 +134,6 @@ keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
 void add_key_to_keymap(keymap_t **head, sfKeyCode key,
     void (*function)(rpg_t *));
 void handle_key_press(rpg_t *main, sfKeyCode key);
+void render_hud(rpg_t *params);
 
 #endif //RPG_H
