@@ -102,7 +102,6 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    menu_node_t *menus;
 };
 
 // Main Category
@@ -134,6 +133,5 @@ keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
 void add_key_to_keymap(keymap_t **head, sfKeyCode key,
     void (*function)(rpg_t *));
 void handle_key_press(rpg_t *main, sfKeyCode key);
-void render_hud(rpg_t *params);
 
 #endif //RPG_H
