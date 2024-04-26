@@ -77,7 +77,7 @@ void free_rpg(rpg_t *rpg)
         free_quests(rpg->quests);
         free_events(rpg->events);
         free_keymap(rpg->keymap);
-        free_sprites(rpg->sprites);
+        free_entities(rpg->entities);
         free(rpg);
     }
 }

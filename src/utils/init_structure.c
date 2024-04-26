@@ -70,13 +70,13 @@ keymap_t *init_keymap(void)
     return new_keymap;
 }
 
-sprite_t *init_sprite(void)
+entity_t *init_entity(void)
 {
-    sprite_t *new_sprite = malloc(sizeof(sprite_t));
+    entity_t *new_entity = malloc(sizeof(entity_t));
 
-    if (new_sprite != NULL)
-        memset(new_sprite, 0, sizeof(sprite_t));
-    return new_sprite;
+    if (new_entity != NULL)
+        memset(new_entity, 0, sizeof(entity_t));
+    return new_entity;
 }
 
 rpg_t *init_structure(void)
@@ -91,7 +91,7 @@ rpg_t *init_structure(void)
         main->quests = init_quest();
         main->window = init_window();
         main->keymap = init_keymap();
-        main->sprites = init_sprite();
+        main->entities = init_entity();
     } else
         free_rpg(main);
     return main;

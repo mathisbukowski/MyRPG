@@ -7,13 +7,13 @@
 
 #include "rpg.h"
 
-void free_sprites(sprite_t *sprites)
+void free_entities(entity_t *entities)
 {
-    sprite_t *tmp = NULL;
+    entity_t *tmp = NULL;
 
-    while (sprites != NULL) {
-        tmp = sprites;
-        sprites = sprites->next;
+    while (entities != NULL) {
+        tmp = entities;
+        entities = entities->next;
         if (tmp->sprite)
             sfSprite_destroy(tmp->sprite);
         if (tmp->texture)

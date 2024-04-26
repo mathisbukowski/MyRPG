@@ -74,6 +74,15 @@ typedef struct keymap_s {
     struct keymap_s *next;
 } keymap_t;
 
+// Sprite List
+typedef struct sprite_s {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f position;
+    char *name;
+    bool state;
+    struct sprite_s *next;
+} sprite_t;
 
 // Events List
 typedef struct event_s {
@@ -102,6 +111,7 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
+    sprite_t *sprites;
 };
 
 // Main Category
@@ -111,6 +121,7 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
+int check_texture(sfSprite *sprite, sfTexture *texture);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,
@@ -133,5 +144,11 @@ keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
 void add_key_to_keymap(keymap_t **head, sfKeyCode key,
     void (*function)(rpg_t *));
 void handle_key_press(rpg_t *main, sfKeyCode key);
+
+// Sprite Manager
+void free_sprites(sprite_t *sprites);
+void sprite_displayer(rpg_t *main);
+void add_sprite_to_list(rpg_t *main, sfVector2f position,
+    char const *path, char const *name);
 
 #endif //RPG_H
