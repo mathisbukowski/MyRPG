@@ -7,12 +7,14 @@
 
 SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/utils/print_help.c src/utils/init_structure.c \
-		src/utils/free_project.c \
+		src/utils/free_project.c src/utils/check_texture.c \
 		src/events/event_manager.c src/events/init_event.c \
 		src/events/execute_event.c \
 		src/events/create_keymap.c \
 		src/window_manager/create_window.c src/window_manager/display_window.c\
-		src/window_manager/destroy_window.c
+		src/window_manager/destroy_window.c \
+		src/entities/create_entity.c src/entities/delete_entity.c \
+		src/entities/display_entity.c
 
 OBJ = $(SRC:.c=.o)
 
