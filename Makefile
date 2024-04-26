@@ -13,8 +13,8 @@ SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/events/create_keymap.c \
 		src/window_manager/create_window.c src/window_manager/display_window.c\
 		src/window_manager/destroy_window.c \
-		src/sprites/create_sprite.c src/sprites/delete_sprite.c \
-		src/sprites/display_sprite.c
+		src/entities/create_entity.c src/entities/delete_entity.c \
+		src/entities/display_entity.c
 
 OBJ = $(SRC:.c=.o)
 

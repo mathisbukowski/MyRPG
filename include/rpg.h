@@ -83,14 +83,14 @@ typedef struct keymap_s {
 } keymap_t;
 
 // Sprite List
-typedef struct sprite_s {
+typedef struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
     sfVector2f position;
     char *name;
     bool state;
-    struct sprite_s *next;
-} sprite_t;
+    struct entity_s *next;
+} entity_t;
 
 // Events List
 typedef struct event_s {
@@ -119,7 +119,7 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    sprite_t *sprites;
+    entity_t *entities;
 };
 
 // Main Category
@@ -154,9 +154,9 @@ void add_key_to_keymap(keymap_t **head, sfKeyCode key,
 void handle_key_press(rpg_t *main, sfKeyCode key);
 
 // Sprite Manager
-void free_sprites(sprite_t *sprites);
-void sprite_displayer(rpg_t *main);
-void add_sprite_to_list(rpg_t *main, sfVector2f position,
+void free_entities(entity_t *entities);
+void entity_displayer(rpg_t *main);
+void add_entity_to_list(rpg_t *main, sfVector2f position,
     char const *path, char const *name);
 
 #endif //RPG_H

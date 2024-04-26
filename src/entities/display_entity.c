@@ -7,9 +7,9 @@
 
 #include "rpg.h"
 
-void sprite_displayer(rpg_t *main)
+void entity_displayer(rpg_t *main)
 {
-    sprite_t *current = main->sprites;
+    entity_t *current = main->entities;
 
     if (!sfRenderWindow_isOpen(main->window->window))
         return;
