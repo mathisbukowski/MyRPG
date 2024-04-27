@@ -111,7 +111,7 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    menu_t *menus;
+    menu_node_t *menus;
     entity_t *entities;
 };
 
