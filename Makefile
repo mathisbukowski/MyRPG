@@ -24,7 +24,7 @@ OBJ = $(SRC:.c=.o)
 NAME = my_rpg
 
 LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
-CFLAGS = -Wall -Wextra  -I./include -g #-Werror
+CFLAGS = -Wall -Wextra -I./include -g #-Werror
 
 all: $(NAME)
 
