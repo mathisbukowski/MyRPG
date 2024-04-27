@@ -41,16 +41,6 @@ static void render_menu(menu_node_t *currMenuNode, rpg_t *params)
     }
 }
 
-void define_main_menus(rpg_t *params, sfFont *font)
-{
-    create_menu((menu_params_t){"mainMenu", (sfVector2f){0, 0 },
-        (sfVector2f){1920, 75}, 0, sfColor_fromRGB(97, 97, 97), NULL, NULL, 0}
-        , params);
-    create_menu((menu_params_t){"toolsSelector", (sfVector2f){0, 0 },
-        (sfVector2f){55, 200}, 2, sfCyan, NULL, &(text_infos_t)
-        {"Tools", font, (sfVector2f) {5, 15}, sfBlack, 18}, 1}, params);
-}
-
 void render_hud(rpg_t *params)
 {
     menu_node_t *currMenuNode;
