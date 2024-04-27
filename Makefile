@@ -14,7 +14,7 @@ SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/window_manager/create_window.c src/window_manager/display_window.c\
 		src/window_manager/destroy_window.c \
 		src/entities/create_entity.c src/entities/delete_entity.c \
-		src/entities/display_entity.c
+		src/entities/display_entity.c \
 		src/menus/menu.c src/menus/sort_menus.c \
 		src/buttons/buttons.c src/buttons/buttons_creator.c \
 		src/hud_renderer.c
