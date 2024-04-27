@@ -43,7 +43,7 @@ static void add_to_linked(entity_t **head, entity_t *prev, entity_t *new_node)
 }
 
 static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
-    sfVector2f pos, char const *path)
+    entity_params_t *params, char const *path)
 {
     entity_t *new_node = malloc(sizeof(entity_t));
 
@@ -58,7 +58,8 @@ static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
         free(new_node);
         return NULL;
     }
-    new_node->position = pos;
+    new_node->position = params->pos;
+    new_node->type = params->type;
     new_node->state = true;
     sfSprite_setPosition(new_node->sprite, new_node->position);
     new_node->next = NULL;
@@ -66,8 +67,7 @@ static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
     return new_node;
 }
 
-void add_entity_to_list(rpg_t *main, sfVector2f position,
-    char const *path, char const *name)
+void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path)
 {
     entity_t *current = main->entities;
     entity_t *prev = NULL;
@@ -75,14 +75,14 @@ void add_entity_to_list(rpg_t *main, sfVector2f position,
 
     if (current == NULL)
         return;
-    if (already_in(current, &prev, name, path) == 0)
+    if (already_in(current, &prev, params.name, path) == 0)
         return;
-    new_node = create_new_sprite(&(main->entities), prev, position, path);
+    new_node = create_new_sprite(&(main->entities), prev, &params, path);
     if (new_node == NULL) {
         fprintf(stderr, "Failed to create a new event.\n");
         return;
     }
-    new_node->name = strdup(name);
+    new_node->name = strdup(params.name);
     if (!new_node->name) {
         fprintf(stderr, "Failed to put a name");
         new_node->name = NULL;
