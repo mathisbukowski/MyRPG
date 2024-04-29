@@ -23,6 +23,12 @@
 
 typedef struct rpg_s rpg_t;
 
+
+typedef enum entitype_s {
+    BACKGROUND,
+    BUTTON_MENU,
+    NONE
+} entitype_t;
 // Player Structure
 typedef struct player_t {
     char name[128];
@@ -74,12 +80,20 @@ typedef struct keymap_s {
     struct keymap_s *next;
 } keymap_t;
 
+// Entity Params
+typedef struct entity_params_s {
+    char *name;
+    sfVector2f pos;
+    entitype_t type;
+} entity_params_t;
+
 // Sprite List
 typedef struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
     sfVector2f position;
     char *name;
+    entitype_t type;
     bool state;
     struct entity_s *next;
 } entity_t;
@@ -149,7 +163,7 @@ void handle_key_press(rpg_t *main, sfKeyCode key);
 // Sprite Manager
 void free_entities(entity_t *entities);
 void entity_displayer(rpg_t *main);
-void add_entity_to_list(rpg_t *main, sfVector2f position,
-    char const *path, char const *name);
+void add_entity_to_list(rpg_t *main, entity_params_t params,
+    char const *path);
 
 #endif //RPG_H
