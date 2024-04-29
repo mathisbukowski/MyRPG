@@ -12,31 +12,35 @@
 static void render_buttons_in_menu(rpg_t *params, menu_node_t *currMenuNode)
 {
     button_node_t *currButtonNode;
-    sfVector2i mouse_pos = sfMouse_getPosition((sfWindow *)params->window->window);
+    sfVector2i mouse_pos = sfMouse_getPosition(
+    (sfWindow *)params->window->window);
 
     currButtonNode = currMenuNode->menu->buttons;
     while (currButtonNode != NULL) {
         sfRenderWindow_drawRectangleShape(params->window->window,
-                                        currButtonNode->button->rect, NULL);
+        currButtonNode->button->rect, NULL);
         handle_hover_and_click(currButtonNode, mouse_pos, params);
         if (currButtonNode->button->text != NULL)
             sfRenderWindow_drawText(params->window->window,
-                                    currButtonNode->button->text, NULL);
+            currButtonNode->button->text, NULL);
         currButtonNode = currButtonNode->next;
     }
 }
 
 static void render_menu(menu_node_t *currMenuNode, rpg_t *params)
 {
-    sfVector2i mouse_pos = sfMouse_getPosition((sfWindow *)params->window->window);
+    sfVector2i mouse_pos = sfMouse_getPosition(
+    (sfWindow *)params->window->window);
     menu_t *menu = currMenuNode->menu;
 
     if (menu->isHidden == 0) {
         check_menu_hover(menu, mouse_pos);
         handle_menu_hover(menu);
-        sfRenderWindow_drawRectangleShape(params->window->window, menu->rect, NULL);
+        sfRenderWindow_drawRectangleShape(params->window->window,
+        menu->rect, NULL);
         if (menu->text != NULL)
-            sfRenderWindow_drawText(params->window->window, menu->text, NULL);
+            sfRenderWindow_drawText(params->window->window,
+            menu->text, NULL);
         render_buttons_in_menu(params, currMenuNode);
     }
 }
