@@ -19,7 +19,7 @@ SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/buttons/buttons.c src/buttons/buttons_creator.c \
 		src/hud_renderer.c src/utils/find_entity.c \
 		src/player/player_moov_function.c src/player/init_player.c \
-		src/player/player_stand_function.c \
+		src/player/player_stand_function.c src/entities/manage_clock.c \
 
 OBJ = $(SRC:.c=.o)
 

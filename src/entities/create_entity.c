@@ -76,6 +76,7 @@ entity_t *create_new_sprite(entity_t **head, entity_t *prev,
     }
     if (params->type == PLAYER)
         new_node->rect = init_rect();
+    new_node->clock = NULL;
     new_node->position = params->pos;
     new_node->type = params->type;
     new_node->state = true;

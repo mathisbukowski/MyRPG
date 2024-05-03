@@ -98,6 +98,7 @@ typedef struct entity_s {
     sfTexture *texture;
     sfVector2f position;
     sfIntRect rect;
+    sfClock *clock;
     char *name;
     entitype_t type;
     bool state;
@@ -177,6 +178,9 @@ void left_action(rpg_t *main);
 void right_action(rpg_t *main);
 void up_action(rpg_t *main);
 void down_action(rpg_t *main);
-void player_no_action(rpg_t *main);
+void player_no_action(entity_t *player);
+
+//Clock Manager
+void manage_clock(entity_t *entity);
 
 #endif //RPG_H

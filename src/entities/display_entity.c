@@ -14,6 +14,7 @@ void entity_displayer(rpg_t *main)
     if (!sfRenderWindow_isOpen(main->window->window))
         return;
     while (current != NULL) {
+        manage_clock(current);
         if (current->sprite && current->state == true)
             sfRenderWindow_drawSprite(main->window->window,
             current->sprite, NULL);

@@ -50,10 +50,8 @@ void player_stand_right(entity_t *player)
     player->type = PLAYER;
 }
 
-void player_no_action(rpg_t *main)
+void player_no_action(entity_t *player)
 {
-    entity_t *player = find_entity(main, "player");
-
     if (player->type == L_ANIMATED)
         player_stand_left(player);
     if (player->type == R_ANIMATED)

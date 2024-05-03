@@ -40,9 +40,6 @@ void handle_key_press(rpg_t *main, sfKeyCode key)
 {
     keymap_t *current = main->keymap;
 
-    if (key != sfKeyZ && key != sfKeyQ && key != sfKeyD && key != sfKeyS) {
-        player_no_action(main);
-    }
     while (current != NULL) {
         if (current->key == key) {
             current->function(main);
