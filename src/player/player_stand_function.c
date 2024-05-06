@@ -8,45 +8,33 @@
 
 void player_stand_left(entity_t *player)
 {
-    sfTexture_destroy(player->texture);
-    player->texture = sfTexture_createFromFile(
-        "assets/player/stand/left.png", NULL);
-    player->rect.top = 0;
+    player->rect.top = 64;
     player->rect.left = 0;
-    sfSprite_setTexture(player->sprite, player->texture, sfTrue);
+    sfSprite_setTextureRect(player->sprite, player->rect);
     player->type = PLAYER;
 }
 
 void player_stand_up(entity_t *player)
 {
-    sfTexture_destroy(player->texture);
-    player->texture = sfTexture_createFromFile(
-        "assets/player/stand/back.png", NULL);
     player->rect.top = 0;
     player->rect.left = 0;
-    sfSprite_setTexture(player->sprite, player->texture, sfTrue);
+    sfSprite_setTextureRect(player->sprite, player->rect);
     player->type = PLAYER;
 }
 
 void player_stand_down(entity_t *player)
 {
-    sfTexture_destroy(player->texture);
-    player->texture = sfTexture_createFromFile(
-        "assets/player/stand/front.png", NULL);
-    player->rect.top = 0;
+    player->rect.top = 128;
     player->rect.left = 0;
-    sfSprite_setTexture(player->sprite, player->texture, sfTrue);
+    sfSprite_setTextureRect(player->sprite, player->rect);
     player->type = PLAYER;
 }
 
 void player_stand_right(entity_t *player)
 {
-    sfTexture_destroy(player->texture);
-    player->texture = sfTexture_createFromFile(
-        "assets/player/stand/right.png", NULL);
-    player->rect.top = 0;
+    player->rect.top = 192;
     player->rect.left = 0;
-    sfSprite_setTexture(player->sprite, player->texture, sfTrue);
+    sfSprite_setTextureRect(player->sprite, player->rect);
     player->type = PLAYER;
 }
 
