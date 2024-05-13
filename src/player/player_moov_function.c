@@ -15,8 +15,9 @@ static void update_player(entity_t *player)
     seconds = time.microseconds / 1000000.0f;
     if (seconds > 0.06) {
         if (player->rect.left == 512)
-            player->rect.left = 0;
-        player->rect.left += 64;
+            player->rect.left = 64;
+        else
+            player->rect.left += 64;
         sfSprite_setTextureRect(player->sprite, player->rect);
         sfClock_restart(player->clock);
     }
