@@ -165,5 +165,6 @@ void free_entities(entity_t *entities);
 void entity_displayer(rpg_t *main);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
+void define_main_menu(rpg_t *params, sfFont *font);
 
 #endif //RPG_H
