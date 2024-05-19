@@ -92,6 +92,7 @@ rpg_t *init_structure(void)
         main->window = init_window();
         main->keymap = init_keymap();
         main->entities = init_entity();
+        main->menus = NULL;
     } else
         free_rpg(main);
     return main;
