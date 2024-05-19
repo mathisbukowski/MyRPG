@@ -70,6 +70,8 @@ void init_button(button_t *button, button_params_t buttonParams)
     button->color = buttonParams.color;
     button->hoverColor = buttonParams.hoverColor;
     button->action = buttonParams.action;
+    button->isHidden = 0;
+    button->isHover = 0;
     button->isSelected = 0;
     sfRectangleShape_setSize(button->rect, buttonParams.size);
     sfRectangleShape_setFillColor(button->rect, button->color);

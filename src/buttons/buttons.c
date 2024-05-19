@@ -48,8 +48,6 @@ void handle_hover_and_click(button_node_t *buttonNode, sfVector2i mousePos,
     if (sfFloatRect_contains(&rect, (float)pos.x, (float)pos.y)) {
         buttonNode->button->isHover = 1;
         is_clicked(buttonNode, params);
-        if (buttonNode->button->linkedMenu != NULL)
-            buttonNode->button->linkedMenu->isHidden = 1;
     } else
         buttonNode->button->isHover = 0;
     set_color_and_outline(buttonNode);

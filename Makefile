@@ -26,7 +26,7 @@ NAME = my_rpg
 LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
 CFLAGS = -Wall -Wextra -I./include -g #-Werror
 
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(OBJ)
 	make -C lib/my

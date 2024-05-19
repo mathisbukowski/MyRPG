@@ -93,7 +93,8 @@ typedef struct button_params_s {
 int create_button(button_params_t buttonParams, rpg_t *params);
 void handle_hover_and_click(button_node_t *buttonNode, sfVector2i mousePos,
     rpg_t *params);
-
+void render_hud(rpg_t *params);
+void define_tools_menus(rpg_t *params, sfFont *font);
 //texts
 typedef struct text_infos_s {
     char *text;
