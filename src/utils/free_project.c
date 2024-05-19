@@ -68,6 +68,12 @@ void free_keymap(keymap_t *keymap)
     }
 }
 
+void free_utils(util_t *utils)
+{
+    sfFont_destroy(utils->font);
+    free(utils);
+}
+
 void free_rpg(rpg_t *rpg)
 {
     if (rpg != NULL) {
@@ -78,6 +84,7 @@ void free_rpg(rpg_t *rpg)
         free_events(rpg->events);
         free_keymap(rpg->keymap);
         free_entities(rpg->entities);
+        free_utils(rpg->utils);
         free(rpg);
     }
 }

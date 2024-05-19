@@ -79,6 +79,17 @@ entity_t *init_entity(void)
     return new_entity;
 }
 
+util_t *init_util(void)
+{
+    util_t *new_util = malloc(sizeof(util_t));
+
+    if (new_util == NULL)
+        return NULL;
+    memset(new_util, 0, sizeof(util_t));
+    new_util->font = sfFont_createFromFile("assets/font/font.ttf");
+    return new_util;
+}
+
 rpg_t *init_structure(void)
 {
     rpg_t *main = malloc(sizeof(rpg_t));
@@ -93,6 +104,7 @@ rpg_t *init_structure(void)
         main->keymap = init_keymap();
         main->entities = init_entity();
         main->menus = NULL;
+        main->utils = init_util();
     } else
         free_rpg(main);
     return main;
