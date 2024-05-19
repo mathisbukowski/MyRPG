@@ -116,6 +116,10 @@ typedef struct window_s {
     sfBool isActive;
 } window_t;
 
+typedef struct util_s {
+    sfFont *font;
+} util_t;
+
 // Main
 struct rpg_s {
     player_t *player;
@@ -127,6 +131,7 @@ struct rpg_s {
     keymap_t *keymap;
     menu_node_t *menus;
     entity_t *entities;
+    util_t *utils;
 };
 
 // Main Category
@@ -165,6 +170,6 @@ void free_entities(entity_t *entities);
 void entity_displayer(rpg_t *main);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
-void define_main_menu(rpg_t *params, sfFont *font);
+void define_main_menu(rpg_t *params);
 
 #endif //RPG_H
