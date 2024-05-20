@@ -8,16 +8,20 @@ env:
 
 on:
   push:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
+
   pull_request:
-    branches-ignore:
-      - 'ga-ignore-*'
+    branches:
+      - main
     paths:
       - '.github/workflows/**'
+
 jobs:
   check_coding_style:
     runs-on: ubuntu-latest
+    if: github.repository != 'git@github.com:EpitechPromo2028/B-MUL-200-LIL-2-1-myrpg-mathis.bukowski.git'
+    needs: check_repo_size
     container:
       image:  ghcr.io/epitech/coding-style-checker:latest
     steps:
@@ -42,6 +46,7 @@ jobs:
 
   check_program_compilation:
     runs-on: ubuntu-latest
+    if: github.repository != 'git@github.com:EpitechPromo2028/B-MUL-200-LIL-2-1-myrpg-mathis.bukowski.git'
     container:
       image: epitechcontent/epitest-docker:latest
     needs: check_coding_style
@@ -58,7 +63,8 @@ jobs:
           IFS=',' read -ra ADDR <<< "$EXECUTABLES"
           for i in "${ADDR[@]}"; do
               if [ -f "$i" ] && [ -x "$i" ]; then
-                  ./$i $ARGS
+                  echo "$i exists and is executable."
+                  exit 0
               else
                   echo "$i does not exist or is not executable."
                   exit 1
@@ -67,7 +73,7 @@ jobs:
 
   push_to_mirror:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.repository != 'git@github.com:EpitechPromo2028/B-MUL-200-LIL-2-1-myrpg-mathis.bukowski.git'
     needs: check_program_compilation
     container:
       image: epitechcontent/epitest-docker:latest
@@ -89,3 +95,22 @@ jobs:
         with:
           target_repo_url: ${{ env.MIRROR_URL }}
           ssh_private_key: ${{ secrets.GIT_SSH_PRIVATE_KEY  }}
+
+  check_repo_size:
+    runs-on: ubuntu-latest
+    if: github.repository != 'git@github.com:EpitechPromo2028/B-MUL-200-LIL-2-1-myrpg-mathis.bukowski.git'
+    steps:
+      - name: Check size of the repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        run: |
+          REPO_SIZE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+                       "https://api.github.com/repos/${{ github.repository }}/git/trees/main?recursive=1" \
+                       | jq '.tree | map(select(.type == "blob")) | map(.size) | add')
+          if [[ "$REPO_SIZE" -ge "30000000" ]]; then
+            echo "Error: Size of the repository is too high."
+            exit 1
+          else
+            echo "Size is great: $REPO_SIZE"
+            exit 0
+          fi

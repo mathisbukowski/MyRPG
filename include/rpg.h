@@ -15,8 +15,11 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-    #include <stdbool.h>
     #include <math.h>
+    #include <stdbool.h>
+    #include "hud.h"
+    #include "my.h"
+    #include "my_printf.h"
     #include <time.h>
     #include <ctype.h>
     #include <limits.h>
@@ -29,6 +32,14 @@
     #include "my.h"
     #include "my_printf.h"
     #include "map.h"
+
+typedef struct rpg_s rpg_t;
+
+typedef enum entitype_s {
+    BACKGROUND,
+    BUTTON_MENU,
+    NONE
+} entitype_t;
 
 // Player Structure
 typedef struct player_t {
@@ -73,11 +84,35 @@ typedef struct quest_s {
     struct quest_s *next;
 } quest_t;
 
+// Keymap
+typedef struct keymap_s {
+    sfKeyCode key;
+    void (*function)(rpg_t *);
+    struct keymap_s *next;
+} keymap_t;
+
+// Entity Params
+typedef struct entity_params_s {
+    char *name;
+    sfVector2f pos;
+    entitype_t type;
+} entity_params_t;
+
+// Sprite List
+typedef struct entity_s {
+    sfSprite *sprite;
+    sfTexture *texture;
+    sfVector2f position;
+    char *name;
+    entitype_t type;
+    bool state;
+    struct entity_s *next;
+} entity_t;
+
 // Events List
 typedef struct event_s {
     sfEventType type;
-    sfEvent event;
-    void (*function)(sfEventType, sfEvent);
+    void (*function)(rpg_t *);
     struct event_s *next;
 } event_t;
 
@@ -92,15 +127,40 @@ typedef struct window_s {
     sfBool isActive;
 } window_t;
 
+typedef struct util_s {
+    sfFont *font;
+} util_t;
+
+typedef struct scene_s {
+    void (*init_scene)();
+    void (*handle_event_scene)();
+    void (*update_scene)();
+    void (*draw)();
+    void (*destroy)();
+    menu_node_t *scene_menus;
+    bool is_visible;
+    struct scene_s *next;
+} scene_t;
+
+typedef struct scene_list_s {
+    scene_t *head;
+    scene_t *tail;
+    scene_t *current;
+} scene_list_t;
 // Main
-typedef struct rpg_s {
+struct rpg_s {
     player_t *player;
     mob_t *mobs;
     object_t *objs;
     quest_t *quests;
     event_t *events;
     window_t *window;
-} rpg_t;
+    keymap_t *keymap;
+    menu_node_t *menus;
+    entity_t *entities;
+    util_t *utils;
+    scene_list_t *scene_manager;
+};
 
 // Main Category
 int game_loop(int ac, char **av);
@@ -109,6 +169,7 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
+int check_texture(sfSprite *sprite, const sfTexture *texture);
 char *remove_spaces(char *str);
 
 // Window Manager
@@ -121,4 +182,39 @@ void destroy_window(rpg_t *main);
 // Help Category
 int print_help(int ac, char **av);
 
+// Event Manager
+void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
+    sfEventType type);
+void execute_event(rpg_t *main, sfEventType type);
+void close_window(rpg_t *main);
+
+// Keymap
+keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
+void add_key_to_keymap(keymap_t **head, sfKeyCode key,
+    void (*function)(rpg_t *));
+void handle_key_press(rpg_t *main, sfKeyCode key);
+
+// Sprite Manager
+void free_entities(entity_t *entities);
+void entity_displayer(rpg_t *main);
+void add_entity_to_list(rpg_t *main, entity_params_t params,
+    char const *path);
+void define_main_menu(rpg_t *params);
+
+// Init
+quest_t *init_quest(void);
+event_t *init_event(void);
+window_t *init_window(void);
+keymap_t *init_keymap(void);
+util_t *init_util(void);
+player_t *init_player(void);
+mob_t *init_mobs(void);
+object_t *init_object(void);
+entity_t *init_entity(void);
+scene_list_t *init_scene(void);
+
+void add_scene(rpg_t *main, scene_t *new);
+void destroying_scene(rpg_t *main);
+void saving_system(rpg_t *main);
+void loading_system(rpg_t *main, char **av);
 #endif //RPG_H
