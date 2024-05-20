@@ -56,9 +56,9 @@ typedef struct menu_params_s {
 
 int create_menu(menu_params_t menuParams, rpg_t *params);
 void check_menu_hover(menu_t *menu, sfVector2i mousePos);
-menu_t *find_menu_by_name(char *name, menu_node_t *head);
+menu_t *find_menu_by_name(const char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
-void handle_menu_hover(menu_t *menu);
+void handle_menu_hover(const menu_t *menu);
 //buttons
 typedef struct button_s {
     sfRectangleShape *rect;
@@ -90,11 +90,12 @@ typedef struct button_params_s {
     button_func_t action;
 }button_params_t;
 
-int create_button(button_params_t buttonParams, rpg_t *params);
-void handle_hover_and_click(button_node_t *buttonNode, sfVector2i mousePos,
-    rpg_t *params);
+int create_button(const button_params_t buttonParams, const rpg_t *params);
+void handle_hover_and_click(const button_node_t *buttonNode,
+    sfVector2i mousePos, rpg_t *params);
 void render_hud(rpg_t *params);
 void define_tools_menus(rpg_t *params, sfFont *font);
+
 //texts
 typedef struct text_infos_s {
     char *text;

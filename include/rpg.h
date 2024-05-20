@@ -158,7 +158,7 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
-int check_texture(sfSprite *sprite, sfTexture *texture);
+int check_texture(sfSprite *sprite, const sfTexture *texture);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,
@@ -174,7 +174,7 @@ int print_help(int ac, char **av);
 void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
     sfEventType type);
 void execute_event(rpg_t *main, sfEventType type);
-void close_window(rpg_t *main);
+void close_window(const rpg_t *main);
 
 // Keymap
 keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));

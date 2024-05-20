@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void close_window(rpg_t *main)
+void close_window(const rpg_t *main)
 {
     sfRenderWindow_close(main->window->window);
 }

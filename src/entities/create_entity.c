@@ -43,7 +43,7 @@ static void add_to_linked(entity_t **head, entity_t *prev, entity_t *new_node)
 }
 
 static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
-    entity_params_t *params, char const *path)
+    const entity_params_t *params, char const *path)
 {
     entity_t *new_node = malloc(sizeof(entity_t));
 
@@ -83,7 +83,7 @@ void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path)
         return;
     }
     new_node->name = strdup(params.name);
-    if (!new_node->name) {
+    if (new_node->name == NULL) {
         fprintf(stderr, "Failed to put a name");
         new_node->name = NULL;
     }

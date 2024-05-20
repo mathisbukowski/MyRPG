@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-static void is_clicked(button_node_t *buttonNode, rpg_t *params)
+static void is_clicked(const button_node_t *buttonNode, rpg_t *params)
 {
     button_node_t *current = buttonNode->button->linkedMenu->buttons;
 
@@ -23,7 +23,7 @@ static void is_clicked(button_node_t *buttonNode, rpg_t *params)
     }
 }
 
-void set_color_and_outline(button_node_t *buttonNode)
+void set_color_and_outline(const button_node_t *buttonNode)
 {
     if (buttonNode->button->isHover)
         sfRectangleShape_setFillColor(buttonNode->button->rect,
@@ -37,12 +37,12 @@ void set_color_and_outline(button_node_t *buttonNode)
         sfRectangleShape_setOutlineThickness(buttonNode->button->rect, 0);
 }
 
-void handle_hover_and_click(button_node_t *buttonNode, sfVector2i mousePos,
-    rpg_t *params)
+void handle_hover_and_click(const button_node_t *buttonNode,
+    const sfVector2i mousePos, rpg_t *params)
 {
-    sfFloatRect rect = sfRectangleShape_getGlobalBounds(
+    const sfFloatRect rect = sfRectangleShape_getGlobalBounds(
             buttonNode->button->rect);
-    sfVector2i pos = (sfVector2i){mousePos.x, mousePos.y};
+    const sfVector2i pos = (sfVector2i){mousePos.x, mousePos.y};
 
     sfRectangleShape_setOutlineColor(buttonNode->button->rect, sfBlack);
     if (sfFloatRect_contains(&rect, (float)pos.x, (float)pos.y)) {
