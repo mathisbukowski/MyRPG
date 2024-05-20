@@ -11,7 +11,7 @@
 
 void saving_system(rpg_t *main)
 {
-    int fd = open("save_file.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    int fd = open("save/save_file.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
     ssize_t bytes;
 
     if (fd == -1)
