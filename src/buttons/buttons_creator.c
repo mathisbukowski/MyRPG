@@ -107,8 +107,7 @@ int create_button(const button_params_t buttonParams, const rpg_t *params)
     button_t *button = malloc(sizeof(button_t));
     menu_t *linkedMenu =
         find_menu_by_name(buttonParams.linkedMenuName, params->menus);
-    const sfVector2f linkedMenuPos =
-        sfRectangleShape_getPosition(linkedMenu->rect);
+    sfVector2f linkedMenuPos;
 
     if (button == NULL)
         return 84;
@@ -116,6 +115,7 @@ int create_button(const button_params_t buttonParams, const rpg_t *params)
         free(button);
         return 84;
     }
+    linkedMenuPos = sfRectangleShape_getPosition(linkedMenu->rect);
     init_button(button, buttonParams);
     set_button_position(button, linkedMenuPos, buttonParams);
     if (set_text_and_linked_menu(button, buttonParams, params) == 84)

@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-static int add_menu_to_hud(rpg_t *params, menu_t *menu)
+static int add_menu_to_scene(scene_t *scene, menu_t *menu)
 {
     menu_node_t *newNode = malloc(sizeof(menu_node_t));
     menu_node_t *current;
@@ -16,16 +16,16 @@ static int add_menu_to_hud(rpg_t *params, menu_t *menu)
         return 84;
     newNode->menu = menu;
     newNode->next = NULL;
-    if (params->menus == NULL)
-        params->menus = newNode;
+    if (scene->menus == NULL)
+        scene->menus = newNode;
     else {
-        current = params->menus;
+        current = scene->menus;
         while (current != NULL && current->next != NULL)
             current = current->next;
         if (current != NULL)
             current->next = newNode;
     }
-    sort_menus(&params->menus);
+    sort_menus(&scene->menus);
     return 0;
 }
 
@@ -120,7 +120,7 @@ static void set_submenu(menu_t *menu)
     sfRectangleShape_setPosition(menu->subMenu->rect, menu->subMenu->pos);
 }
 
-int create_menu(const menu_params_t menuParams, rpg_t *params)
+int create_menu(const menu_params_t menuParams, scene_t *scene, rpg_t *params)
 {
     menu_t *menu = malloc(sizeof(menu_t));
 
@@ -129,6 +129,6 @@ int create_menu(const menu_params_t menuParams, rpg_t *params)
     init_variables(menu, menuParams, params);
     if (menu->subMenu != NULL)
         set_submenu(menu);
-    add_menu_to_hud(params, menu);
+    add_menu_to_scene(scene, menu);
     return 0;
 }

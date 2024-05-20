@@ -29,6 +29,7 @@ typedef enum entitype_s {
     BUTTON_MENU,
     NONE
 } entitype_t;
+
 // Player Structure
 typedef struct player_t {
     char name[128];
@@ -48,7 +49,6 @@ typedef struct mob_s {
 } mob_t;
 
 // Object Structure
-
 typedef enum tool_s {
     SHOVEL,
     HOE,
@@ -120,22 +120,6 @@ typedef struct util_s {
     sfFont *font;
 } util_t;
 
-typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
-    void (*update_scene)();
-    void (*draw)();
-    void (*destroy)();
-    menu_node_t *scene_menus;
-    bool is_visible;
-    struct scene_s *next;
-} scene_t;
-
-typedef struct scene_list_s {
-    scene_t *head;
-    scene_t *tail;
-    scene_t *current;
-} scene_list_t;
 // Main
 struct rpg_s {
     player_t *player;
@@ -187,7 +171,7 @@ void free_entities(entity_t *entities);
 void entity_displayer(rpg_t *main);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
-void define_main_menu(rpg_t *params);
+void define_main_menu(rpg_t *params, scene_t *scene);
 
 // Init
 quest_t *init_quest(void);

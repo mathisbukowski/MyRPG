@@ -26,7 +26,7 @@ SRC = 	src/main.c src/rpg.c 				\
 		src/buttons/buttons.c 				\
 		src/buttons/buttons_creator.c 		\
 		src/hud_renderer.c 					\
-		 src/hud/start_menu.c 				\
+		src/hud/start_menu.c 				\
 		src/init/init_quest.c 				\
 		src/init/init_entities.c 			\
 		src/init/init_tools.c 				\
@@ -56,6 +56,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-post_build_clean:
-	rm -f $(OBJ)

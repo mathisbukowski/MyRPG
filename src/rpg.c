@@ -14,7 +14,7 @@ void screen_manager(rpg_t *main)
     add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     add_entity_to_list(main, (entity_params_t){"background",
     (sfVector2f){0, 0}, BACKGROUND}, "assets/bg.jpg");
-    define_main_menu(main);
+    //define_main_menu(main);
     while (sfRenderWindow_isOpen(main->window->window)) {
         event_manager(main);
         display_window(main);

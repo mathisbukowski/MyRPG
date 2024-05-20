@@ -19,6 +19,7 @@ typedef struct params_s params_t;
 typedef struct button_node_s button_node_t;
 typedef struct text_infos_s text_infos_t;
 typedef void (*button_func_t)(rpg_t *);
+typedef struct scene_s scene_t;
 
 //menus
 typedef struct menu_s {
@@ -54,11 +55,30 @@ typedef struct menu_params_s {
     int isHidden;
 }menu_params_t;
 
-int create_menu(menu_params_t menuParams, rpg_t *params);
+int create_menu(menu_params_t menuParams, scene_t *scene, rpg_t *params);
 void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(const char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
 void handle_menu_hover(const menu_t *menu);
+
+//scenes
+typedef struct scene_s {
+    void (*init_scene)();
+    void (*handle_event_scene)();
+    void (*update_scene)();
+    void (*draw)();
+    void (*destroy)();
+    menu_node_t *menus;
+    bool is_visible;
+    struct scene_s *next;
+} scene_t;
+
+typedef struct scene_list_s {
+    scene_t *head;
+    scene_t *tail;
+    scene_t *current;
+} scene_list_t;
+
 //buttons
 typedef struct button_s {
     sfRectangleShape *rect;

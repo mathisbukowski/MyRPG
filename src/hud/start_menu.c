@@ -37,7 +37,7 @@ void define_exit_button(rpg_t *main,
     sfBlack, 30}, "mainMenu", NULL}, main);
 }
 
-void define_main_menu(rpg_t *main)
+void define_main_menu(rpg_t *main, scene_t *scene)
 {
     sfVector2f button_size = {400, 100};
     sfVector2f menu_size = {600, 600};
@@ -51,7 +51,7 @@ void define_main_menu(rpg_t *main)
     menu_size.y / 2 + 0.5 * button_size.y + 50};
 
     create_menu((menu_params_t){"mainMenu", menu_pos,
-    menu_size, 0, sfTransparent, NULL, NULL, 0}, main);
+    menu_size, 0, sfTransparent, NULL, NULL, 0}, scene, main);
     define_start_button(main, button_size, start_button_pos);
     define_options_button(main, button_size, options_button_pos);
     define_exit_button(main, button_size, exit_button_pos);
