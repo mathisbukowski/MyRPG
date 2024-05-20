@@ -29,10 +29,10 @@ static int add_menu_to_hud(rpg_t *params, menu_t *menu)
     return 0;
 }
 
-void check_menu_hover(menu_t *menu, sfVector2i mousePos)
+void check_menu_hover(menu_t *menu, const sfVector2i mousePos)
 {
-    sfFloatRect rect = sfRectangleShape_getGlobalBounds(menu->rect);
-    sfVector2i pos = (sfVector2i){mousePos.x, mousePos.y};
+    const sfFloatRect rect = sfRectangleShape_getGlobalBounds(menu->rect);
+    const sfVector2i pos = (sfVector2i){mousePos.x, mousePos.y};
 
     if (sfFloatRect_contains(&rect, (float)pos.x, (float)pos.y) ||
         (menu->subMenu != NULL && menu->subMenu->isHover == 1)) {
@@ -42,7 +42,7 @@ void check_menu_hover(menu_t *menu, sfVector2i mousePos)
     }
 }
 
-menu_t *find_menu_by_name(char *name, menu_node_t *head)
+menu_t *find_menu_by_name(const char *name, menu_node_t *head)
 {
     menu_node_t *current = head;
 
@@ -54,9 +54,10 @@ menu_t *find_menu_by_name(char *name, menu_node_t *head)
     return NULL;
 }
 
-static int create_menu_text(menu_t *menu, menu_params_t menuParams)
+static int create_menu_text(menu_t *menu, const menu_params_t menuParams)
 {
-    sfVector2f textPos;
+    const sfVector2f textPos = (sfVector2f){menuParams.pos.x +
+        menuParams.text->pos.x, menuParams.pos.y + menuParams.text->pos.y};
 
     menu->text = sfText_create();
     if (menu->text == NULL)
@@ -64,14 +65,12 @@ static int create_menu_text(menu_t *menu, menu_params_t menuParams)
     sfText_setString(menu->text, menuParams.text->text);
     sfText_setFont(menu->text, menuParams.text->font);
     sfText_setCharacterSize(menu->text, menuParams.text->size);
-    textPos = (sfVector2f){menuParams.pos.x + menuParams.text->pos.x,
-                            menuParams.pos.y + menuParams.text->pos.y};
     sfText_setPosition(menu->text, textPos);
     sfText_setColor(menu->text, menuParams.text->color);
     return 0;
 }
 
-static void init_variables(menu_t *menu, menu_params_t menuParams,
+static void init_variables(menu_t *menu, const menu_params_t menuParams,
     rpg_t *params)
 {
     menu->name = menuParams.name;
@@ -96,7 +95,7 @@ static void init_variables(menu_t *menu, menu_params_t menuParams,
     sfRectangleShape_setFillColor(menu->rect, menuParams.color);
 }
 
-void handle_menu_hover(menu_t *menu)
+void handle_menu_hover(const menu_t *menu)
 {
     if (menu->isHover == 1) {
         if (menu->subMenu != NULL)
@@ -109,19 +108,19 @@ void handle_menu_hover(menu_t *menu)
 
 static void set_submenu(menu_t *menu)
 {
-    sfVector2f subMenuPos;
-    sfVector2f subMenuTextPos;
+    const sfVector2f subMenuPos = (sfVector2f){menu->subMenu->pos.x,
+        menu->subMenu->pos.y};
+    const sfVector2f subMenuTextPos = (sfVector2f){subMenuPos.x + 5,
+        subMenuPos.y + 15};
 
     menu->subMenu->parentMenu = menu;
     menu->subMenu->pos.x += menu->pos.x;
     menu->subMenu->pos.y += menu->pos.y;
-    subMenuPos = (sfVector2f){menu->subMenu->pos.x, menu->subMenu->pos.y};
-    subMenuTextPos = (sfVector2f){subMenuPos.x + 5, subMenuPos.y + 15};
     sfText_setPosition(menu->subMenu->text, subMenuTextPos);
     sfRectangleShape_setPosition(menu->subMenu->rect, menu->subMenu->pos);
 }
 
-int create_menu(menu_params_t menuParams, rpg_t *params)
+int create_menu(const menu_params_t menuParams, rpg_t *params)
 {
     menu_t *menu = malloc(sizeof(menu_t));
 

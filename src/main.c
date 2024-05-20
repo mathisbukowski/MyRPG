@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-int main(int ac, char **av, char **env)
+int main(const int ac, char **av, char **env)
 {
     if (check_tty(env) != 0)
         return 84;

@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void create_window(unsigned int width, unsigned int height,
+void create_window(const unsigned int width, const unsigned int height,
     const char *title, rpg_t *main)
 {
     if (main->window != NULL) {

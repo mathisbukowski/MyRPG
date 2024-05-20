@@ -9,13 +9,13 @@
 #include <stdlib.h>
 #include "rpg.h"
 
-static void render_buttons_in_menu(rpg_t *params, menu_node_t *currMenuNode)
+static void render_buttons_in_menu(rpg_t *params,
+    const menu_node_t *currMenuNode)
 {
-    button_node_t *currButtonNode;
-    sfVector2i mouse_pos = sfMouse_getPosition(
+    button_node_t *currButtonNode = currMenuNode->menu->buttons;
+    const sfVector2i mouse_pos = sfMouse_getPosition(
     (sfWindow *)params->window->window);
 
-    currButtonNode = currMenuNode->menu->buttons;
     while (currButtonNode != NULL) {
         sfRenderWindow_drawRectangleShape(params->window->window,
         currButtonNode->button->rect, NULL);
@@ -27,9 +27,9 @@ static void render_buttons_in_menu(rpg_t *params, menu_node_t *currMenuNode)
     }
 }
 
-static void render_menu(menu_node_t *currMenuNode, rpg_t *params)
+static void render_menu(const menu_node_t *currMenuNode, rpg_t *params)
 {
-    sfVector2i mouse_pos = sfMouse_getPosition(
+    const sfVector2i mouse_pos = sfMouse_getPosition(
     (sfWindow *)params->window->window);
     menu_t *menu = currMenuNode->menu;
 
@@ -47,9 +47,8 @@ static void render_menu(menu_node_t *currMenuNode, rpg_t *params)
 
 void render_hud(rpg_t *params)
 {
-    menu_node_t *currMenuNode;
+    const menu_node_t *currMenuNode = params->menus;
 
-    currMenuNode = params->menus;
     while (currMenuNode != NULL) {
         if (currMenuNode->menu->isHidden == 0)
             render_menu(currMenuNode, params);

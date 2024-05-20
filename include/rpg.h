@@ -123,6 +123,26 @@ typedef struct window_s {
     sfBool isActive;
 } window_t;
 
+typedef struct util_s {
+    sfFont *font;
+} util_t;
+
+typedef struct scene_s {
+    void (*init_scene)();
+    void (*handle_event_scene)();
+    void (*update_scene)();
+    void (*draw)();
+    void (*destroy)();
+    menu_node_t *scene_menus;
+    bool is_visible;
+    struct scene_s *next;
+} scene_t;
+
+typedef struct scene_list_s {
+    scene_t *head;
+    scene_t *tail;
+    scene_t *current;
+} scene_list_t;
 // Main
 struct rpg_s {
     player_t *player;
@@ -134,6 +154,8 @@ struct rpg_s {
     keymap_t *keymap;
     menu_node_t *menus;
     entity_t *entities;
+    util_t *utils;
+    scene_list_t *scene_manager;
 };
 
 // Main Category
@@ -143,8 +165,8 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
-int check_texture(sfSprite *sprite, sfTexture *texture);
 entity_t *find_entity(rpg_t *main, char *entity_name);
+int check_texture(sfSprite *sprite, const sfTexture *texture);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,
@@ -179,8 +201,25 @@ void right_action(rpg_t *main);
 void up_action(rpg_t *main);
 void down_action(rpg_t *main);
 void player_no_action(entity_t *player);
+void define_main_menu(rpg_t *params);
 
 //Clock Manager
 void manage_clock(entity_t *entity);
 
+// Init
+quest_t *init_quest(void);
+event_t *init_event(void);
+window_t *init_window(void);
+keymap_t *init_keymap(void);
+util_t *init_util(void);
+player_t *init_player(void);
+mob_t *init_mobs(void);
+object_t *init_object(void);
+entity_t *init_entity(void);
+scene_list_t *init_scene(void);
+
+void add_scene(rpg_t *main, scene_t *new);
+void destroying_scene(rpg_t *main);
+void saving_system(rpg_t *main);
+void loading_system(rpg_t *main, char **av);
 #endif //RPG_H

@@ -48,7 +48,8 @@ static int add_button_to_menu(button_t *button, menu_t *menu)
 
 static int create_button_text(button_t *button, button_params_t buttonParams)
 {
-    sfVector2f textPos;
+    sfVector2f textPos = (sfVector2f){button->pos.x + buttonParams.text->pos.x,
+        button->pos.y + buttonParams.text->pos.y};
 
     button->text = sfText_create();
     if (button->text == NULL)
@@ -56,29 +57,29 @@ static int create_button_text(button_t *button, button_params_t buttonParams)
     sfText_setString(button->text, buttonParams.text->text);
     sfText_setFont(button->text, buttonParams.text->font);
     sfText_setCharacterSize(button->text, buttonParams.text->size);
-    textPos = (sfVector2f){button->pos.x + buttonParams.text->pos.x,
-        button->pos.y + buttonParams.text->pos.y};
     sfText_setPosition(button->text, textPos);
     sfText_setColor(button->text, buttonParams.text->color);
     return 0;
 }
 
-void init_button(button_t *button, button_params_t buttonParams)
+void init_button(button_t *button, const button_params_t buttonParams)
 {
     button->rect = sfRectangleShape_create();
     button->pos = buttonParams.pos;
     button->color = buttonParams.color;
     button->hoverColor = buttonParams.hoverColor;
     button->action = buttonParams.action;
+    button->isHidden = 0;
+    button->isHover = 0;
     button->isSelected = 0;
     sfRectangleShape_setSize(button->rect, buttonParams.size);
     sfRectangleShape_setFillColor(button->rect, button->color);
 }
 
-void set_button_position(button_t *button, sfVector2f linkedMenuPos,
-    button_params_t buttonParams)
+void set_button_position(button_t *button, const sfVector2f linkedMenuPos,
+    const button_params_t buttonParams)
 {
-    sfVector2f buttonPos = {linkedMenuPos.x + buttonParams.pos.x,
+    const sfVector2f buttonPos = {linkedMenuPos.x + buttonParams.pos.x,
                             linkedMenuPos.y + buttonParams.pos.y};
 
     button->pos = buttonPos;
@@ -86,7 +87,7 @@ void set_button_position(button_t *button, sfVector2f linkedMenuPos,
 }
 
 int set_text_and_linked_menu(button_t *button, button_params_t buttonParams,
-    rpg_t *params)
+    const rpg_t *params)
 {
     button->text = NULL;
     if (buttonParams.text != NULL)
@@ -101,21 +102,20 @@ int set_text_and_linked_menu(button_t *button, button_params_t buttonParams,
     return 0;
 }
 
-int create_button(button_params_t buttonParams, rpg_t *params)
+int create_button(const button_params_t buttonParams, const rpg_t *params)
 {
     button_t *button = malloc(sizeof(button_t));
-    sfVector2f linkedMenuPos;
-    menu_t *linkedMenu;
+    menu_t *linkedMenu =
+        find_menu_by_name(buttonParams.linkedMenuName, params->menus);
+    const sfVector2f linkedMenuPos =
+        sfRectangleShape_getPosition(linkedMenu->rect);
 
     if (button == NULL)
         return 84;
-    linkedMenu =
-        find_menu_by_name(buttonParams.linkedMenuName, params->menus);
     if (linkedMenu == NULL) {
         free(button);
         return 84;
     }
-    linkedMenuPos = sfRectangleShape_getPosition(linkedMenu->rect);
     init_button(button, buttonParams);
     set_button_position(button, linkedMenuPos, buttonParams);
     if (set_text_and_linked_menu(button, buttonParams, params) == 84)
