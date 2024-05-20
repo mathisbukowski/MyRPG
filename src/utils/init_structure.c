@@ -7,89 +7,6 @@
 
 #include "rpg.h"
 
-static player_t *init_player(void)
-{
-    player_t *new_player = malloc(sizeof(player_t));
-
-    if (new_player != NULL)
-        memset(new_player, 0, sizeof(player_t));
-    return new_player;
-}
-
-static mob_t *init_mobs(void)
-{
-    mob_t *new_mob = malloc(sizeof(mob_t));
-
-    if (new_mob != NULL)
-        memset(new_mob, 0, sizeof(mob_t));
-    return new_mob;
-}
-
-static object_t *init_object(void)
-{
-    object_t *new_object = malloc(sizeof(object_t));
-
-    if (new_object != NULL)
-        memset(new_object, 0, sizeof(object_t));
-    return new_object;
-}
-
-static quest_t *init_quest(void)
-{
-    quest_t *new_quest = malloc(sizeof(quest_t));
-
-    if (new_quest != NULL)
-        memset(new_quest, 0, sizeof(quest_t));
-    return new_quest;
-}
-
-static event_t *init_event(void)
-{
-    event_t *new_event = malloc(sizeof(event_t));
-
-    if (new_event != NULL)
-        memset(new_event, 0, sizeof(event_t));
-    return new_event;
-}
-
-window_t *init_window(void)
-{
-    window_t *new_window = malloc(sizeof(window_t));
-
-    if (new_window != NULL)
-        memset(new_window, 0, sizeof(window_t));
-    return new_window;
-}
-
-keymap_t *init_keymap(void)
-{
-    keymap_t *new_keymap = malloc(sizeof(keymap_t));
-
-    if (new_keymap != NULL)
-        memset(new_keymap, 0, sizeof(keymap_t));
-    return new_keymap;
-}
-
-entity_t *init_entity(void)
-{
-    entity_t *new_entity = malloc(sizeof(entity_t));
-
-    if (new_entity != NULL)
-        memset(new_entity, 0, sizeof(entity_t));
-    return new_entity;
-}
-
-util_t *init_util(void)
-{
-    util_t *new_util = malloc(sizeof(util_t));
-
-    if (new_util == NULL)
-        return NULL;
-    memset(new_util, 0, sizeof(util_t));
-    new_util->font = sfFont_createFromFile("assets/font/font.ttf");
-    return new_util;
-}
-
 rpg_t *init_structure(void)
 {
     rpg_t *main = malloc(sizeof(rpg_t));
@@ -105,6 +22,7 @@ rpg_t *init_structure(void)
         main->entities = init_entity();
         main->menus = NULL;
         main->utils = init_util();
+        main->manager = init_scene();
     } else
         free_rpg(main);
     return main;
