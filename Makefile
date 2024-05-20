@@ -18,7 +18,9 @@ SRC = src/main.c src/rpg.c src/utils/check_tty.c \
 		src/menus/menu.c src/menus/sort_menus.c \
 		src/buttons/buttons.c src/buttons/buttons_creator.c \
 		src/hud_renderer.c src/hud/start_menu.c \
-
+		src/init/init_quest.c src/init/init_entities.c \
+		src/init/init_tools.c \
+		src/scene/adding_scene.c src/scene/destroying_scene.c
 OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg
