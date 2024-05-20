@@ -45,21 +45,6 @@ static void render_menu(menu_node_t *currMenuNode, rpg_t *params)
     }
 }
 
-void define_tools_menus(rpg_t *params, sfFont *font)
-{
-    create_menu((menu_params_t){"mainMenu", (sfVector2f){620, 400 },
-    (sfVector2f){120, 123}, 0, sfTransparent, NULL, NULL, 0}
-    , params);
-    create_button((button_params_t){"HELLO", (sfVector2f){5, 55},
-    (sfVector2f){45, 45}, sfBlue, sfBlue,
-    &(text_infos_t){"pencil", font, (sfVector2f){5, 15},
-    sfBlack, 13}, "mainMenu", NULL}, params);
-    create_button((button_params_t){"sdlfksmf", (sfVector2f){70, 55},
-    (sfVector2f){45, 45}, sfBlue, sfBlue,
-    &(text_infos_t){"HELLO", font, (sfVector2f){5, 15},
-    sfBlack, 13}, "mainMenu", NULL}, params);
-}
-
 void render_hud(rpg_t *params)
 {
     menu_node_t *currMenuNode;
