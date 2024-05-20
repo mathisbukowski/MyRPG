@@ -9,6 +9,7 @@
 void init_player_sprite(rpg_t *main)
 {
     entity_t *player = NULL;
+
     add_entity_to_list(main, (entity_params_t){"player",
         (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
     player = find_entity(main, "player");
