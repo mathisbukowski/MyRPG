@@ -9,7 +9,7 @@
 
 void destroying_scene(rpg_t *main)
 {
-    scene_t *current = main->manager->head;
+    scene_t *current = main->scene_manager->head;
     scene_t *next = NULL;
 
     while (current != NULL) {
@@ -19,8 +19,8 @@ void destroying_scene(rpg_t *main)
         free(current);
         current = next;
     }
-    main->manager->head = NULL;
-    main->manager->tail = NULL;
-    main->manager->current = NULL;
-    free(main->manager);
+    main->scene_manager->head = NULL;
+    main->scene_manager->tail = NULL;
+    main->scene_manager->current = NULL;
+    free(main->scene_manager);
 }

@@ -35,7 +35,6 @@ keymap_t *init_keymap(void)
     return new_keymap;
 }
 
-
 util_t *init_util(void)
 {
     util_t *new_util = malloc(sizeof(util_t));
