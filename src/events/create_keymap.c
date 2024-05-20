@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *))
+keymap_t *create_keymap_node(const sfKeyCode key, void (*function)(rpg_t *))
 {
     keymap_t *new_node = malloc(sizeof(keymap_t));
 
@@ -21,7 +21,7 @@ keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *))
     return new_node;
 }
 
-void add_key_to_keymap(keymap_t **head, sfKeyCode key,
+void add_key_to_keymap(keymap_t **head, const sfKeyCode key,
     void (*function)(rpg_t *))
 {
     keymap_t *current = *head;
@@ -36,7 +36,7 @@ void add_key_to_keymap(keymap_t **head, sfKeyCode key,
     current->next = create_keymap_node(key, function);
 }
 
-void handle_key_press(rpg_t *main, sfKeyCode key)
+void handle_key_press(rpg_t *main, const sfKeyCode key)
 {
     keymap_t *current = main->keymap;
 

@@ -7,9 +7,9 @@
 
 #include "rpg.h"
 
-void execute_event(rpg_t *main, sfEventType type)
+void execute_event(rpg_t *main, const sfEventType type)
 {
-    event_t *current = main->events;
+    const event_t *current = main->events;
 
     while (current != NULL) {
         if (current->type == type)

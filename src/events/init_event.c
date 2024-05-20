@@ -8,7 +8,7 @@
 #include "rpg.h"
 
 static event_t *create_new_event(event_t **head, event_t *prev,
-    sfEventType type, void (*function)(rpg_t *))
+    const sfEventType type, void (*function)(rpg_t *))
 {
     event_t *new_node = malloc(sizeof(event_t));
 
@@ -25,7 +25,7 @@ static event_t *create_new_event(event_t **head, event_t *prev,
 }
 
 static int already_define_event(event_t *current, event_t **prev,
-    void (*function)(rpg_t *), sfEventType type)
+    void (*function)(rpg_t *), const sfEventType type)
 {
     while (current != NULL) {
         if (type == current->type) {
@@ -40,7 +40,7 @@ static int already_define_event(event_t *current, event_t **prev,
 }
 
 void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
-    sfEventType type)
+    const sfEventType type)
 {
     event_t *current = main->events;
     event_t *prev = NULL;
@@ -51,8 +51,6 @@ void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
     if (already_define_event(current, &prev, function, type) == 0)
         return;
     new_node = create_new_event(&(main->events), prev, type, function);
-    if (new_node == NULL) {
+    if (new_node == NULL)
         fprintf(stderr, "Failed to create a new event.\n");
-        return;
-    }
 }
