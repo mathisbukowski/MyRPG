@@ -120,6 +120,22 @@ typedef struct util_s {
     sfFont *font;
 } util_t;
 
+typedef struct scene_s {
+    void (*init_scene)();
+    void (*handle_event_scene)();
+    void (*update_scene)();
+    void (*draw)();
+    void (*destroy)();
+    menu_node_t *scene_menus;
+    bool is_visible;
+    struct scene_s *next;
+} scene_t;
+
+typedef struct scene_list_s {
+    scene_t *head;
+    scene_t *tail;
+    scene_t *current;
+} scene_list_t;
 // Main
 struct rpg_s {
     player_t *player;
@@ -132,6 +148,7 @@ struct rpg_s {
     menu_node_t *menus;
     entity_t *entities;
     util_t *utils;
+    scene_list_t *manager;
 };
 
 // Main Category
@@ -172,4 +189,18 @@ void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
 void define_main_menu(rpg_t *params);
 
+// Init
+quest_t *init_quest(void);
+event_t *init_event(void);
+window_t *init_window(void);
+keymap_t *init_keymap(void);
+util_t *init_util(void);
+player_t *init_player(void);
+mob_t *init_mobs(void);
+object_t *init_object(void);
+entity_t *init_entity(void);
+scene_list_t *init_scene(void);
+
+void add_scene(rpg_t *main, scene_t *new);
+void destroying_scene(rpg_t *main);
 #endif //RPG_H
