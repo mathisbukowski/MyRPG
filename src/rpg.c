@@ -25,6 +25,7 @@ int game_loop(int ac, char **av)
 {
     rpg_t *main = init_structure();
 
+    loading_system(main, av);
     create_window(1920, 1080, "RPGLand", main);
     screen_manager(main);
     destroy_window(main);
