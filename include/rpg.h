@@ -174,7 +174,7 @@ int print_help(int ac, char **av);
 void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
     sfEventType type);
 void execute_event(rpg_t *main, sfEventType type);
-void close_window(const rpg_t *main);
+void close_window(rpg_t *main);
 
 // Keymap
 keymap_t *create_keymap_node(sfKeyCode key, void (*function)(rpg_t *));
@@ -203,4 +203,6 @@ scene_list_t *init_scene(void);
 
 void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);
+void saving_system(rpg_t *main);
+void loading_system(rpg_t *main, char **av);
 #endif //RPG_H

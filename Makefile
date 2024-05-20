@@ -32,6 +32,7 @@ SRC = 	src/main.c src/rpg.c 				\
 		src/init/init_tools.c 				\
 		src/scene/adding_scene.c 			\
 		src/scene/destroying_scene.c 		\
+		src/utils/saving_system.c    		\
 
 OBJ = $(SRC:.c=.o)
 
@@ -40,7 +41,7 @@ NAME = my_rpg
 LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
 CFLAGS = -Wall -Wextra -I./include -g #-Werror
 
-all: $(NAME) post_build_clean
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C lib/my
