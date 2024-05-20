@@ -26,8 +26,9 @@
     #include <sys/types.h>
     #include <sys/stat.h>
     #include <fcntl.h>
-    #include "../include/my.h"
-    #include "../include/my_printf.h"
+    #include "my.h"
+    #include "my_printf.h"
+    #include "map.h"
 
 // Player Structure
 typedef struct player_t {
@@ -48,7 +49,6 @@ typedef struct mob_s {
 } mob_t;
 
 // Object Structure
-
 typedef enum tool_s {
     SHOVEL,
     HOE,
@@ -109,6 +109,7 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
+char *remove_spaces(char *str);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,

@@ -5,7 +5,7 @@
 ** print_help.c
 */
 
-#include "../../include/rpg.h"
+#include "rpg.h"
 
 static void help(void)
 {

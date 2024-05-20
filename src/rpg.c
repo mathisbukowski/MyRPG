@@ -5,7 +5,7 @@
 ** rpg.c
 */
 
-#include "../include/rpg.h"
+#include "rpg.h"
 
 
 void screen_manager(rpg_t *main)
@@ -20,7 +20,7 @@ int game_loop(int ac, char **av)
 {
     rpg_t *main = init_structure();
 
-    create_window(1920, 1080, "RPGLand", main);
+    create_window(1920, 1080, "BozoLand", main);
     screen_manager(main);
     destroy_window(main);
     free_rpg(main);
