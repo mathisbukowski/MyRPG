@@ -42,6 +42,25 @@ static void add_to_linked(entity_t **head, entity_t *prev, entity_t *new_node)
         *head = new_node;
 }
 
+static void destroy_if_no_texture(entity_t *new_node)
+{
+    sfSprite_destroy(new_node->sprite);
+    sfTexture_destroy(new_node->texture);
+    free(new_node->name);
+    free(new_node);
+}
+
+static sfIntRect init_rect(void)
+{
+    sfIntRect rectangle;
+
+    rectangle.height = 64;
+    rectangle.width = 64;
+    rectangle.left = 0;
+    rectangle.top = 0;
+    return rectangle;
+}
+
 static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
     const entity_params_t *params, char const *path)
 {
@@ -52,12 +71,12 @@ static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
     new_node->sprite = sfSprite_create();
     new_node->texture = sfTexture_createFromFile(path, NULL);
     if (check_texture(new_node->sprite, new_node->texture)) {
-        sfSprite_destroy(new_node->sprite);
-        sfTexture_destroy(new_node->texture);
-        free(new_node->name);
-        free(new_node);
+        destroy_if_no_texture(new_node);
         return NULL;
     }
+    if (params->type == PLAYER)
+        new_node->rect = init_rect();
+    new_node->clock = NULL;
     new_node->position = params->pos;
     new_node->type = params->type;
     new_node->state = true;
