@@ -148,7 +148,7 @@ struct rpg_s {
     menu_node_t *menus;
     entity_t *entities;
     util_t *utils;
-    scene_list_t *manager;
+    scene_list_t *scene_manager;
 };
 
 // Main Category
