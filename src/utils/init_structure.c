@@ -22,7 +22,7 @@ rpg_t *init_structure(void)
         main->entities = init_entity();
         main->menus = NULL;
         main->utils = init_util();
-        main->manager = init_scene();
+        main->scene_manager = init_scene();
     } else
         free_rpg(main);
     return main;
