@@ -107,7 +107,7 @@ typedef struct event_s {
 
 // Window Structure
 typedef struct window_s {
-    sfRenderWindow *window;
+    sfRenderWindow *renderWindow;
     sfTexture *texture;
     sfVideoMode mode;
     char *title;
@@ -129,7 +129,6 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    menu_node_t *menus;
     entity_t *entities;
     util_t *utils;
     scene_list_t *scene_manager;
@@ -189,4 +188,10 @@ void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);
 void saving_system(rpg_t *main);
 void loading_system(rpg_t *main, char **av);
+void draw_start(rpg_t *main);
+void init_start_scene(rpg_t *main);
+scene_t *find_scene(scene_list_t *scene_list, char const *name);
+void destroy_scene(scene_t *scene);
+void init_params_scene(rpg_t *main);
+void destroying_scenes(rpg_t *main);
 #endif //RPG_H

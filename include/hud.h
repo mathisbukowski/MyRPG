@@ -63,13 +63,12 @@ void handle_menu_hover(const menu_t *menu);
 
 //scenes
 typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
-    void (*update_scene)();
-    void (*draw)();
-    void (*destroy)();
+    void (*update_scene)(rpg_t *);
+    void (*draw)(scene_t *, rpg_t *);
+    void (*destroy)(scene_t *);
     menu_node_t *menus;
     bool is_visible;
+    char *name;
     struct scene_s *next;
 } scene_t;
 
@@ -92,7 +91,7 @@ typedef struct button_s {
     int isSelected;
     menu_t *linkedMenu;
     button_func_t action;
-}button_t;
+} button_t;
 
 typedef struct button_node_s {
     button_t *button;
@@ -110,11 +109,13 @@ typedef struct button_params_s {
     button_func_t action;
 }button_params_t;
 
-int create_button(const button_params_t buttonParams, const rpg_t *params);
+int create_button(const button_params_t buttonParams,
+    const rpg_t *params, scene_t *scene);
 void handle_hover_and_click(const button_node_t *buttonNode,
     sfVector2i mousePos, rpg_t *params);
-void render_hud(rpg_t *params);
-void define_tools_menus(rpg_t *params, sfFont *font);
+void render_scene(scene_t *scene, rpg_t *params);
+void destroy_menu(menu_node_t *menuNode);
+void destroy_button(button_node_t *buttonNode);
 
 //texts
 typedef struct text_infos_s {
