@@ -27,6 +27,11 @@ typedef struct rpg_s rpg_t;
 typedef enum entitype_s {
     BACKGROUND,
     BUTTON_MENU,
+    PLAYER,
+    L_ANIMATED,
+    R_ANIMATED,
+    U_ANIMATED,
+    D_ANIMATED,
     NONE
 } entitype_t;
 
@@ -92,6 +97,8 @@ typedef struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
     sfVector2f position;
+    sfIntRect rect;
+    sfClock *clock;
     char *name;
     entitype_t type;
     bool state;
@@ -141,6 +148,7 @@ int game_loop(int ac, char **av);
 int check_tty(char **env);
 void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
+entity_t *find_entity(rpg_t *main, char *entity_name);
 int check_texture(sfSprite *sprite, const sfTexture *texture);
 
 // Window Manager
@@ -170,7 +178,16 @@ void free_entities(entity_t *entities);
 void entity_displayer(rpg_t *main);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
+void init_player_sprite(rpg_t *main);
+void left_action(rpg_t *main);
+void right_action(rpg_t *main);
+void up_action(rpg_t *main);
+void down_action(rpg_t *main);
+void player_no_action(entity_t *player);
 void define_main_menu(rpg_t *params, scene_t *scene);
+
+//Clock Manager
+void manage_clock(entity_t *entity);
 
 // Init
 quest_t *init_quest(void);

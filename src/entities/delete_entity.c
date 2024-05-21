@@ -20,6 +20,8 @@ void free_entities(entity_t *entities)
             sfTexture_destroy(tmp->texture);
         if (tmp->name)
             free(tmp->name);
+        if (tmp->clock)
+            sfClock_destroy(tmp->clock);
         free(tmp);
     }
 }

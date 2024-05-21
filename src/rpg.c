@@ -16,7 +16,9 @@ void screen_manager(rpg_t *main)
     (sfVector2f){0, 0}, BACKGROUND}, "assets/bg.jpg");
     init_start_scene(main);
     init_params_scene(main);
-    while (sfRenderWindow_isOpen(main->window->renderWindow)) {
+    init_player_sprite(main);
+    define_main_menu(main);
+    while (sfRenderWindow_isOpen(main->window->window)) {
         event_manager(main);
         display_window(main);
     }
