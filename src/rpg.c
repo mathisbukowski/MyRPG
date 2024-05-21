@@ -17,8 +17,7 @@ void screen_manager(rpg_t *main)
     init_start_scene(main);
     init_params_scene(main);
     init_player_sprite(main);
-    define_main_menu(main);
-    while (sfRenderWindow_isOpen(main->window->window)) {
+    while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);
         display_window(main);
     }

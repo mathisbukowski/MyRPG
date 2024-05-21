@@ -184,7 +184,6 @@ void right_action(rpg_t *main);
 void up_action(rpg_t *main);
 void down_action(rpg_t *main);
 void player_no_action(entity_t *player);
-void define_main_menu(rpg_t *params, scene_t *scene);
 
 //Clock Manager
 void manage_clock(entity_t *entity);
