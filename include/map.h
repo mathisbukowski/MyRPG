@@ -6,22 +6,28 @@
 */
 
 #ifndef MAP_H
-    #define MAP_H
-    #include "rpg.h"
+#define MAP_H
+#include "rpg.h"
 
 typedef struct property_s property_t;
+typedef struct map_s map_t;
 
 typedef struct layer_s {
-    int id;
-    char *name;
+    sfSprite ***tiles;
     int width;
     int height;
-    int **tiles;
-}layer_t;
+} layer_t;
 
 typedef struct map_s {
-    layer_t *layers_list;
-}map_t;
+    sfTexture *texture;
+    layer_t **layers;
+    int layer_count;
+    int width;
+    int height;
+} map_t;
 
-map_t *load_map(const char *path);
+void load_map(rpg_t *main);
+void draw_map(rpg_t *main, map_t *map);
+void free_map(map_t *map);
+
 #endif //MAP_H

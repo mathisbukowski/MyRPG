@@ -15,6 +15,7 @@ SRC = 	src/main.c 							\
 		src/utils/check_texture.c 			\
 		src/utils/find_entity.c 			\
 		src/utils/saving_system.c    		\
+		src/utils/remove_spaces.c 			\
 		src/events/event_manager.c 			\
 		src/events/init_event.c 			\
 		src/events/execute_event.c 			\
@@ -39,9 +40,7 @@ SRC = 	src/main.c 							\
 		src/init/init_tools.c 				\
 		src/scene/adding_scene.c 			\
 		src/scene/destroying_scene.c 		\
-		src/utils/saving_system.c    		\
-		src/map_loader/loader_core.c \
-        src/utils/remove_spaces.c \
+		src/map_loader/loader_core.c 		\
 
 OBJ = $(SRC:.c=.o)
 

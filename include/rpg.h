@@ -46,15 +46,6 @@ typedef enum entitype_s {
     NONE
 } entitype_t;
 
-// Player Structure
-typedef struct player_t {
-    char name[128];
-    int level;
-    long experience;
-    int pv;
-    int pc;
-} player_t;
-
 // Mob Structure
 typedef struct mob_s {
     char name[128];
@@ -107,14 +98,24 @@ typedef struct entity_params_s {
 typedef struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
-    sfVector2f position;
+    sfVector2f pos;
     sfIntRect rect;
     sfClock *clock;
+    float speed;
     char *name;
     entitype_t type;
     bool state;
     struct entity_s *next;
 } entity_t;
+
+// Player Structure
+typedef struct player_t {
+    char name[128];
+    int level;
+    long experience;
+    int pv;
+    int pc;
+} player_t;
 
 // Events List
 typedef struct event_s {
@@ -154,6 +155,7 @@ typedef struct scene_list_s {
     scene_t *tail;
     scene_t *current;
 } scene_list_t;
+
 // Main
 struct rpg_s {
     player_t *player;
@@ -167,10 +169,12 @@ struct rpg_s {
     entity_t *entities;
     util_t *utils;
     scene_list_t *scene_manager;
+    map_t *map;
+    sfView *view;
 };
 
 // Main Category
-int game_loop(int ac, char **av);
+int game_logic(int ac, char **av);
 
 // Utils
 int check_tty(char **env);
@@ -234,4 +238,7 @@ void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);
 void saving_system(rpg_t *main);
 void loading_system(rpg_t *main, char **av);
+
+// Player
+void update_view(rpg_t *main);
 #endif //RPG_H

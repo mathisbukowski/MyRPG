@@ -77,10 +77,10 @@ static entity_t *create_new_sprite(entity_t **head, entity_t *prev,
     if (params->type == PLAYER)
         new_node->rect = init_rect();
     new_node->clock = NULL;
-    new_node->position = params->pos;
+    new_node->pos = params->pos;
     new_node->type = params->type;
     new_node->state = true;
-    sfSprite_setPosition(new_node->sprite, new_node->position);
+    sfSprite_setPosition(new_node->sprite, new_node->pos);
     new_node->next = NULL;
     add_to_linked(head, prev, new_node);
     return new_node;
