@@ -7,25 +7,24 @@
 
 #include "rpg.h"
 
-static int add_menu_to_hud(rpg_t *params, menu_t *menu)
+static int add_menu_to_scene(scene_t *scene, menu_t *menu)
 {
     menu_node_t *newNode = malloc(sizeof(menu_node_t));
-    menu_node_t *current;
+    menu_node_t *current = NULL;
 
     if (newNode == NULL)
         return 84;
     newNode->menu = menu;
     newNode->next = NULL;
-    if (params->menus == NULL)
-        params->menus = newNode;
+    if (scene->menus == NULL)
+        scene->menus = newNode;
     else {
-        current = params->menus;
-        while (current != NULL && current->next != NULL)
+        current = scene->menus;
+        while (current->next != NULL)
             current = current->next;
-        if (current != NULL)
-            current->next = newNode;
+        current->next = newNode;
     }
-    sort_menus(&params->menus);
+    sort_menus(&scene->menus);
     return 0;
 }
 
@@ -71,7 +70,7 @@ static int create_menu_text(menu_t *menu, const menu_params_t menuParams)
 }
 
 static void init_variables(menu_t *menu, const menu_params_t menuParams,
-    rpg_t *params)
+    rpg_t *params, scene_t *scene)
 {
     menu->name = menuParams.name;
     menu->pos = menuParams.pos;
@@ -89,7 +88,7 @@ static void init_variables(menu_t *menu, const menu_params_t menuParams,
     menu->subMenu = NULL;
     if (menuParams.subMenuName != NULL)
         menu->subMenu = find_menu_by_name(menuParams.subMenuName,
-                                            params->menus);
+    scene->menus);
     sfRectangleShape_setPosition(menu->rect, menuParams.pos);
     sfRectangleShape_setSize(menu->rect, menuParams.size);
     sfRectangleShape_setFillColor(menu->rect, menuParams.color);
@@ -120,15 +119,15 @@ static void set_submenu(menu_t *menu)
     sfRectangleShape_setPosition(menu->subMenu->rect, menu->subMenu->pos);
 }
 
-int create_menu(const menu_params_t menuParams, rpg_t *params)
+int create_menu(const menu_params_t menuParams, scene_t *scene, rpg_t *params)
 {
     menu_t *menu = malloc(sizeof(menu_t));
 
     if (menu == NULL)
         return 84;
-    init_variables(menu, menuParams, params);
+    init_variables(menu, menuParams, params, scene);
     if (menu->subMenu != NULL)
         set_submenu(menu);
-    add_menu_to_hud(params, menu);
+    add_menu_to_scene(scene, menu);
     return 0;
 }

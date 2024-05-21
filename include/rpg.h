@@ -34,6 +34,7 @@ typedef enum entitype_s {
     D_ANIMATED,
     NONE
 } entitype_t;
+
 // Player Structure
 typedef struct player_t {
     char name[128];
@@ -53,7 +54,6 @@ typedef struct mob_s {
 } mob_t;
 
 // Object Structure
-
 typedef enum tool_s {
     SHOVEL,
     HOE,
@@ -114,7 +114,7 @@ typedef struct event_s {
 
 // Window Structure
 typedef struct window_s {
-    sfRenderWindow *window;
+    sfRenderWindow *renderWindow;
     sfTexture *texture;
     sfVideoMode mode;
     char *title;
@@ -127,22 +127,6 @@ typedef struct util_s {
     sfFont *font;
 } util_t;
 
-typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
-    void (*update_scene)();
-    void (*draw)();
-    void (*destroy)();
-    menu_node_t *scene_menus;
-    bool is_visible;
-    struct scene_s *next;
-} scene_t;
-
-typedef struct scene_list_s {
-    scene_t *head;
-    scene_t *tail;
-    scene_t *current;
-} scene_list_t;
 // Main
 struct rpg_s {
     player_t *player;
@@ -152,7 +136,6 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    menu_node_t *menus;
     entity_t *entities;
     util_t *utils;
     scene_list_t *scene_manager;
@@ -201,7 +184,6 @@ void right_action(rpg_t *main);
 void up_action(rpg_t *main);
 void down_action(rpg_t *main);
 void player_no_action(entity_t *player);
-void define_main_menu(rpg_t *params);
 
 //Clock Manager
 void manage_clock(entity_t *entity);
@@ -222,4 +204,10 @@ void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);
 void saving_system(rpg_t *main);
 void loading_system(rpg_t *main, char **av);
+void draw_start(rpg_t *main);
+void init_start_scene(rpg_t *main);
+scene_t *find_scene(scene_list_t *scene_list, char const *name);
+void destroy_scene(scene_t *scene);
+void init_params_scene(rpg_t *main);
+void destroying_scenes(rpg_t *main);
 #endif //RPG_H
