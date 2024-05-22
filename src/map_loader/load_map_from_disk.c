@@ -29,9 +29,9 @@ static int get_file_size(const char *path, struct stat *st)
 static char *allocate_buffer(size_t size)
 {
     char *buffer = malloc(size + 1);
-    if (buffer == NULL) {
+
+    if (buffer == NULL)
         perror("Error allocating memory for buffer");
-    }
     return buffer;
 }
 
