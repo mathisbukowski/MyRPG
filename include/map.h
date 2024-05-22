@@ -30,4 +30,8 @@ void load_map(rpg_t *main);
 void draw_map(rpg_t *main, map_t *map);
 void free_map(map_t *map);
 
+char *load_map_from_disk(const char *path);
+char *find_tag(char *data, const char *tag);
+int extract_attribute(char *tag, const char *attribute);
+char *extract_data_section(char *layer_tag);
 #endif //MAP_H

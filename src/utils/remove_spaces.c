@@ -18,8 +18,10 @@ char *remove_spaces(char *str)
     if (!new_str)
         return NULL;
     for (i = 0; i < len; i++)
-        if (str[i] != ' ')
-            new_str[j++] = str[i];
+        if (str[i] != ' ') {
+            new_str[j] = str[i];
+            j++;
+        }
     new_str[j] = '\0';
     return new_str;
 }

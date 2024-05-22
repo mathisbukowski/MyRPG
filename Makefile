@@ -41,6 +41,12 @@ SRC = 	src/main.c 							\
 		src/scene/adding_scene.c 			\
 		src/scene/destroying_scene.c 		\
 		src/map_loader/loader_core.c 		\
+		src/map_loader/tools_for_core.c 	\
+		src/map_loader/load_map_from_disk.c 	\
+		src/map_loader/free_map.c 	\
+		src/map_loader/draw_map.c 	\
+		src/map_loader/map_parser.c 	\
+		src/map_loader/extract_data_section.c 	\
 
 OBJ = $(SRC:.c=.o)
 

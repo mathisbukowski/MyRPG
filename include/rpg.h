@@ -241,4 +241,5 @@ void loading_system(rpg_t *main, char **av);
 
 // Player
 void update_view(rpg_t *main);
+map_t *parse_map_data(char *raw_map_data);
 #endif //RPG_H
