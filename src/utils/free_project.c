@@ -85,6 +85,7 @@ void free_rpg(rpg_t *rpg)
         free_keymap(rpg->keymap);
         free_entities(rpg->entities);
         free_utils(rpg->utils);
+        free_inventory(rpg->inventory);
         free(rpg);
     }
 }

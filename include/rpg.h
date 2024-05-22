@@ -92,6 +92,22 @@ typedef struct entity_params_s {
     entitype_t type;
 } entity_params_t;
 
+// Inventory
+typedef struct item_s {
+    tool_t id;
+    char *name;
+    sfIntRect *rect;
+    sfSprite *sprite;
+} item_t;
+
+extern item_t item_bank[];
+
+typedef struct inventory_s {
+    item_t **slot;
+    sfTexture *item;
+    sfSprite *inventory_back;
+} inventory_t;
+
 // Sprite List
 typedef struct entity_s {
     sfSprite *sprite;
@@ -145,6 +161,7 @@ typedef struct scene_list_s {
 } scene_list_t;
 // Main
 struct rpg_s {
+    inventory_t *inventory;
     player_t *player;
     mob_t *mobs;
     object_t *objs;
@@ -206,6 +223,12 @@ void define_main_menu(rpg_t *params);
 //Clock Manager
 void manage_clock(entity_t *entity);
 
+// Inventory
+void free_inventory(inventory_t *inventory);
+void add_inventory_select(rpg_t *main, int y, int x, char *name);
+void delete_inventory(rpg_t *main, int x, int y);
+void auto_add_inventory(rpg_t *main, char *name);
+
 // Init
 quest_t *init_quest(void);
 event_t *init_event(void);
@@ -217,6 +240,9 @@ mob_t *init_mobs(void);
 object_t *init_object(void);
 entity_t *init_entity(void);
 scene_list_t *init_scene(void);
+inventory_t *init_inventory(void);
+void init_bank_item_sprite(void);
+
 
 void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);

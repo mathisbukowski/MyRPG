@@ -39,6 +39,10 @@ SRC = 	src/main.c 							\
 		src/init/init_tools.c 				\
 		src/scene/adding_scene.c 			\
 		src/scene/destroying_scene.c 		\
+		src/inventory/add_function.c		\
+		src/inventory/del_function.c		\
+		src/inventory/init_inventory.c		\
+		src/inventory/set_item.c			\
 
 OBJ = $(SRC:.c=.o)
 
