@@ -11,7 +11,8 @@ char *find_tag(char *data, const char *tag)
 {
     char *start = strstr(data, tag);
 
-    if (start == NULL) return NULL;
+    if (start == NULL)
+        return NULL;
     return start;
 }
 
@@ -34,4 +35,27 @@ int extract_attribute(char *tag, const char *attribute)
     strncpy(buffer, value_start + 1, value_end - value_start - 1);
     buffer[value_end - value_start - 1] = '\0';
     return atoi(buffer);
+}
+
+int extract_map_dimensions(map_t *map, char *map_tag)
+{
+    map->width = extract_attribute(map_tag, "width");
+    map->height = extract_attribute(map_tag, "height");
+    if (map->width <= 0 || map->height <= 0)
+        return -1;
+    return 0;
+}
+
+int load_tileset_texture(map_t *map)
+{
+    map->texture = sfTexture_createFromFile("assets/map/tileset.png", NULL);
+    return map->texture ? 0 : -1;
+}
+
+void free_layer_tiles(layer_t *layer, int rows)
+{
+    for (int k = 0; k < rows; k++)
+        free(layer->tiles[k]);
+    free(layer->tiles);
+    free(layer);
 }
