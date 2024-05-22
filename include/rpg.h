@@ -228,6 +228,7 @@ void free_inventory(inventory_t *inventory);
 void add_inventory_select(rpg_t *main, int y, int x, char *name);
 void delete_inventory(rpg_t *main, int x, int y);
 void auto_add_inventory(rpg_t *main, char *name);
+int is_in_inventory(rpg_t *main, char *item);
 
 // Init
 quest_t *init_quest(void);

@@ -43,6 +43,7 @@ SRC = 	src/main.c 							\
 		src/inventory/del_function.c		\
 		src/inventory/init_inventory.c		\
 		src/inventory/set_item.c			\
+		src/inventory/is_in_inventory.c		\
 
 OBJ = $(SRC:.c=.o)
 
