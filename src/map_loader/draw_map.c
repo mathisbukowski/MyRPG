@@ -31,7 +31,6 @@ void draw_map(rpg_t *main, map_t *map)
 
     if (!main || !map)
         return;
-
     player = find_entity(main, "player");
     if (!player)
         return;
