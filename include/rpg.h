@@ -231,4 +231,8 @@ void loading_system(rpg_t *main, char **av);
 
 // Player
 void update_view(rpg_t *main);
+
+void open_params(rpg_t *main);
+void open_start(rpg_t *main);
+void open_game(rpg_t *main);
 #endif //RPG_H

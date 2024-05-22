@@ -30,6 +30,7 @@ SRC = 	src/main.c 								\
 		src/menus/menu.c 						\
 		src/menus/sort_menus.c 					\
 		src/menus/delete_menus.c 				\
+		src/buttons/redirections.c 				\
 		src/buttons/buttons.c 					\
 		src/buttons/buttons_creator.c 			\
 		src/init/init_quest.c 					\
