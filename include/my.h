@@ -48,4 +48,7 @@ void my_putchar_error(char c);
 int err_str(char *str);
 char *my_strchr(char const *str, int index);
 char *my_strrchr(char const *str, int index);
+int show_double_array(char *const *tab);
+void free_double_array(char **word_ar);
+int get_double_array_len(char **array);
 #endif /* MY_H */

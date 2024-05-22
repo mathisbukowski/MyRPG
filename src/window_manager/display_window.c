@@ -9,7 +9,10 @@
 
 void display_window(rpg_t *main)
 {
-    sfRenderWindow_clear(main->window->renderWindow, sfWhite);
+    sfRenderWindow_clear(main->window->renderWindow, sfBlack);
+    draw_map(main, main->map);
+    sfRenderWindow_setView(main->window->renderWindow,
+    sfRenderWindow_getDefaultView(main->window->renderWindow));
     entity_displayer(main);
     main->scene_manager->current->draw(main->scene_manager->current, main);
     sfRenderWindow_display(main->window->renderWindow);

@@ -7,7 +7,6 @@
 
 #include "rpg.h"
 
-
 void screen_manager(rpg_t *main)
 {
     add_event_to_list(main, &close_window, sfEvtClosed);
@@ -19,17 +18,23 @@ void screen_manager(rpg_t *main)
     init_player_sprite(main);
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);
+        update_view(main);
         display_window(main);
     }
 }
 
-int game_loop(int ac, char **av)
+int game_logic(int ac, char **av)
 {
     rpg_t *main = init_structure();
 
     if (av[1] != NULL)
         loading_system(main, av);
     create_window(1920, 1080, "RPGLand", main);
+    load_map(main);
+    if (main->map == NULL) {
+        my_putstr("Error: Map not loaded\n");
+        return 84;
+    }
     screen_manager(main);
     destroy_window(main);
     free_rpg(main);
