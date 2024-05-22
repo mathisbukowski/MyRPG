@@ -10,167 +10,69 @@
 map_t *allocate_map(void)
 {
     map_t *map = malloc(sizeof(map_t));
-    if (map == NULL) {
+
+    if (!map)
         return NULL;
-    }
     map->layer_count = 0;
     map->layers = NULL;
     return map;
 }
 
-int extract_map_dimensions(map_t *map, char *map_tag)
+static char *find_map_tag(char *raw_map_data)
 {
-    map->width = extract_attribute(map_tag, "width");
-    map->height = extract_attribute(map_tag, "height");
-
-    if (map->width <= 0 || map->height <= 0) {
-        return -1;
-    }
-    return 0;
+    return find_tag(raw_map_data, "<map");
 }
 
-int load_tileset_texture(map_t *map)
+static char *find_layer_start(char *raw_map_data)
 {
-    map->texture = sfTexture_createFromFile("assets/map/tileset.png", NULL);
-    if (map->texture == NULL)
-        return -1;
-    return 0;
+    return find_tag(raw_map_data, "<layer");
 }
 
-void free_layer_tiles(layer_t *layer, int rows)
+static char *find_next_layer_end(char *layer_tag)
 {
-    for (int k = 0; k < rows; k++)
-        free(layer->tiles[k]);
-    free(layer->tiles);
-    free(layer);
+    return strstr(layer_tag, "</layer>");
 }
 
-layer_t *create_layer(int width, int height, sfTexture *texture)
+static int parse_map_metadata(map_t *map, char *raw_map_data)
 {
-    layer_t *layer = malloc(sizeof(layer_t));
-    if (layer == NULL) {
-        return NULL;
-    }
+    char *map_tag = find_map_tag(raw_map_data);
 
-    layer->width = width;
-    layer->height = height;
-    layer->tiles = malloc(height * sizeof(sfSprite **));
-    if (layer->tiles == NULL) {
-        free(layer);
-        return NULL;
+    if (!map_tag || extract_map_dimensions(map, map_tag) < 0 ||
+        load_tileset_texture(map) < 0) {
+        return 0;
     }
-
-    for (int i = 0; i < height; i++) {
-        if ((layer->tiles[i] = malloc(width * sizeof(sfSprite *))) == NULL) {
-            for (int k = 0; k < i; k++) free(layer->tiles[k]);
-            free(layer->tiles);
-            free(layer);
-            return NULL;
-        }
-        for (int j = 0; j < width; j++) {
-            if ((layer->tiles[i][j] = sfSprite_create()) == NULL) {
-                free_layer_tiles(layer, i);
-                return NULL;
-            }
-            sfSprite_setTexture(layer->tiles[i][j], texture, sfTrue);
-        }
-    }
-
-    return layer;
+    return 1;
 }
 
-void configure_tile(layer_t *layer, int tile_id, int i, int j, sfTexture *texture)
+static int parse_map_layers(map_t *map, char *raw_map_data)
 {
-    int tileWidth = 16;
-    int tileHeight = 16;
+    char *layer_start = find_layer_start(raw_map_data);
+    char *layer_end;
 
-    if (tile_id == 0) {
-        sfSprite_setTextureRect(layer->tiles[i][j], (sfIntRect){0, 0, 0, 0});
-    } else {
-        int x = j * tileWidth;
-        int y = i * tileHeight;
-        sfSprite_setPosition(layer->tiles[i][j], (sfVector2f){x, y});
-
-        sfVector2u tileset_size = sfTexture_getSize(texture);
-        int tilesPerRow = (int)tileset_size.x / tileWidth;
-
-        sfIntRect rect;
-        rect.left = ((tile_id - 1) % tilesPerRow) * tileWidth;
-        rect.top = ((tile_id - 1) / tilesPerRow) * tileHeight;
-        rect.width = tileWidth;
-        rect.height = tileHeight;
-        sfSprite_setTextureRect(layer->tiles[i][j], rect);
+    while (layer_start) {
+        layer_end = find_next_layer_end(layer_start);
+        if (!layer_end)
+            break;
+        if (add_layer(map, layer_start) < 0)
+            return 0;
+        layer_start = find_layer_start(layer_end);
     }
-}
-
-int configure_tiles(layer_t *layer, char **tile_data, sfTexture *texture)
-{
-    int tile_index = 0;
-    int tile_id = 0;
-
-    for (int i = 0; i < layer->height; i++) {
-        for (int j = 0; j < layer->width; j++) {
-             tile_id = (int)strtol(tile_data[tile_index], NULL, 10);
-             tile_index++;
-            configure_tile(layer, tile_id, i, j, texture);
-        }
-    }
-    return 0;
-}
-
-int add_layer(map_t *map, char *layer_tag)
-{
-    map->layer_count++;
-    layer_t **temp = realloc(map->layers, map->layer_count * sizeof(layer_t *));
-    if (temp == NULL)
-        return -1;
-    map->layers = temp;
-
-    layer_t *layer = create_layer(map->width, map->height, map->texture);
-    if (layer == NULL) {
-        return -1;
-    }
-    map->layers[map->layer_count - 1] = layer;
-
-    char *data_buffer = extract_data_section(layer_tag);
-    if (data_buffer == NULL)
-        return -1;
-    char **tile_data = my_str_to_word_array(data_buffer, ",");
-    free(data_buffer);
-    if (tile_data == NULL)
-        return -1;
-
-    int result = configure_tiles(layer, tile_data, map->texture);
-
-    for (int i = 0; tile_data[i] != NULL; i++) {
-        free(tile_data[i]);
-    }
-    free(tile_data);
-
-    return result;
+    return 1;
 }
 
 map_t *parse_map_data(char *raw_map_data)
 {
     map_t *map = allocate_map();
-    if (map == NULL) {
-        return NULL;
-    }
 
-    char *map_tag = find_tag(raw_map_data, "<map");
-    if (map_tag == NULL || extract_map_dimensions(map, map_tag) < 0 ||
-        load_tileset_texture(map) < 0) {
+    if (!map)
+        return NULL;
+    if (!parse_map_metadata(map, raw_map_data)) {
         free(map);
         return NULL;
     }
-
-    char *layer_tag = raw_map_data;
-    while ((layer_tag = find_tag(layer_tag, "<layer")) != NULL) {
-        if (add_layer(map, layer_tag) < 0) {
-            free_map(map);
-            return NULL;
-        }
-        layer_tag = strstr(layer_tag, "</layer>");
+    if (!parse_map_layers(map, raw_map_data)) {
+        free_map(map);
+        return NULL;
     }
     return map;
 }
