@@ -47,6 +47,9 @@ SRC = 	src/main.c 							\
 		src/map_loader/draw_map.c 	\
 		src/map_loader/map_parser.c 	\
 		src/map_loader/extract_data_section.c 	\
+		src/map_loader/create_layer.c 	\
+		src/map_loader/configure_tiles.c 	\
+		src/map_loader/add_layer.c 	\
 
 OBJ = $(SRC:.c=.o)
 
