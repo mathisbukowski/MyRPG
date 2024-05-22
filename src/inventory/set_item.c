@@ -13,10 +13,12 @@ void init_bank_item_sprite(void)
         NULL);
 
     if (check_texture(sprite, texture)) {
+        sfSprite_destroy(sprite);
         return;
     }
     sfSprite_setTexture(sprite, texture, sfFalse);
     for (int i = 0; i < 10; i ++) {
+        item_bank[i].sprite = sfSprite_create();
         sfSprite_setTextureRect(item_bank[i].sprite, *item_bank[i].rect);
     }
 }
