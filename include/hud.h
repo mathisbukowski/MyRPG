@@ -63,9 +63,11 @@ void handle_menu_hover(const menu_t *menu);
 
 //scenes
 typedef struct scene_s {
-    void (*update_scene)(rpg_t *);
-    void (*draw)(scene_t *, rpg_t *);
-    void (*destroy)(scene_t *);
+    void (*init_scene)();
+    void (*handle_event_scene)();
+    void (*update_scene)();
+    void (*draw)();
+    void (*destroy)();
     menu_node_t *menus;
     bool is_visible;
     char *name;

@@ -15,7 +15,7 @@ void set_view(rpg_t *main, entity_t *player)
 
     sfView_setCenter(main->view, center);
     sfView_setSize(main->view, size);
-    sfRenderWindow_setView(main->window->window, main->view);
+    sfRenderWindow_setView(main->window->renderWindow, main->view);
 }
 
 void draw_layer(sfRenderWindow *window, layer_t *layer)
@@ -36,5 +36,5 @@ void draw_map(rpg_t *main, map_t *map)
         return;
     set_view(main, player);
     for (int l = 0; l < map->layer_count; l++)
-        draw_layer(main->window->window, map->layers[l]);
+        draw_layer(main->window->renderWindow, map->layers[l]);
 }

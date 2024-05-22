@@ -139,23 +139,6 @@ typedef struct util_s {
     sfFont *font;
 } util_t;
 
-typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
-    void (*update_scene)();
-    void (*draw)();
-    void (*destroy)();
-    menu_node_t *scene_menus;
-    bool is_visible;
-    struct scene_s *next;
-} scene_t;
-
-typedef struct scene_list_s {
-    scene_t *head;
-    scene_t *tail;
-    scene_t *current;
-} scene_list_t;
-
 // Main
 struct rpg_s {
     player_t *player;
@@ -168,6 +151,7 @@ struct rpg_s {
     entity_t *entities;
     util_t *utils;
     scene_list_t *scene_manager;
+    scene_t *current_scene;
     map_t *map;
     sfView *view;
 };

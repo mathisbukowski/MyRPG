@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** rpg_dev
 ** File description:
-** player_moov_function.c
+** player_move_function.c
 */
 #include "rpg.h"
 
@@ -105,5 +105,5 @@ void update_view(rpg_t *main)
     sfVector2f center = {player->pos.x, player->pos.y};
 
     sfView_setCenter(main->view, center);
-    sfRenderWindow_setView(main->window->window, main->view);
+    sfRenderWindow_setView(main->window->renderWindow, main->view);
 }
