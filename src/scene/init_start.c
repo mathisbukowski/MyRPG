@@ -14,15 +14,7 @@ void define_start_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Start Game", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "mainMenu", NULL}, main, scene);
-}
-
-void open_params(rpg_t *main)
-{
-    scene_t *new = NULL;
-
-    new = find_scene(main->scene_manager, "paramsScene");
-    main->scene_manager->current = new;
+    sfBlack, 30}, "mainMenu", &open_game}, main, scene);
 }
 
 void define_options_button(rpg_t *main,
@@ -42,7 +34,7 @@ void define_exit_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Exit", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "mainMenu", NULL}, main, scene);
+    sfBlack, 30}, "mainMenu", &close_window}, main, scene);
 }
 
 static void define_scene(scene_t *scene)
