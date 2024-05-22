@@ -19,6 +19,7 @@ typedef struct params_s params_t;
 typedef struct button_node_s button_node_t;
 typedef struct text_infos_s text_infos_t;
 typedef void (*button_func_t)(rpg_t *);
+typedef struct scene_s scene_t;
 
 //menus
 typedef struct menu_s {
@@ -54,11 +55,29 @@ typedef struct menu_params_s {
     int isHidden;
 }menu_params_t;
 
-int create_menu(menu_params_t menuParams, rpg_t *params);
+int create_menu(menu_params_t menuParams, scene_t *scene, rpg_t *params);
 void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(const char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
 void handle_menu_hover(const menu_t *menu);
+
+//scenes
+typedef struct scene_s {
+    void (*update_scene)(rpg_t *);
+    void (*draw)(scene_t *, rpg_t *);
+    void (*destroy)(scene_t *);
+    menu_node_t *menus;
+    bool is_visible;
+    char *name;
+    struct scene_s *next;
+} scene_t;
+
+typedef struct scene_list_s {
+    scene_t *head;
+    scene_t *tail;
+    scene_t *current;
+} scene_list_t;
+
 //buttons
 typedef struct button_s {
     sfRectangleShape *rect;
@@ -72,7 +91,7 @@ typedef struct button_s {
     int isSelected;
     menu_t *linkedMenu;
     button_func_t action;
-}button_t;
+} button_t;
 
 typedef struct button_node_s {
     button_t *button;
@@ -90,11 +109,13 @@ typedef struct button_params_s {
     button_func_t action;
 }button_params_t;
 
-int create_button(const button_params_t buttonParams, const rpg_t *params);
+int create_button(const button_params_t buttonParams,
+    const rpg_t *params, scene_t *scene);
 void handle_hover_and_click(const button_node_t *buttonNode,
     sfVector2i mousePos, rpg_t *params);
-void render_hud(rpg_t *params);
-void define_tools_menus(rpg_t *params, sfFont *font);
+void render_scene(scene_t *scene, rpg_t *params);
+void destroy_menu(menu_node_t *menuNode);
+void destroy_button(button_node_t *buttonNode);
 
 //texts
 typedef struct text_infos_s {

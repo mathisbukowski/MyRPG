@@ -11,6 +11,8 @@ void add_scene(rpg_t *main, scene_t *new)
 {
     scene_list_t *list = main->scene_manager;
 
+    if (list == NULL)
+        return;
     new->next = NULL;
     if (list->tail == NULL) {
         list->head = new;

@@ -7,15 +7,20 @@
 
 #include "rpg.h"
 
-void destroying_scene(rpg_t *main)
+void destroy_scene(scene_t *scene)
+{
+    free(scene->name);
+    destroy_menu(scene->menus);
+}
+
+void destroying_scenes(rpg_t *main)
 {
     scene_t *current = main->scene_manager->head;
     scene_t *next = NULL;
 
     while (current != NULL) {
         next = current->next;
-        if (current->destroy != NULL)
-            current->destroy();
+        destroy_scene(current);
         free(current);
         current = next;
     }

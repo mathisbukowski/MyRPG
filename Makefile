@@ -27,14 +27,11 @@ SRC = 	src/main.c 							\
 		src/entities/delete_entity.c 		\
 		src/entities/display_entity.c 		\
 		src/entities/manage_clock.c 		\
-		src/buttons/buttons.c 				\
-		src/buttons/buttons_creator.c 		\
-		src/player/player_moov_function.c 	\
-		src/player/init_player.c 			\
-		src/player/player_stand_function.c 	\
 		src/menus/menu.c 					\
 		src/menus/sort_menus.c 				\
-		src/hud/start_menu.c 				\
+		src/menus/delete_menus.c 			\
+		src/buttons/buttons.c 				\
+		src/buttons/buttons_creator.c 		\
 		src/init/init_quest.c 				\
 		src/init/init_entities.c 			\
 		src/init/init_tools.c 				\
@@ -50,6 +47,12 @@ SRC = 	src/main.c 							\
 		src/map_loader/create_layer.c 	\
 		src/map_loader/configure_tiles.c 	\
 		src/map_loader/add_layer.c 	\
+		src/scene/find_scene.c 				\
+		src/scene/init_params.c 			\
+		src/scene/init_start.c 				\
+		src/player/init_player.c 			\
+		src/player/player_move_functions.c 	\
+		src/player/player_stand_function.c 	\
 
 OBJ = $(SRC:.c=.o)
 

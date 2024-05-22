@@ -17,9 +17,9 @@ void create_window(const unsigned int width, const unsigned int height,
         main->window->isFullscreen = sfTrue;
         main->window->title = strdup(title);
         main->window->style = sfClose | sfResize;
-        main->window->window = sfRenderWindow_create(main->window->mode,
+        main->window->renderWindow = sfRenderWindow_create(main->window->mode,
         main->window->title, main->window->style, NULL);
-        if (main->window->window == NULL) {
+        if (main->window->renderWindow == NULL) {
             free(main->window->title);
             free(main->window);
             main->window = NULL;

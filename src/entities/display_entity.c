@@ -11,12 +11,12 @@ void entity_displayer(rpg_t *main)
 {
     entity_t *current = main->entities;
 
-    if (!sfRenderWindow_isOpen(main->window->window))
+    if (!sfRenderWindow_isOpen(main->window->renderWindow))
         return;
     while (current != NULL) {
         manage_clock(current);
         if (current->sprite && current->state == true)
-            sfRenderWindow_drawSprite(main->window->window,
+            sfRenderWindow_drawSprite(main->window->renderWindow,
             current->sprite, NULL);
         current = current->next;
     }

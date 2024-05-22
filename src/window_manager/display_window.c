@@ -14,6 +14,6 @@ void display_window(rpg_t *main)
     sfRenderWindow_setView(main->window->window,
     sfRenderWindow_getDefaultView(main->window->window));
     entity_displayer(main);
-    render_hud(main);
-    sfRenderWindow_display(main->window->window);
+    main->scene_manager->current->draw(main->scene_manager->current, main);
+    sfRenderWindow_display(main->window->renderWindow);
 }
