@@ -28,8 +28,13 @@ static void update_player_animation(entity_t *player)
 void left_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
+    float speed = player->speed;
 
-    player->pos.x -= player->speed;
+    if ((sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS)) &&
+        (sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))) {
+        speed /= sqrt(2);
+    }
+    player->pos.x -= speed;
     if (player->type != L_ANIMATED) {
         player->rect.top = 64;
         player->rect.left = 0;
@@ -46,8 +51,13 @@ void left_action(rpg_t *main)
 void right_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
+    float speed = player->speed;
 
-    player->pos.x += player->speed;
+    if ((sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS)) &&
+        (sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))) {
+        speed /= sqrt(2);
+    }
+    player->pos.x += speed;
     if (player->type != R_ANIMATED) {
         player->rect.top = 192;
         player->rect.left = 0;
@@ -64,8 +74,13 @@ void right_action(rpg_t *main)
 void up_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
+    float speed = player->speed;
 
-    player->pos.y -= player->speed;
+    if ((sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS)) &&
+        (sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))) {
+        speed /= sqrt(2);
+    }
+    player->pos.y -= speed;
     if (player->type != U_ANIMATED) {
         player->rect.top = 0;
         player->rect.left = 0;
@@ -82,8 +97,13 @@ void up_action(rpg_t *main)
 void down_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
+    float speed = player->speed;
 
-    player->pos.y += player->speed;
+    if ((sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS)) &&
+        (sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))) {
+        speed /= sqrt(2);
+    }
+    player->pos.y += speed;
     if (player->type != D_ANIMATED) {
         player->rect.top = 128;
         player->rect.left = 0;
