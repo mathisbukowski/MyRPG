@@ -99,12 +99,18 @@ void define_exit_params_button(rpg_t *main,
         button_size, sfBlue, sfBlue,
         &(text_infos_t){"Go to main menu", main->utils->font,
         (sfVector2f){button_size.x / 10, button_size.y / 4},
-        sfBlack, 30}, "paramsMenu", NULL}, main, scene);
+        sfBlack, 30}, "paramsMenu", &open_start}, main, scene);
+}
+
+void render_params(scene_t *scene, rpg_t *main)
+{
+    entity_displayer(main, "background");
+    render_scene(scene, main);
 }
 
 static void define_scene(scene_t *scene)
 {
-    scene->draw = render_scene;
+    scene->draw = render_params;
     scene->update_scene = NULL;
     scene->name = strdup("paramsScene");
 }
