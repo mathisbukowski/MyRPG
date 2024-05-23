@@ -10,9 +10,11 @@
 void set_view(rpg_t *main, entity_t *player)
 {
     sfVector2f center = {player->pos.x, player->pos.y};
-    sfVector2f size = {main->window->mode.width / 3,
-    main->window->mode.height / 3};
+    sfVector2f size = {main->window->mode.width / 4.0f,
+        main->window->mode.height / 4.0f};
 
+    center.x = floor(center.x) + 0.5f;
+    center.y = floor(center.y) + 0.5f;
     sfView_setCenter(main->view, center);
     sfView_setSize(main->view, size);
     sfRenderWindow_setView(main->window->renderWindow, main->view);

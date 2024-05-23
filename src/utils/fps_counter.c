@@ -24,6 +24,7 @@ void update_fps(rpg_t *main)
 
     sprintf(fpsString, "FPS: %.2f", fps);
     sfText_setString(main->fpsCounter, fpsString);
-    sfRenderWindow_drawText(main->window->renderWindow, main->fpsCounter, NULL);
+    sfRenderWindow_drawText(main->window->renderWindow, main->fpsCounter,
+        NULL);
     sfRenderWindow_display(main->window->renderWindow);
 }
