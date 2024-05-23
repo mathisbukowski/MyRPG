@@ -37,9 +37,15 @@ void define_exit_button(rpg_t *main,
     sfBlack, 30}, "mainMenu", &close_window}, main, scene);
 }
 
-static void define_scene(scene_t *scene)
+static void draw_start_menu(scene_t *current, rpg_t *main)
 {
-    scene->draw = render_scene;
+    entity_displayer(main, "background");
+    render_scene(current, main);
+}
+
+static void define_menu(scene_t *scene)
+{
+    scene->draw = draw_start_menu;
     scene->update_scene = NULL;
     scene->name = strdup("startScene");
     scene->destroy = destroy_scene;
@@ -58,12 +64,12 @@ void init_start_scene(rpg_t *main)
 
     if (scene == NULL)
         return;
-    scene->menus = NULL;
+    memset(scene, 0, sizeof(scene_t));
     create_menu((menu_params_t){"mainMenu", menu_pos,
     msize, 0, sfTransparent, NULL, NULL, 0}, scene, main);
     define_start_button(main, bsize, start_pos, scene);
     define_options_button(main, bsize, options_pos, scene);
     define_exit_button(main, bsize, exit_pos, scene);
-    define_scene(scene);
+    define_menu(scene);
     add_scene(main, scene);
 }
