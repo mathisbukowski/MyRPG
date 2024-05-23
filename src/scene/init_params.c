@@ -7,21 +7,6 @@
 
 #include "rpg.h"
 
-static void set_window_fps_to_60(rpg_t *main)
-{
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 60);
-}
-
-static void set_window_fps_to_100(rpg_t *main)
-{
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 100);
-}
-
-static void set_window_fps_to_120(rpg_t *main)
-{
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 120);
-}
-
 static void create_fps_button(const rpg_t *main, sfVector2f *button_size,
     scene_t *scene, sfVector2f fps_pos)
 {
@@ -59,23 +44,26 @@ void define_fps_button(rpg_t *main,
 
 static void set_window_size_to_1920x1080(rpg_t *main)
 {
-    sfRenderWindow_setSize(main->window->renderWindow, (sfVector2u){1920, 1080});
+    sfRenderWindow_setSize(main->window->renderWindow,
+        (sfVector2u){1920, 1080});
 }
 
 static void set_window_size_to_1280x720(rpg_t *main)
 {
-    sfRenderWindow_setSize(main->window->renderWindow, (sfVector2u){1280, 720});
+    sfRenderWindow_setSize(main->window->renderWindow,
+        (sfVector2u){1280, 720});
 }
 
 static void create_screen_size_button(const rpg_t *main,
-     sfVector2f *button_size, sfVector2f *options_pos, scene_t *scene)
+    sfVector2f *button_size, sfVector2f *options_pos, scene_t *scene)
 {
     create_button((button_params_t){"Fullscreen",
         (sfVector2f){(*options_pos).x - 500, (*options_pos).y + 150},
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"Fullscreen", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
-        sfBlack, 30}, "paramsMenu", set_window_size_to_1920x1080}, main, scene);
+        sfBlack, 30}, "paramsMenu",
+        set_window_size_to_1920x1080}, main, scene);
     create_button((button_params_t){"Windowed",
         (sfVector2f){(*options_pos).x, (*options_pos).y + 150},
         (*button_size), sfBlue, sfBlue,
@@ -87,7 +75,8 @@ static void create_screen_size_button(const rpg_t *main,
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"Borderless", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
-        sfBlack, 30}, "paramsMenu", set_window_size_to_1920x1080}, main, scene);
+        sfBlack, 30}, "paramsMenu",
+        set_window_size_to_1920x1080}, main, scene);
 }
 
 void define_screen_button(rpg_t *main,
@@ -104,7 +93,8 @@ void define_screen_button(rpg_t *main,
 void define_exit_params_button(rpg_t *main,
     sfVector2f button_size, sfVector2f exit_pos, scene_t *scene)
 {
-    create_button((button_params_t){"Main menu", {exit_pos.x, exit_pos.y + 150},
+    create_button((button_params_t){"Main menu",
+        {exit_pos.x, exit_pos.y + 150},
         button_size, sfBlue, sfBlue,
         &(text_infos_t){"Go to main menu", main->utils->font,
         (sfVector2f){button_size.x / 10, button_size.y / 4},
