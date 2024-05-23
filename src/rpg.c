@@ -13,8 +13,11 @@ void screen_manager(rpg_t *main)
     add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     add_entity_to_list(main, (entity_params_t){"background",
     (sfVector2f){0, 0}, BACKGROUND}, "assets/bg.jpg");
+    add_entity_to_list(main, (entity_params_t){"player",
+    (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
     init_start_scene(main);
     init_params_scene(main);
+    init_game_scene(main);
     init_player_sprite(main);
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);

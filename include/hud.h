@@ -63,8 +63,6 @@ void handle_menu_hover(const menu_t *menu);
 
 //scenes
 typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
     void (*update_scene)();
     void (*draw)();
     void (*destroy)();
