@@ -95,6 +95,7 @@ typedef struct entity_params_s {
 // Inventory
 typedef struct item_s {
     tool_t id;
+    int quantity;
     char *name;
     sfIntRect *rect;
     sfSprite *sprite;
@@ -103,9 +104,8 @@ typedef struct item_s {
 extern item_t item_bank[];
 
 typedef struct inventory_s {
-    item_t **slot;
-    sfTexture *item;
-    sfSprite *inventory_back;
+    int state;
+    sfRectangleShape *inventory_back;
 } inventory_t;
 
 // Sprite List
@@ -224,11 +224,13 @@ void define_main_menu(rpg_t *params);
 void manage_clock(entity_t *entity);
 
 // Inventory
+int delete_inventory(rpg_t *main, char *name, int nb);
+int add_inventory(rpg_t *main, char *name, int nb);
+int is_in_inventory(rpg_t *main, char *item, int nb);
+int find_id(char *item);
+void display_inventory(rpg_t *main);
 void free_inventory(inventory_t *inventory);
-void add_inventory_select(rpg_t *main, int y, int x, char *name);
-void delete_inventory(rpg_t *main, int x, int y);
-void auto_add_inventory(rpg_t *main, char *name);
-int is_in_inventory(rpg_t *main, char *item);
+void change_inventory_state(rpg_t *main);
 
 // Init
 quest_t *init_quest(void);
@@ -241,8 +243,8 @@ mob_t *init_mobs(void);
 object_t *init_object(void);
 entity_t *init_entity(void);
 scene_list_t *init_scene(void);
-inventory_t *init_inventory(void);
 void init_bank_item_sprite(void);
+inventory_t *init_inventory_sprite(rpg_t *main);
 
 
 void add_scene(rpg_t *main, scene_t *new);

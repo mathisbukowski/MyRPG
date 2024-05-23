@@ -6,7 +6,15 @@
 */
 #include "rpg.h"
 
-void delete_inventory(rpg_t *main, int x, int y)
+int delete_inventory(rpg_t *main, char *name, int nb)
 {
-    main->inventory->slot[y][x] = item_bank[10];
+    int x = find_id(name);
+
+    if (x < 0)
+        return 1;
+    if (item_bank[x].quantity > nb) {
+        item_bank[x].quantity -= nb;
+        return 0;
+    }
+    return 1;
 }

@@ -77,6 +77,7 @@ void free_utils(util_t *utils)
 void free_rpg(rpg_t *rpg)
 {
     if (rpg != NULL) {
+        free_inventory(rpg->inventory);
         free_players(rpg->player);
         free_mobs(rpg->mobs);
         free_objects(rpg->objs);
@@ -85,7 +86,6 @@ void free_rpg(rpg_t *rpg)
         free_keymap(rpg->keymap);
         free_entities(rpg->entities);
         free_utils(rpg->utils);
-        free_inventory(rpg->inventory);
         free(rpg);
     }
 }

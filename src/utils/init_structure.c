@@ -23,7 +23,7 @@ rpg_t *init_structure(void)
         main->menus = NULL;
         main->utils = init_util();
         main->scene_manager = init_scene();
-        main->inventory = init_inventory();
+        main->inventory = init_inventory_sprite(main);
     } else
         free_rpg(main);
     return main;

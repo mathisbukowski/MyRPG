@@ -6,35 +6,27 @@
 */
 #include "rpg.h"
 
-inventory_t *init_inventory(void)
+inventory_t *init_inventory_sprite(rpg_t *main)
 {
     inventory_t *inventory = malloc(sizeof(inventory_t));
+    sfRectangleShape *inventory_sprite = sfRectangleShape_create();
 
+    add_key_to_keymap(&(main->keymap), sfKeyI, &change_inventory_state);
     init_bank_item_sprite();
-    inventory->slot = malloc(sizeof(item_t *) * 5);
-    for (int i = 0; i < 5; i ++) {
-        inventory->slot[i] = malloc(sizeof(item_t) * 5);
-        for (int j = 0; j < 5; j ++) {
-            inventory->slot[i][j].sprite = NULL;
-        }
-    }
-    inventory->inventory_back = sfSprite_create();
+    sfRectangleShape_setSize(inventory_sprite, (sfVector2f){550, 600});
+    sfRectangleShape_setPosition(inventory_sprite, (sfVector2f){685, 240});
+    sfRectangleShape_setFillColor(inventory_sprite,
+        (sfColor){169, 169, 169, 255});
+    inventory->inventory_back = inventory_sprite;
+    inventory->state = -1;
     return inventory;
 }
 
 void free_inventory(inventory_t *inventory)
 {
-    int x = 0;
-
-    for (int i = 0; i < 5; i ++) {
-        sfSprite_destroy(inventory->slot[i]->sprite);
-        free(inventory->slot[i]);
+    for (int i = 0; item_bank[i].id != 0; i ++) {
+        sfSprite_destroy(item_bank[i].sprite);
     }
-    while (item_bank[x].id != 0) {
-        sfSprite_destroy(item_bank[x].sprite);
-        x ++;
-    }
-    free(inventory->slot);
-    sfSprite_destroy(inventory->inventory_back);
+    sfRectangleShape_destroy(inventory->inventory_back);
     free(inventory);
 }
