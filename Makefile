@@ -16,6 +16,7 @@ SRC = 	src/main.c 								\
 		src/utils/find_entity.c 				\
 		src/utils/saving_system.c    			\
 		src/utils/remove_spaces.c 				\
+		src/utils/fps_counter.c 				\
 		src/events/event_manager.c 				\
 		src/events/init_event.c 				\
 		src/events/execute_event.c 				\
@@ -51,7 +52,7 @@ SRC = 	src/main.c 								\
 		src/scene/find_scene.c 					\
 		src/scene/init_params.c 				\
 		src/scene/init_start.c 					\
-		src/scene/set_window_fps.c 					\
+		src/scene/set_window_fps.c 				\
 		src/player/init_player.c 				\
 		src/player/player_move_functions.c 		\
 		src/player/player_stand_function.c 		\

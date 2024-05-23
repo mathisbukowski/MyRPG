@@ -153,6 +153,8 @@ struct rpg_s {
     scene_list_t *scene_manager;
     map_t *map;
     sfView *view;
+    sfText *fpsCounter;
+    sfClock *fpsClock;
 };
 
 // Main Category
@@ -165,6 +167,7 @@ rpg_t *init_structure(void);
 entity_t *find_entity(rpg_t *main, char *entity_name);
 int check_texture(sfSprite *sprite, const sfTexture *texture);
 char *remove_spaces(char *str);
+void update_fps(rpg_t *main);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,
@@ -214,6 +217,7 @@ mob_t *init_mobs(void);
 object_t *init_object(void);
 entity_t *init_entity(void);
 scene_list_t *init_scene(void);
+void init_fps(rpg_t *main);
 
 // Scenes
 void add_scene(rpg_t *main, scene_t *new);
