@@ -7,17 +7,17 @@
 
 #include "rpg.h"
 
-void set_window_fps_to_60(rpg_t *main)
+void set_window_fps_to_sixty(rpg_t *main)
 {
     sfRenderWindow_setFramerateLimit(main->window->renderWindow, 60);
 }
 
-void set_window_fps_to_100(rpg_t *main)
+void set_window_fps_to_hundred(rpg_t *main)
 {
     sfRenderWindow_setFramerateLimit(main->window->renderWindow, 100);
 }
 
-void set_window_fps_to_120(rpg_t *main)
+void set_window_fps_to_hundred_twenty(rpg_t *main)
 {
     sfRenderWindow_setFramerateLimit(main->window->renderWindow, 120);
 }
