@@ -14,7 +14,9 @@ void screen_manager(rpg_t *main)
     add_entity_to_list(main, (entity_params_t){"background",
     (sfVector2f){0, 0}, BACKGROUND}, "assets/bg.jpg");
     add_entity_to_list(main, (entity_params_t){"player",
-    (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
+    (sfVector2f){900, 508}, PLAYER}, "assets/player/player.png");
+    add_entity_to_list(main, (entity_params_t){"npc",
+    (sfVector2f){800, 508}, NPC}, "assets/player/npc.png");
     init_start_scene(main);
     init_params_scene(main);
     init_game_scene(main);

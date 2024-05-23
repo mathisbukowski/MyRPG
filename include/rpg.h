@@ -43,6 +43,7 @@ typedef enum entitype_s {
     R_ANIMATED,
     U_ANIMATED,
     D_ANIMATED,
+    NPC,
     NONE
 } entitype_t;
 
