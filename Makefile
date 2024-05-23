@@ -16,6 +16,7 @@ SRC = 	src/main.c 								\
 		src/utils/find_entity.c 				\
 		src/utils/saving_system.c    			\
 		src/utils/remove_spaces.c 				\
+		src/utils/fps_counter.c 				\
 		src/events/event_manager.c 				\
 		src/events/init_event.c 				\
 		src/events/execute_event.c 				\
@@ -38,20 +39,20 @@ SRC = 	src/main.c 								\
 		src/init/init_tools.c 					\
 		src/scene/adding_scene.c 				\
 		src/scene/destroying_scene.c 			\
-		src/map_loader/loader_core.c 			\
-		src/map_loader/tools_for_core.c 		\
-		src/map_loader/load_map_from_disk.c 	\
-		src/map_loader/free_map.c 				\
-		src/map_loader/draw_map.c 				\
-		src/map_loader/map_parser.c 			\
-		src/map_loader/extract_data_section.c 	\
-		src/map_loader/create_layer.c 			\
-		src/map_loader/configure_tiles.c 		\
-		src/map_loader/add_layer.c 				\
+		src/map/loader_core.c 					\
+		src/map/tools_for_core.c 				\
+		src/map/load_map_from_disk.c 			\
+		src/map/free_map.c 						\
+		src/map/draw_map.c 						\
+		src/map/map_parser.c 					\
+		src/map/extract_data_section.c 			\
+		src/map/create_layer.c 					\
+		src/map/configure_tiles.c 				\
+		src/map/add_layer.c 					\
 		src/scene/find_scene.c 					\
 		src/scene/init_params.c 				\
 		src/scene/init_start.c 					\
-		src/scene/set_window_fps.c 					\
+		src/scene/set_window_fps.c 				\
 		src/player/init_player.c 				\
 		src/player/player_move_functions.c 		\
 		src/player/player_stand_function.c 		\
@@ -61,7 +62,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg
 
-LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window
+LIB = -L./lib/my -lmy -lcsfml-graphics -lcsfml-system -lcsfml-window -lm
 CFLAGS = -Wall -Wextra -I./include -g #-Werror
 
 all: $(NAME)

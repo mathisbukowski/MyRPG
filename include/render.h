@@ -55,6 +55,13 @@ typedef struct menu_params_s {
     int isHidden;
 }menu_params_t;
 
+typedef struct render_bounds_s {
+    int startRow;
+    int endRow;
+    int startCol;
+    int endCol;
+}render_bounds_t;
+
 int create_menu(menu_params_t menuParams, scene_t *scene, rpg_t *params);
 void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(const char *name, menu_node_t *head);
