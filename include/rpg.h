@@ -233,7 +233,7 @@ void loading_system(rpg_t *main, char **av);
 void update_view(rpg_t *main);
 
 // Set Window FPS
-void set_window_fps_to_60(rpg_t *main);
-void set_window_fps_to_100(rpg_t *main);
-void set_window_fps_to_120(rpg_t *main);
+void set_window_fps_to_sixty(rpg_t *main);
+void set_window_fps_to_hundred(rpg_t *main);
+void set_window_fps_to_hundred_twenty(rpg_t *main);
 #endif //RPG_H
