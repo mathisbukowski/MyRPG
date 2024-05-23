@@ -45,14 +45,20 @@ void define_fps_button(rpg_t *main,
 
 static void set_window_size_to_full(rpg_t *main)
 {
-    sfRenderWindow_setSize(main->window->renderWindow,
-        (sfVector2u){1920, 1080});
+    main->window->mode.width = 1920;
+    main->window->mode.height = 1080;
+    sfRenderWindow_destroy(main->window->renderWindow);
+    main->window->renderWindow = sfRenderWindow_create(main->window->mode,
+        "RPGLand", sfDefaultStyle, NULL);
 }
 
 static void set_window_size_to_windowed(rpg_t *main)
 {
-    sfRenderWindow_setSize(main->window->renderWindow,
-        (sfVector2u){1280, 720});
+    main->window->mode.width = 1280;
+    main->window->mode.height = 720;
+    sfRenderWindow_destroy(main->window->renderWindow);
+    main->window->renderWindow = sfRenderWindow_create(main->window->mode,
+        "RPGLand", sfDefaultStyle, NULL);
 }
 
 static void create_screen_size_button(const rpg_t *main,
