@@ -19,7 +19,7 @@ rpg_t *init_structure(void)
         main->quests = init_quest();
         main->window = init_window();
         main->keymap = init_keymap();
-        main->entities = init_entity();
+        main->entities = NULL;
         main->utils = init_util();
         main->scene_manager = init_scene();
         main->map = NULL;
