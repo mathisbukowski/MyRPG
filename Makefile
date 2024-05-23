@@ -54,6 +54,7 @@ SRC = 	src/main.c 								\
 		src/player/init_player.c 				\
 		src/player/player_move_functions.c 		\
 		src/player/player_stand_function.c 		\
+		src/scene/game/init_game.c		 		\
 
 OBJ = $(SRC:.c=.o)
 
