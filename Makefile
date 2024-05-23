@@ -50,6 +50,7 @@ SRC = 	src/main.c 								\
 		src/scene/find_scene.c 					\
 		src/scene/init_params.c 				\
 		src/scene/init_start.c 					\
+		src/scene/set_window_fps.c 					\
 		src/player/init_player.c 				\
 		src/player/player_move_functions.c 		\
 		src/player/player_stand_function.c 		\
