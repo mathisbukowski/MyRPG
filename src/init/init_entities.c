@@ -33,12 +33,3 @@ object_t *init_object(void)
         memset(new_object, 0, sizeof(object_t));
     return new_object;
 }
-
-entity_t *init_entity(void)
-{
-    entity_t *new_entity = malloc(sizeof(entity_t));
-
-    if (new_entity != NULL)
-        memset(new_entity, 0, sizeof(entity_t));
-    return new_entity;
-}
