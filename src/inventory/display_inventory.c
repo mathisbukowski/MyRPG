@@ -16,7 +16,6 @@ char *get_value_item(int x)
 
 void change_inventory_state(rpg_t *main)
 {
-    add_inventory(main, "pioche", 100);
     main->inventory->state *= -1;
 }
 

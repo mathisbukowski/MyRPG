@@ -14,7 +14,7 @@ int add_inventory(rpg_t *main, char *name, int nb)
     if (x < 0)
         return 1;
     value = get_value_item(x);
-    if (item_bank[x].quantity + nb <= 100000) {
+    if (item_bank[x].quantity + nb < 10000) {
         item_bank[x].quantity += nb;
         sfText_setString(item_bank[x].texte, value);
         free(value);

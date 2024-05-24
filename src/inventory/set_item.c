@@ -42,7 +42,7 @@ void init_bank_item_sprite(inventory_t *inventory)
     sfSprite *sprite = sfSprite_create();
     sfTexture *texture = sfTexture_createFromFile("assets/item.png",
         NULL);
-    sfFont* font = sfFont_createFromFile("assets/font/font.ttf");
+    sfFont* font = sfFont_createFromFile("assets/font/arial.ttf");
 
     if (!font) {
         fprintf(stderr, "Error: file not found.\n");
