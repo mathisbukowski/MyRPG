@@ -37,4 +37,5 @@ void move_entity(rpg_t *main, entity_t *entity, int direction)
     if (main->collisions_map->layers[0]->coords[tile_y + 1][tile_x].data ==
         NON_COLIDE_TILE)
         entity->pos = next_pos;
+    sfSprite_setPosition(entity->sprite, entity->pos);
 }

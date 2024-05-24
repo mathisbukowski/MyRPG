@@ -96,12 +96,3 @@ void down_action(rpg_t *main)
     } else
         update_player_animation(player);
 }
-
-void update_view(rpg_t *main)
-{
-    entity_t *player = find_entity(main, "player");
-    sfVector2f center = {player->pos.x, player->pos.y};
-
-    sfView_setCenter(main->view, center);
-    sfRenderWindow_setView(main->window->renderWindow, main->view);
-}

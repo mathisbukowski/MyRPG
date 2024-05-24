@@ -17,6 +17,8 @@ void define_background(rpg_t *main)
 
 void screen_manager(rpg_t *main)
 {
+    entity_t *player;
+
     add_event_to_list(main, &close_window, sfEvtClosed);
     add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     add_entity_to_list(main, (entity_params_t){"player",
@@ -26,9 +28,10 @@ void screen_manager(rpg_t *main)
     init_params_scene(main);
     init_game_scene(main);
     init_player_sprite(main);
+    player = find_entity(main, "player");
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);
-        update_view(main);
+        set_view(main, player);
         display_window(main);
     }
 }

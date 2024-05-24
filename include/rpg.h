@@ -211,7 +211,6 @@ void handle_key_press(rpg_t *main, sfKeyCode key);
 
 // Sprite Manager
 void free_entities(entity_t *entities);
-void entity_displayer(rpg_t *main, char *name);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
 void init_player_sprite(rpg_t *main);
@@ -255,8 +254,10 @@ void update_view(rpg_t *main);
 
 // Entities
 void move_entity(rpg_t *main, entity_t *entity, int direction);
+void entities_displayer(rpg_t *rpg);
+void display_entity(rpg_t *main, char *name);
 
-// Set Window FPS
+// Window related
 void set_window_fps_to_sixty(rpg_t *main);
 void set_window_fps_to_hundred(rpg_t *main);
 void set_window_fps_to_hundred_twenty(rpg_t *main);
@@ -265,4 +266,5 @@ void open_start(rpg_t *main);
 void open_game(rpg_t *main);
 void init_game_scene(rpg_t *main);
 void init_background(rpg_t *main);
+void set_view(rpg_t *main, entity_t *player);
 #endif //RPG_H
