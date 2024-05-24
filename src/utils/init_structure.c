@@ -25,6 +25,7 @@ rpg_t *init_structure(void)
         main->map = NULL;
         main->view = sfView_create();
         init_fps(main);
+        main->inventory = init_inventory_sprite(main);
     } else
         free_rpg(main);
     return main;
