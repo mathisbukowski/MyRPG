@@ -18,7 +18,7 @@ static void handle_diagonal_movement(rpg_t *main, entity_t *entity,
 
 void move_entity(rpg_t *main, entity_t *entity, int direction)
 {
-    float speed = entity->speed;
+    float speed = entity->speed * get_elapsed_time(main);
     sfVector2f next_pos = entity->pos;
     int tile_x;
     int tile_y;

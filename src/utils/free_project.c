@@ -74,6 +74,15 @@ void free_utils(util_t *utils)
     free(utils);
 }
 
+void destroy_sf(rpg_t *rpg)
+{
+    sfText_destroy(rpg->fps_counter);
+    sfClock_destroy(rpg->fps_clock);
+    sfTexture_destroy(rpg->background_texture);
+    sfSprite_destroy(rpg->background_sprite);
+    sfClock_destroy(rpg->global);
+}
+
 void free_rpg(rpg_t *rpg)
 {
     if (rpg != NULL) {
@@ -88,10 +97,7 @@ void free_rpg(rpg_t *rpg)
         destroying_scenes(rpg);
         free_utils(rpg->utils);
         free_map(rpg->map);
-        sfText_destroy(rpg->fps_counter);
-        sfClock_destroy(rpg->fps_clock);
-        sfTexture_destroy(rpg->background_texture);
-        sfSprite_destroy(rpg->background_sprite);
+        destroy_sf(rpg);
         sfView_destroy(rpg->view);
     }
 }

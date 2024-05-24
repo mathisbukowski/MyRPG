@@ -22,6 +22,8 @@ static void handle_player_events(rpg_t *main)
         left_action(main);
     if (sfKeyboard_isKeyPressed(sfKeyD))
         right_action(main);
+    if (sfKeyboard_isKeyPressed(sfKeyP))
+        close_window(main);
 }
 
 void event_manager(rpg_t *main)
