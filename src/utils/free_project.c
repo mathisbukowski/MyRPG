@@ -71,6 +71,7 @@ void free_keymap(keymap_t *keymap)
 void free_utils(util_t *utils)
 {
     sfFont_destroy(utils->font);
+    sfFont_destroy(utils->font2);
     free(utils);
 }
 
