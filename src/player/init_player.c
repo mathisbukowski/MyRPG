@@ -13,7 +13,6 @@ void init_player_sprite(rpg_t *main)
     sfIntRect rect = {320, 128, 64, 64};
 
     player = find_entity(main, "player");
-    npc = find_entity(main, "npc");
     player->pos.x = (main->map->width * 16 / 2);
     player->pos.y = (main->map->height * 16 / 2) - 150;
     player->speed = PLAYER_SPEED;

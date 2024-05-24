@@ -55,6 +55,11 @@ enum direction {
     RIGHT
 };
 
+enum tile_type {
+    COLIDE_TILE = 1282,
+    NON_COLIDE_TILE = 1281
+};
+
 // Mob Structure
 typedef struct mob_s {
     char name[128];

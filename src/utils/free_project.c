@@ -87,8 +87,8 @@ void free_rpg(rpg_t *rpg)
         destroying_scenes(rpg);
         free_utils(rpg->utils);
         free_map(rpg->map);
-        sfText_destroy(rpg->fpsCounter);
-        sfClock_destroy(rpg->fpsClock);
+        sfText_destroy(rpg->fps_counter);
+        sfClock_destroy(rpg->fps_clock);
         sfTexture_destroy(rpg->background_texture);
         sfSprite_destroy(rpg->background_sprite);
         sfView_destroy(rpg->view);

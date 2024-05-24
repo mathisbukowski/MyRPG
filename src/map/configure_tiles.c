@@ -41,7 +41,7 @@ int configure_tiles(layer_t *layer, char **tile_data, sfTexture *texture)
             config.i = i;
             config.j = j;
             configure_tile(&config);
-            layer->coords[i]->data = tile_id;
+            layer->coords[i][j].data = tile_id;
             layer->coords[i][j].x = config.j * 16;
             layer->coords[i][j].y = config.i * 16;
             index++;
