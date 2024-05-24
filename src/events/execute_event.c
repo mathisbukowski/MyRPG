@@ -12,7 +12,7 @@ void execute_event(rpg_t *main, const sfEventType type)
     const event_t *current = main->events;
 
     while (current != NULL) {
-        if (current->type == type)
+        if (current->type == type && current->function)
             current->function(main);
         current = current->next;
     }
