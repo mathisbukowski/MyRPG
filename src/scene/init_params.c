@@ -43,24 +43,6 @@ void define_fps_button(rpg_t *main,
     create_fps_button(main, &button_size, scene, fps_pos);
 }
 
-void update_button_positions_and_sizes(rpg_t *main, scene_t *scene) {
-    button_node_t *button = scene->menus->menu->buttons;
-    sfVector2u window_size = sfRenderWindow_getSize(main->window->renderWindow);
-
-    while (button != NULL) {
-        sfVector2f new_position;
-        sfVector2f new_size;
-        new_position.x = button->button->pos.x * window_size.x / main->window->mode.width / 1.5;
-        new_position.y = button->button->pos.y * window_size.y / main->window->mode.height / 1.5;
-        new_size.x = sfRectangleShape_getSize(button->button->rect).x * window_size.x / main->window->mode.width;
-        new_size.y = sfRectangleShape_getSize(button->button->rect).y * window_size.y / main->window->mode.height;
-        sfRectangleShape_setPosition(button->button->rect, new_position);
-        sfRectangleShape_setSize(button->button->rect, new_size);
-        sfText_setPosition(button->button->text, new_position);
-        button = button->next;
-    }
-}
-
 static void set_window_size_to_full(rpg_t *main)
 {
     main->window->mode.width = 1920;
@@ -71,7 +53,8 @@ static void set_window_size_to_full(rpg_t *main)
     update_button_positions_and_sizes(main, main->scene_manager->current);
 }
 
-static void set_window_size_to_windowed(rpg_t *main) {
+static void set_window_size_to_windowed(rpg_t *main)
+{
     main->window->mode.width = 1280;
     main->window->mode.height = 720;
     sfRenderWindow_destroy(main->window->renderWindow);
