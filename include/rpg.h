@@ -99,11 +99,14 @@ typedef struct item_s {
     char *name;
     sfIntRect *rect;
     sfSprite *sprite;
+    sfText *texte;
 } item_t;
 
 extern item_t item_bank[];
 
 typedef struct inventory_s {
+    sfFont *font;
+    sfTexture *texture;
     int state;
     sfRectangleShape *inventory_back;
 } inventory_t;
@@ -243,7 +246,7 @@ mob_t *init_mobs(void);
 object_t *init_object(void);
 entity_t *init_entity(void);
 scene_list_t *init_scene(void);
-void init_bank_item_sprite(void);
+void init_bank_item_sprite(inventory_t *inventory);
 inventory_t *init_inventory_sprite(rpg_t *main);
 
 

@@ -13,6 +13,9 @@ void change_inventory_state(rpg_t *main)
 
 void display_item(rpg_t *main, int i)
 {
+    if (item_bank[i].texte != NULL)
+        sfRenderWindow_drawText(main->window->window,
+            item_bank[i].texte, sfFalse);
     if (item_bank[i].sprite != NULL)
         sfRenderWindow_drawSprite(main->window->window,
             item_bank[i].sprite, sfFalse);

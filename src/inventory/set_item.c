@@ -15,37 +15,62 @@ int find_id(char *item)
     return -1;
 }
 
-void init_bank_item_sprite(void)
+sfText *init_texte_item(sfFont *font, int i)
+{
+    sfText *texte = sfText_create();
+
+    sfText_setString(texte, ": 0");
+    sfText_setFont(texte, font);
+    sfText_setCharacterSize(texte, 40);
+    sfText_setColor(texte, sfColor_fromRGB(0, 0, 0));
+    sfText_setPosition(texte, (sfVector2f){260, (float)(250 + (i * 58))});
+    return texte;
+}
+
+sfSprite *init_sprite_item(sfTexture *texture, int i)
+{
+    sfSprite *sprite = sfSprite_create();
+
+    sfSprite_setTexture(sprite, texture, sfFalse);
+    sfSprite_setTextureRect(sprite, *item_bank[i].rect);
+    sfSprite_setPosition(sprite, (sfVector2f){200, (float)(250 + (i * 58))});
+    return sprite;
+}
+
+void init_bank_item_sprite(inventory_t *inventory)
 {
     sfSprite *sprite = sfSprite_create();
     sfTexture *texture = sfTexture_createFromFile("assets/item.png",
         NULL);
+    sfFont* font = sfFont_createFromFile("assets/font/font.ttf");
 
+    if (!font) {
+        fprintf(stderr, "Error: file not found.\n");
+        return;
+    }
     if (check_texture(sprite, texture)) {
         sfSprite_destroy(sprite);
         return;
     }
     for (int i = 0; i < 10; i ++) {
-        item_bank[i].sprite = sfSprite_create();
-        sfSprite_setTexture(item_bank[i].sprite, texture, sfFalse);
-        sfSprite_setTextureRect(item_bank[i].sprite, *item_bank[i].rect);
-        sfSprite_setPosition(item_bank[i].sprite,
-            (sfVector2f){710, (float)(250 + (i * 58))});
+        item_bank[i].texte = init_texte_item(font, i);
+        item_bank[i].sprite = init_sprite_item(texture, i);
     }
-    sfTexture_destroy(texture);
+    inventory->texture = texture;
+    inventory->font = font;
     sfSprite_destroy(sprite);
 }
 
 item_t item_bank[] = {
-    {1, 0, "houe", &(sfIntRect){144, 0, 48, 48}, NULL},
-    {2, 0, "pioche", &(sfIntRect){192, 0, 48, 48}, NULL},
-    {3, 0, "hache", &(sfIntRect){288, 0, 48, 48}, NULL},
-    {4, 0, "épée", &(sfIntRect){240, 0, 48, 48}, NULL},
-    {5, 0, "pierre", &(sfIntRect){96, 0, 48, 48}, NULL},
-    {6, 0, "bois", &(sfIntRect){48, 0, 48, 48}, NULL},
-    {7, 0, "poisson", &(sfIntRect){0, 0, 48, 48}, NULL},
-    {8, 0, "carotte", &(sfIntRect){432, 0, 48, 48}, NULL},
-    {9, 0, "tomate", &(sfIntRect){384, 0, 48, 48}, NULL},
-    {10, 0, "pomme de terre", &(sfIntRect){336, 0, 48, 48}, NULL},
-    {0, 0, NULL, NULL, NULL}
+    {1, 0, "houe", &(sfIntRect){144, 0, 48, 48}, NULL, NULL},
+    {2, 0, "pioche", &(sfIntRect){192, 0, 48, 48}, NULL, NULL},
+    {3, 0, "hache", &(sfIntRect){288, 0, 48, 48}, NULL, NULL},
+    {4, 0, "épée", &(sfIntRect){240, 0, 48, 48}, NULL, NULL},
+    {5, 0, "pierre", &(sfIntRect){96, 0, 48, 48}, NULL, NULL},
+    {6, 0, "bois", &(sfIntRect){48, 0, 48, 48}, NULL, NULL},
+    {7, 0, "poisson", &(sfIntRect){0, 0, 48, 48}, NULL, NULL},
+    {8, 0, "carotte", &(sfIntRect){432, 0, 48, 48}, NULL, NULL},
+    {9, 0, "tomate", &(sfIntRect){384, 0, 48, 48}, NULL, NULL},
+    {10, 0, "pomme de terre", &(sfIntRect){336, 0, 48, 48}, NULL, NULL},
+    {0, 0, NULL, NULL, NULL, NULL}
 };
