@@ -104,7 +104,8 @@ void define_exit_params_button(rpg_t *main,
 
 void render_params(scene_t *scene, rpg_t *main)
 {
-    entity_displayer(main, "background");
+    sfRenderWindow_drawSprite(main->window->renderWindow,
+    main->background_sprite, NULL);
     render_scene(scene, main);
 }
 

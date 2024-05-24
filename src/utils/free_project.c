@@ -89,6 +89,8 @@ void free_rpg(rpg_t *rpg)
         free_map(rpg->map);
         sfText_destroy(rpg->fpsCounter);
         sfClock_destroy(rpg->fpsClock);
+        sfTexture_destroy(rpg->background_texture);
+        sfSprite_destroy(rpg->background_sprite);
         sfView_destroy(rpg->view);
     }
 }
