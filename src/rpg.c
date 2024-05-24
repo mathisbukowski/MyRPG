@@ -23,14 +23,14 @@ void screen_manager(rpg_t *main)
     add_event_to_list(main, &close_window, sfEvtClosed);
     add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
     add_entity_to_list(main, (entity_params_t){"player",
-    (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
+    (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png", NULL);
     define_background(main);
     init_start_scene(main);
     init_params_scene(main);
     init_game_scene(main);
-    create_npc(main, "black-smith", (sfVector2f){816, 337},
-        (sfIntRect){0, 0, 32, 32});
     init_player_sprite(main);
+    create_npc(main, "black-smith", (sfVector2f){816, 337},
+        (sfIntRect){0, 0, 64, 64});
     player = find_entity(main, "player");
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);

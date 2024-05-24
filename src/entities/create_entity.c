@@ -91,7 +91,8 @@ static entity_t *create_new_sprite(const entity_params_t *params,
     return new_node;
 }
 
-void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path)
+void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path,
+    void (*function)(rpg_t *, entity_t *, sfIntRect, entity_t *))
 {
     entity_t *new_node = NULL;
 
@@ -108,5 +109,6 @@ void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path)
         destroy_if_no_texture(new_node);
         return;
     }
+    new_node->actions = function;
     add_to_linked(&(main->entities), new_node);
 }
