@@ -39,6 +39,7 @@ SRC = 	src/main.c 								\
 		src/init/init_tools.c 					\
 		src/scene/adding_scene.c 				\
 		src/scene/destroying_scene.c 			\
+		src/scene/update_button_size.c 			\
 		src/map/loader_core.c 					\
 		src/map/tools_for_core.c 				\
 		src/map/load_map_from_disk.c 			\
