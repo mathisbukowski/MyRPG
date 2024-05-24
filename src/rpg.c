@@ -39,7 +39,7 @@ int game_logic(int ac, char **av)
         return 84;
     }
     screen_manager(main);
-    destroy_window(main);
     free_rpg(main);
+    destroy_window(main);
     return 0;
 }

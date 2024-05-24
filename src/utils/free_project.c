@@ -84,7 +84,11 @@ void free_rpg(rpg_t *rpg)
         free_events(rpg->events);
         free_keymap(rpg->keymap);
         free_entities(rpg->entities);
+        destroying_scenes(rpg);
         free_utils(rpg->utils);
-        free(rpg);
+        free_map(rpg->map);
+        sfText_destroy(rpg->fpsCounter);
+        sfClock_destroy(rpg->fpsClock);
+        sfView_destroy(rpg->view);
     }
 }
