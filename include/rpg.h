@@ -234,6 +234,7 @@ int find_id(char *item);
 void display_inventory(rpg_t *main);
 void free_inventory(inventory_t *inventory);
 void change_inventory_state(rpg_t *main);
+char *get_value_item(int x);
 
 // Init
 quest_t *init_quest(void);

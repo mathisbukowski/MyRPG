@@ -6,8 +6,17 @@
 */
 #include "rpg.h"
 
+char *get_value_item(int x)
+{
+    char *buffer = malloc(sizeof(char) * 9);
+
+    sprintf(buffer, ": %d", item_bank[x].quantity);
+    return buffer;
+}
+
 void change_inventory_state(rpg_t *main)
 {
+    add_inventory(main, "pioche", 100);
     main->inventory->state *= -1;
 }
 
