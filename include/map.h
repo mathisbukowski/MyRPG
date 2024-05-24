@@ -17,10 +17,17 @@ enum map_type {
     COLLISIONS_MAP
 };
 
+typedef struct tile_s {
+    int data;
+    int x;
+    int y;
+} tile_t;
+
 typedef struct layer_s {
     sfSprite ***tiles;
     int width;
     int height;
+    tile_t **coords;
 } layer_t;
 
 typedef struct map_s {

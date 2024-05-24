@@ -166,6 +166,8 @@ struct rpg_s {
     sfText *fps_counter;
     sfClock *fps_clock;
     sfClock *delta_clock;
+    sfSprite *background_sprite;
+    sfTexture *background_texture;
 };
 
 // Main Category
@@ -257,4 +259,5 @@ void open_params(rpg_t *main);
 void open_start(rpg_t *main);
 void open_game(rpg_t *main);
 void init_game_scene(rpg_t *main);
+void init_background(rpg_t *main);
 #endif //RPG_H
