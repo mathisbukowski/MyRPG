@@ -33,3 +33,9 @@ object_t *init_object(void)
         memset(new_object, 0, sizeof(object_t));
     return new_object;
 }
+
+void init_background(rpg_t *main)
+{
+    main->background_sprite = NULL;
+    main->background_texture = NULL;
+}
