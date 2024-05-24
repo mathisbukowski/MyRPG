@@ -16,7 +16,7 @@ void init_player_sprite(rpg_t *main)
     npc = find_entity(main, "npc");
     player->pos.x = (main->map->width * 16 / 2);
     player->pos.y = (main->map->height * 16 / 2) - 150;
-    player->speed = 1.5;
+    player->speed = PLAYER_SPEED;
     sfSprite_setTextureRect(player->sprite, rect);
     sfSprite_setScale(player->sprite, (sfVector2f){2, 2});
 }

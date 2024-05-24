@@ -7,6 +7,7 @@
 
 #ifndef RPG_H
     #define RPG_H
+    #define PLAYER_SPEED 1
     #include <SFML/System.h>
     #include <SFML/Window.h>
     #include <SFML/Graphics.h>

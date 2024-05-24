@@ -14,7 +14,7 @@ static void update_player_animation(entity_t *player)
 
     time = sfClock_getElapsedTime(player->clock);
     seconds = time.microseconds / 1000000.0f;
-    animation_interval = 0.12 / player->speed;
+    animation_interval = 0.14 / player->speed;
     if (seconds > animation_interval) {
         if (player->rect.left == 512)
             player->rect.left = 64;
