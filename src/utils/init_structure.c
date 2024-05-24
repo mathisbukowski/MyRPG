@@ -7,6 +7,13 @@
 
 #include "rpg.h"
 
+static void init_values(rpg_t *main)
+{
+    main->elapsed = 0.0f;
+    main->map = NULL;
+    main->entities = NULL;
+}
+
 rpg_t *init_structure(void)
 {
     rpg_t *main = malloc(sizeof(rpg_t));
@@ -19,12 +26,12 @@ rpg_t *init_structure(void)
         main->quests = init_quest();
         main->window = init_window();
         main->keymap = init_keymap();
-        main->entities = NULL;
         main->utils = init_util();
         main->scene_manager = init_scene();
-        main->map = NULL;
+        main->global = sfClock_create();
         main->view = sfView_create();
         init_fps(main);
+        init_values(main);
         main->inventory = init_inventory_sprite(main);
     } else
         free_rpg(main);

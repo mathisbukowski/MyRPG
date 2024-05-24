@@ -17,8 +17,10 @@ void define_background(rpg_t *main)
 
 void screen_manager(rpg_t *main)
 {
+    entity_t *player;
+
     add_event_to_list(main, &close_window, sfEvtClosed);
-    add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
+    add_key_to_keymap(&(main->keymap), sfKeyEscape, &open_params);
     add_entity_to_list(main, (entity_params_t){"player",
     (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
     define_background(main);
@@ -26,9 +28,10 @@ void screen_manager(rpg_t *main)
     init_params_scene(main);
     init_game_scene(main);
     init_player_sprite(main);
+    player = find_entity(main, "player");
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {
         event_manager(main);
-        update_view(main);
+        set_view(main, player);
         display_window(main);
     }
 }
@@ -40,8 +43,9 @@ int game_logic(int ac, char **av)
     if (av[1] != NULL)
         loading_system(main, av);
     create_window(1920, 1080, "RPGLand", main);
-    load_map(main);
-    if (main->map == NULL) {
+    load_map(main, "assets/map/map.tmx", RENDER_MAP);
+    load_map(main, "assets/map/map_collisions.tmx", COLLISIONS_MAP);
+    if (main->map == NULL || main->collisions_map == NULL) {
         my_putstr("Error: Map not loaded\n");
         return 84;
     }

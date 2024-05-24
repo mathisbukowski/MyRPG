@@ -7,6 +7,7 @@
 
 #ifndef RPG_H
     #define RPG_H
+    #define PLAYER_SPEED 75
     #include <SFML/System.h>
     #include <SFML/Window.h>
     #include <SFML/Graphics.h>
@@ -43,8 +44,21 @@ typedef enum entitype_s {
     R_ANIMATED,
     U_ANIMATED,
     D_ANIMATED,
+    NPC,
     NONE
 } entitype_t;
+
+enum direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
+enum tile_type {
+    COLIDE_TILE = 1282,
+    NON_COLIDE_TILE = 1281
+};
 
 // Mob Structure
 typedef struct mob_s {
@@ -172,11 +186,14 @@ struct rpg_s {
     util_t *utils;
     scene_list_t *scene_manager;
     map_t *map;
+    map_t *collisions_map;
     sfView *view;
-    sfText *fpsCounter;
-    sfClock *fpsClock;
+    sfText *fps_counter;
+    sfClock *fps_clock;
     sfSprite *background_sprite;
     sfTexture *background_texture;
+    sfClock *global;
+    float elapsed;
 };
 
 // Main Category
@@ -215,7 +232,6 @@ void handle_key_press(rpg_t *main, sfKeyCode key);
 
 // Sprite Manager
 void free_entities(entity_t *entities);
-void entity_displayer(rpg_t *main, char *name);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
 void init_player_sprite(rpg_t *main);
@@ -270,7 +286,12 @@ void loading_system(rpg_t *main, char **av);
 // Player
 void update_view(rpg_t *main);
 
-// Set Window FPS
+// Entities
+void move_entity(rpg_t *main, entity_t *entity, int direction);
+void entities_displayer(rpg_t *rpg);
+void display_entity(rpg_t *main, char *name);
+
+// Window related
 void set_window_fps_to_sixty(rpg_t *main);
 void set_window_fps_to_hundred(rpg_t *main);
 void set_window_fps_to_hundred_twenty(rpg_t *main);
@@ -281,4 +302,6 @@ void init_game_scene(rpg_t *main);
 void init_background(rpg_t *main);
 
 void update_button_positions_and_sizes(rpg_t *main, scene_t *scene);
+void set_view(rpg_t *main, entity_t *player);
+float get_elapsed_time(rpg_t *main);
 #endif //RPG_H

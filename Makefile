@@ -15,6 +15,7 @@ SRC = 	src/main.c 								\
 		src/utils/check_texture.c 				\
 		src/utils/find_entity.c 				\
 		src/utils/saving_system.c    			\
+		src/utils/get_elapsed_time.c    		\
 		src/utils/remove_spaces.c 				\
 		src/utils/fps_counter.c 				\
 		src/events/event_manager.c 				\
@@ -28,6 +29,7 @@ SRC = 	src/main.c 								\
 		src/entities/delete_entity.c 			\
 		src/entities/display_entity.c 			\
 		src/entities/manage_clock.c 			\
+		src/entities/move_entity.c 				\
 		src/menus/menu.c 						\
 		src/menus/sort_menus.c 					\
 		src/menus/delete_menus.c 				\

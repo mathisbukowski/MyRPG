@@ -41,7 +41,7 @@ void handle_key_press(rpg_t *main, const sfKeyCode key)
     keymap_t *current = main->keymap;
 
     while (current != NULL) {
-        if (current->key == key) {
+        if (current->key == key && current->function != NULL) {
             current->function(main);
         }
         current = current->next;
