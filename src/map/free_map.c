@@ -7,6 +7,14 @@
 
 #include "rpg.h"
 
+void free_coords(layer_t *layer)
+{
+    for (int i = 0; i < layer->height; i++) {
+        free(layer->coords[i]);
+    }
+    free(layer->coords);
+}
+
 void free_tile_layer(sfSprite ***tiles, int height, int width)
 {
     for (int i = 0; i < height; i++) {
@@ -21,6 +29,8 @@ void free_layer(layer_t *layer)
 {
     if (layer) {
         free_tile_layer(layer->tiles, layer->height, layer->width);
+        if (layer->coords)
+            free_coords(layer);
         free(layer);
     }
 }

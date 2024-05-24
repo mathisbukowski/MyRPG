@@ -12,10 +12,16 @@
 typedef struct property_s property_t;
 typedef struct map_s map_t;
 
+typedef struct tile_s {
+    int x;
+    int y;
+} tile_t;
+
 typedef struct layer_s {
     sfSprite ***tiles;
     int width;
     int height;
+    tile_t **coords;
 } layer_t;
 
 typedef struct map_s {
