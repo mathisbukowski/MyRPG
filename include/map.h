@@ -12,6 +12,11 @@
 typedef struct property_s property_t;
 typedef struct map_s map_t;
 
+enum map_type {
+    RENDER_MAP,
+    COLLISIONS_MAP
+};
+
 typedef struct layer_s {
     sfSprite ***tiles;
     int width;
@@ -34,7 +39,7 @@ typedef struct tile_config_s {
     sfTexture *texture;
 } tile_config_t;
 
-void load_map(rpg_t *main);
+void load_map(rpg_t *main, char *map_path, int map_type);
 void draw_map(rpg_t *main, map_t *map);
 
 void free_map(map_t *map);

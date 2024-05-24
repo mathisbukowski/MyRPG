@@ -48,6 +48,13 @@ typedef enum entitype_s {
     NONE
 } entitype_t;
 
+enum direction {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+};
+
 // Mob Structure
 typedef struct mob_s {
     char name[128];
@@ -154,9 +161,11 @@ struct rpg_s {
     util_t *utils;
     scene_list_t *scene_manager;
     map_t *map;
+    map_t *collisions_map;
     sfView *view;
-    sfText *fpsCounter;
-    sfClock *fpsClock;
+    sfText *fps_counter;
+    sfClock *fps_clock;
+    sfClock *delta_clock;
 };
 
 // Main Category
@@ -236,6 +245,9 @@ void loading_system(rpg_t *main, char **av);
 
 // Player
 void update_view(rpg_t *main);
+
+// Entities
+void move_entity(rpg_t *main, entity_t *entity, int direction);
 
 // Set Window FPS
 void set_window_fps_to_sixty(rpg_t *main);

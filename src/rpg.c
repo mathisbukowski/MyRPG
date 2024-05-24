@@ -35,8 +35,9 @@ int game_logic(int ac, char **av)
     if (av[1] != NULL)
         loading_system(main, av);
     create_window(1920, 1080, "RPGLand", main);
-    load_map(main);
-    if (main->map == NULL) {
+    load_map(main, "assets/map/map.tmx", RENDER_MAP);
+    load_map(main, "assets/map/map_collisions.tmx", COLLISIONS_MAP);
+    if (main->map == NULL || main->collisions_map == NULL) {
         my_putstr("Error: Map not loaded\n");
         return 84;
     }

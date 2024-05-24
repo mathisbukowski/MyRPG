@@ -11,9 +11,8 @@ static FILE *open_map_file(const char *path)
 {
     FILE *map_file = fopen(path, "r");
 
-    if (map_file == NULL) {
+    if (map_file == NULL)
         perror("Error opening map file");
-    }
     return map_file;
 }
 
@@ -49,9 +48,8 @@ FILE *load_map_file(const char *path, struct stat *st)
 {
     FILE *map_file = open_map_file(path);
 
-    if (map_file == NULL) {
+    if (map_file == NULL)
         return NULL;
-    }
     if (get_file_size(path, st) == -1) {
         fclose(map_file);
         return NULL;
@@ -81,8 +79,7 @@ char *load_map_from_disk(const char *path)
     struct stat st;
     FILE *map_file = load_map_file(path, &st);
 
-    if (map_file == NULL) {
+    if (map_file == NULL)
         return NULL;
-    }
     return read_map_data(path, map_file, st.st_size);
 }

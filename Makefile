@@ -28,6 +28,7 @@ SRC = 	src/main.c 								\
 		src/entities/delete_entity.c 			\
 		src/entities/display_entity.c 			\
 		src/entities/manage_clock.c 			\
+		src/entities/move_entity.c 				\
 		src/menus/menu.c 						\
 		src/menus/sort_menus.c 					\
 		src/menus/delete_menus.c 				\

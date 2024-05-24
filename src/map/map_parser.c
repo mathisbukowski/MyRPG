@@ -13,8 +13,7 @@ map_t *allocate_map(void)
 
     if (!map)
         return NULL;
-    map->layer_count = 0;
-    map->layers = NULL;
+    memset(map, 0, sizeof(map_t));
     return map;
 }
 
