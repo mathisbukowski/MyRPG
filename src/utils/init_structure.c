@@ -24,7 +24,6 @@ rpg_t *init_structure(void)
         main->scene_manager = init_scene();
         main->map = NULL;
         main->view = sfView_create();
-        main->delta_clock = sfClock_create();
         init_fps(main);
         main->inventory = init_inventory_sprite(main);
     } else

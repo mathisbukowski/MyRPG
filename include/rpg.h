@@ -190,7 +190,6 @@ struct rpg_s {
     sfView *view;
     sfText *fps_counter;
     sfClock *fps_clock;
-    sfClock *delta_clock;
     sfSprite *background_sprite;
     sfTexture *background_texture;
 };
