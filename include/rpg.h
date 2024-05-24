@@ -246,4 +246,6 @@ void open_start(rpg_t *main);
 void open_game(rpg_t *main);
 void init_game_scene(rpg_t *main);
 void init_background(rpg_t *main);
+
+void update_button_positions_and_sizes(rpg_t *main, scene_t *scene);
 #endif //RPG_H
