@@ -51,6 +51,9 @@ SRC = d_i_s_c_o_flags.c \
         my_putchar_error.c\
         my_strchr.c\
         my_strrchr.c\
+        my_show_double_array.c\
+        free_double_array.c\
+        get_double_array_len.c\
 
 OBJ = $(SRC:.c=.o)
 LIB = libmy.a

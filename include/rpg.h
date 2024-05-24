@@ -17,12 +17,23 @@
     #include <string.h>
     #include <math.h>
     #include <stdbool.h>
-    #include "hud.h"
+    #include "render.h"
     #include "my.h"
     #include "my_printf.h"
+    #include <time.h>
+    #include <ctype.h>
+    #include <limits.h>
+    #include <float.h>
+    #include <errno.h>
+    #include <assert.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include "my.h"
+    #include "my_printf.h"
+    #include "map.h"
 
 typedef struct rpg_s rpg_t;
-
 
 typedef enum entitype_s {
     BACKGROUND,
@@ -34,14 +45,6 @@ typedef enum entitype_s {
     D_ANIMATED,
     NONE
 } entitype_t;
-// Player Structure
-typedef struct player_t {
-    char name[128];
-    int level;
-    long experience;
-    int pv;
-    int pc;
-} player_t;
 
 // Mob Structure
 typedef struct mob_s {
@@ -53,7 +56,6 @@ typedef struct mob_s {
 } mob_t;
 
 // Object Structure
-
 typedef enum tool_s {
     SHOVEL,
     HOE,
@@ -115,14 +117,24 @@ typedef struct inventory_s {
 typedef struct entity_s {
     sfSprite *sprite;
     sfTexture *texture;
-    sfVector2f position;
+    sfVector2f pos;
     sfIntRect rect;
     sfClock *clock;
+    float speed;
     char *name;
     entitype_t type;
     bool state;
     struct entity_s *next;
 } entity_t;
+
+// Player Structure
+typedef struct player_t {
+    char name[128];
+    int level;
+    long experience;
+    int pv;
+    int pc;
+} player_t;
 
 // Events List
 typedef struct event_s {
@@ -133,7 +145,7 @@ typedef struct event_s {
 
 // Window Structure
 typedef struct window_s {
-    sfRenderWindow *window;
+    sfRenderWindow *renderWindow;
     sfTexture *texture;
     sfVideoMode mode;
     char *title;
@@ -146,22 +158,6 @@ typedef struct util_s {
     sfFont *font;
 } util_t;
 
-typedef struct scene_s {
-    void (*init_scene)();
-    void (*handle_event_scene)();
-    void (*update_scene)();
-    void (*draw)();
-    void (*destroy)();
-    menu_node_t *scene_menus;
-    bool is_visible;
-    struct scene_s *next;
-} scene_t;
-
-typedef struct scene_list_s {
-    scene_t *head;
-    scene_t *tail;
-    scene_t *current;
-} scene_list_t;
 // Main
 struct rpg_s {
     inventory_t *inventory;
@@ -172,14 +168,19 @@ struct rpg_s {
     event_t *events;
     window_t *window;
     keymap_t *keymap;
-    menu_node_t *menus;
     entity_t *entities;
     util_t *utils;
     scene_list_t *scene_manager;
+    map_t *map;
+    sfView *view;
+    sfText *fpsCounter;
+    sfClock *fpsClock;
+    sfSprite *background_sprite;
+    sfTexture *background_texture;
 };
 
 // Main Category
-int game_loop(int ac, char **av);
+int game_logic(int ac, char **av);
 
 // Utils
 int check_tty(char **env);
@@ -187,6 +188,8 @@ void free_rpg(rpg_t *rpg);
 rpg_t *init_structure(void);
 entity_t *find_entity(rpg_t *main, char *entity_name);
 int check_texture(sfSprite *sprite, const sfTexture *texture);
+char *remove_spaces(char *str);
+void update_fps(rpg_t *main);
 
 // Window Manager
 void create_window(unsigned int width, unsigned int height,
@@ -212,7 +215,7 @@ void handle_key_press(rpg_t *main, sfKeyCode key);
 
 // Sprite Manager
 void free_entities(entity_t *entities);
-void entity_displayer(rpg_t *main);
+void entity_displayer(rpg_t *main, char *name);
 void add_entity_to_list(rpg_t *main, entity_params_t params,
     char const *path);
 void init_player_sprite(rpg_t *main);
@@ -221,7 +224,6 @@ void right_action(rpg_t *main);
 void up_action(rpg_t *main);
 void down_action(rpg_t *main);
 void player_no_action(entity_t *player);
-void define_main_menu(rpg_t *params);
 
 //Clock Manager
 void manage_clock(entity_t *entity);
@@ -247,12 +249,34 @@ mob_t *init_mobs(void);
 object_t *init_object(void);
 entity_t *init_entity(void);
 scene_list_t *init_scene(void);
+void init_fps(rpg_t *main);
 void init_bank_item_sprite(inventory_t *inventory);
 inventory_t *init_inventory_sprite(rpg_t *main);
 
 
+// Scenes
 void add_scene(rpg_t *main, scene_t *new);
 void destroying_scene(rpg_t *main);
+void draw_start(rpg_t *main);
+void init_start_scene(rpg_t *main);
+scene_t *find_scene(scene_list_t *scene_list, char const *name);
+void destroy_scene(scene_t *scene);
+void init_params_scene(rpg_t *main);
+void destroying_scenes(rpg_t *main);
+
 void saving_system(rpg_t *main);
 void loading_system(rpg_t *main, char **av);
+
+// Player
+void update_view(rpg_t *main);
+
+// Set Window FPS
+void set_window_fps_to_sixty(rpg_t *main);
+void set_window_fps_to_hundred(rpg_t *main);
+void set_window_fps_to_hundred_twenty(rpg_t *main);
+void open_params(rpg_t *main);
+void open_start(rpg_t *main);
+void open_game(rpg_t *main);
+void init_game_scene(rpg_t *main);
+void init_background(rpg_t *main);
 #endif //RPG_H

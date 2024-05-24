@@ -34,11 +34,8 @@ object_t *init_object(void)
     return new_object;
 }
 
-entity_t *init_entity(void)
+void init_background(rpg_t *main)
 {
-    entity_t *new_entity = malloc(sizeof(entity_t));
-
-    if (new_entity != NULL)
-        memset(new_entity, 0, sizeof(entity_t));
-    return new_entity;
+    main->background_sprite = NULL;
+    main->background_texture = NULL;
 }

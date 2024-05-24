@@ -7,17 +7,16 @@
 
 #include "rpg.h"
 
-void entity_displayer(rpg_t *main)
+void entity_displayer(rpg_t *main, char *name)
 {
-    entity_t *current = main->entities;
-
-    if (!sfRenderWindow_isOpen(main->window->window))
+    if (!sfRenderWindow_isOpen(main->window->renderWindow))
         return;
-    while (current != NULL) {
-        manage_clock(current);
-        if (current->sprite && current->state == true)
-            sfRenderWindow_drawSprite(main->window->window,
-            current->sprite, NULL);
-        current = current->next;
-    }
+    for (entity_t *curr = main->entities; curr != NULL; curr = curr->next)
+        if (curr->name != NULL && strcmp(curr->name, name) == 0
+        && curr->sprite && curr->state) {
+            manage_clock(curr);
+            sfRenderWindow_drawSprite(main->window->renderWindow,
+            curr->sprite, NULL);
+            break;
+        }
 }
