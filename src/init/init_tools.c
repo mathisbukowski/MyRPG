@@ -43,6 +43,7 @@ util_t *init_util(void)
         return NULL;
     memset(new_util, 0, sizeof(util_t));
     new_util->font = sfFont_createFromFile("assets/font/font.ttf");
+    new_util->font2 = sfFont_createFromFile("assets/font/font2.ttf");
     return new_util;
 }
 

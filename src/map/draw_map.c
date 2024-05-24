@@ -42,12 +42,22 @@ render_bounds_t set_render_boundaries(int tileSize, sfVector2f *viewSize,
     return (render_bounds_t){startRow, endRow, startCol, endCol};
 }
 
+static void display_player(rpg_t *main, entity_t *player)
+{
+    if (player->sprite && player->state) {
+        manage_clock(player);
+        sfRenderWindow_drawSprite(main->window->renderWindow,
+            player->sprite, NULL);
+    }
+}
+
 void draw_map(rpg_t *main, map_t *map)
 {
     int tileSize = 16;
     render_bounds_t bounds;
     sfVector2f viewSize;
     sfVector2f viewCenter;
+    entity_t *player = find_entity(main, "player");
 
     if (!main || !map)
         return;
@@ -57,6 +67,7 @@ void draw_map(rpg_t *main, map_t *map)
     for (int l = 0; l < map->layer_count - 1; l++)
         draw_layer(main->window->renderWindow, map->layers[l], bounds);
     entities_displayer(main);
+    display_player(main, player);
     draw_layer(main->window->renderWindow,
         map->layers[map->layer_count - 1], bounds);
 }

@@ -35,6 +35,7 @@
     #include "map.h"
 
 typedef struct rpg_s rpg_t;
+typedef struct entity_s entity_t;
 
 typedef enum entitype_s {
     BACKGROUND,
@@ -133,12 +134,14 @@ typedef struct entity_s {
     sfTexture *texture;
     sfVector2f pos;
     sfIntRect rect;
+    sfIntRect interact_rect;
     sfClock *clock;
     float speed;
     char *name;
     entitype_t type;
     bool state;
     struct entity_s *next;
+    void (*actions)(rpg_t *, entity_t *, sfIntRect, entity_t *);
 } entity_t;
 
 // Player Structure
@@ -170,6 +173,7 @@ typedef struct window_s {
 
 typedef struct util_s {
     sfFont *font;
+    sfFont *font2;
 } util_t;
 
 // Main
@@ -232,8 +236,8 @@ void handle_key_press(rpg_t *main, sfKeyCode key);
 
 // Sprite Manager
 void free_entities(entity_t *entities);
-void add_entity_to_list(rpg_t *main, entity_params_t params,
-    char const *path);
+void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path,
+    void (*function)(rpg_t *, entity_t *, sfIntRect, entity_t *));
 void init_player_sprite(rpg_t *main);
 void left_action(rpg_t *main);
 void right_action(rpg_t *main);
@@ -290,6 +294,11 @@ void update_view(rpg_t *main);
 void move_entity(rpg_t *main, entity_t *entity, int direction);
 void entities_displayer(rpg_t *rpg);
 void display_entity(rpg_t *main, char *name);
+void handle_entity_actions(rpg_t *rpg, entity_t *entity);
+
+// NPCs
+void create_npc(rpg_t *main, char *name, sfVector2f pos,
+    sfIntRect interact_rect);
 
 // Window related
 void set_window_fps_to_sixty(rpg_t *main);
