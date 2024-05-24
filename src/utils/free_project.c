@@ -86,7 +86,6 @@ void destroy_sf(rpg_t *rpg)
 void free_rpg(rpg_t *rpg)
 {
     if (rpg != NULL) {
-        free_inventory(rpg->inventory);
         free_players(rpg->player);
         free_mobs(rpg->mobs);
         free_objects(rpg->objs);
@@ -97,6 +96,7 @@ void free_rpg(rpg_t *rpg)
         destroying_scenes(rpg);
         free_utils(rpg->utils);
         free_map(rpg->map);
+        free_map(rpg->collisions_map);
         destroy_sf(rpg);
         sfView_destroy(rpg->view);
     }

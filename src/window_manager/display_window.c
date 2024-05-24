@@ -16,7 +16,6 @@ void display_window(rpg_t *main)
     sfRenderWindow_setView(main->window->renderWindow,
     sfRenderWindow_getDefaultView(main->window->renderWindow));
     main->scene_manager->current->draw(main->scene_manager->current, main);
-    display_inventory(main);
     update_fps(main);
     sfRenderWindow_display(main->window->renderWindow);
 }
