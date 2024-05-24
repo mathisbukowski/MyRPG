@@ -9,12 +9,12 @@
 
 void set_view(rpg_t *main, entity_t *player)
 {
-    sfVector2f center = {player->pos.x, player->pos.y};
-    sfVector2f size = {main->window->mode.width / 4.0f,
-        main->window->mode.height / 4.0f};
+    sfVector2f center;
+    sfVector2f size = {(float)main->window->mode.width / 4.0f,
+        (float)main->window->mode.height / 4.0f};
 
-    center.x = floor(center.x) + 0.5f;
-    center.y = floor(center.y) + 0.5f;
+    center.x = player->pos.x;
+    center.y = player->pos.y;
     sfView_setCenter(main->view, center);
     sfView_setSize(main->view, size);
     sfRenderWindow_setView(main->window->renderWindow, main->view);
@@ -45,20 +45,18 @@ render_bounds_t set_render_boundaries(int tileSize, sfVector2f *viewSize,
 void draw_map(rpg_t *main, map_t *map)
 {
     int tileSize = 16;
-    entity_t *player = NULL;
     render_bounds_t bounds;
     sfVector2f viewSize;
     sfVector2f viewCenter;
 
     if (!main || !map)
         return;
-    player = find_entity(main, "player");
-    if (!player)
-        return;
-    set_view(main, player);
     viewSize = sfView_getSize(main->view);
     viewCenter = sfView_getCenter(main->view);
     bounds = set_render_boundaries(tileSize, &viewSize, &viewCenter, map);
-    for (int l = 0; l < map->layer_count; l++)
+    for (int l = 0; l < map->layer_count - 1; l++)
         draw_layer(main->window->renderWindow, map->layers[l], bounds);
+    entities_displayer(main);
+    draw_layer(main->window->renderWindow,
+        map->layers[map->layer_count - 1], bounds);
 }

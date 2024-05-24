@@ -10,7 +10,6 @@
 void render_game(scene_t *current, rpg_t *main)
 {
     render_scene(current, main);
-    entity_displayer(main, "player");
 }
 
 static void configure_game_scene(scene_t *scene)

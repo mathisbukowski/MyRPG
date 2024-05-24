@@ -14,7 +14,7 @@ static void update_player_animation(entity_t *player)
 
     time = sfClock_getElapsedTime(player->clock);
     seconds = time.microseconds / 1000000.0f;
-    animation_interval = 0.12 / player->speed;
+    animation_interval = 0.14 / player->speed;
     if (seconds > animation_interval) {
         if (player->rect.left == 512)
             player->rect.left = 64;
@@ -29,10 +29,8 @@ void left_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
-    if (player->type == L_ANIMATED) {
-        update_player_animation(player);
-        player->pos.x -= player->speed;
-    } else {
+    move_entity(main, player, LEFT);
+    if (player->type != L_ANIMATED) {
         player->rect.top = 64;
         player->rect.left = 0;
         sfSprite_setTextureRect(player->sprite, player->rect);
@@ -41,17 +39,16 @@ void left_action(rpg_t *main)
             player->clock = sfClock_create();
         else
             sfClock_restart(player->clock);
-    }
+    } else
+        update_player_animation(player);
 }
 
 void right_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
-    if (player->type == R_ANIMATED) {
-        update_player_animation(player);
-        player->pos.x += player->speed;
-    } else {
+    move_entity(main, player, RIGHT);
+    if (player->type != R_ANIMATED) {
         player->rect.top = 192;
         player->rect.left = 0;
         sfSprite_setTextureRect(player->sprite, player->rect);
@@ -60,17 +57,16 @@ void right_action(rpg_t *main)
             player->clock = sfClock_create();
         else
             sfClock_restart(player->clock);
-    }
+    } else
+        update_player_animation(player);
 }
 
 void up_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
-    if (player->type == U_ANIMATED) {
-        update_player_animation(player);
-        player->pos.y -= player->speed;
-    } else {
+    move_entity(main, player, UP);
+    if (player->type != U_ANIMATED) {
         player->rect.top = 0;
         player->rect.left = 0;
         sfSprite_setTextureRect(player->sprite, player->rect);
@@ -79,17 +75,16 @@ void up_action(rpg_t *main)
             player->clock = sfClock_create();
         else
             sfClock_restart(player->clock);
-    }
+    } else
+        update_player_animation(player);
 }
 
 void down_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
-    if (player->type == D_ANIMATED) {
-        update_player_animation(player);
-        player->pos.y += player->speed;
-    } else {
+    move_entity(main, player, DOWN);
+    if (player->type != D_ANIMATED) {
         player->rect.top = 128;
         player->rect.left = 0;
         sfSprite_setTextureRect(player->sprite, player->rect);
@@ -98,14 +93,6 @@ void down_action(rpg_t *main)
             player->clock = sfClock_create();
         else
             sfClock_restart(player->clock);
-    }
-}
-
-void update_view(rpg_t *main)
-{
-    entity_t *player = find_entity(main, "player");
-    sfVector2f center = {player->pos.x, player->pos.y};
-
-    sfView_setCenter(main->view, center);
-    sfRenderWindow_setView(main->window->renderWindow, main->view);
+    } else
+        update_player_animation(player);
 }
