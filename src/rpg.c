@@ -9,7 +9,8 @@
 
 void define_background(rpg_t *main)
 {
-    main->background_texture = sfTexture_createFromFile("assets/bg.jpg", NULL);
+    main->background_texture = sfTexture_createFromFile("assets/UI/bg.jpg",
+        NULL);
     main->background_sprite = sfSprite_create();
     if (check_texture(main->background_sprite, main->background_texture) != 0)
         return;
@@ -27,6 +28,8 @@ void screen_manager(rpg_t *main)
     init_start_scene(main);
     init_params_scene(main);
     init_game_scene(main);
+    create_npc(main, "black-smith", (sfVector2f){816, 337},
+        (sfIntRect){0, 0, 32, 32});
     init_player_sprite(main);
     player = find_entity(main, "player");
     while (sfRenderWindow_isOpen(main->window->renderWindow)) {

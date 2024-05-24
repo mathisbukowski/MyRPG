@@ -289,6 +289,10 @@ void move_entity(rpg_t *main, entity_t *entity, int direction);
 void entities_displayer(rpg_t *rpg);
 void display_entity(rpg_t *main, char *name);
 
+// NPCs
+void create_npc(rpg_t *main, char *name, sfVector2f pos,
+    sfIntRect interact_rect);
+
 // Window related
 void set_window_fps_to_sixty(rpg_t *main);
 void set_window_fps_to_hundred(rpg_t *main);

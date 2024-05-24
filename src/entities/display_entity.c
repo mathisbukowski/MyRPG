@@ -26,9 +26,9 @@ void entities_displayer(rpg_t *main)
     if (!sfRenderWindow_isOpen(main->window->renderWindow))
         return;
     for (entity_t *curr = main->entities; curr != NULL; curr = curr->next)
-        if (curr->sprite && curr->state) {
+        if (curr->sprite && curr->state && strcmp(curr->name, "player") != 0) {
             manage_clock(curr);
             sfRenderWindow_drawSprite(main->window->renderWindow,
-            curr->sprite, NULL);
+                curr->sprite, NULL);
         }
 }
