@@ -19,10 +19,10 @@ sfText *init_texte_item(sfFont *font, int i)
 {
     sfText *texte = sfText_create();
 
-    sfText_setString(texte, ": 0");
+    sfText_setString(texte, get_value_item(i));
     sfText_setFont(texte, font);
-    sfText_setCharacterSize(texte, 40);
-    sfText_setColor(texte, sfColor_fromRGB(0, 0, 0));
+    sfText_setCharacterSize(texte, 30);
+    sfText_setColor(texte, sfColor_fromRGB(255, 255, 255));
     sfText_setPosition(texte, (sfVector2f){260, (float)(250 + (i * 58))});
     return texte;
 }
