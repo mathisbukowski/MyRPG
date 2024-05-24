@@ -9,15 +9,15 @@
 
 void set_window_fps_to_sixty(rpg_t *main)
 {
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 60);
+    sfRenderWindow_setFramerateLimit(main->window->render_window, 60);
 }
 
 void set_window_fps_to_hundred(rpg_t *main)
 {
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 100);
+    sfRenderWindow_setFramerateLimit(main->window->render_window, 100);
 }
 
 void set_window_fps_to_hundred_twenty(rpg_t *main)
 {
-    sfRenderWindow_setFramerateLimit(main->window->renderWindow, 120);
+    sfRenderWindow_setFramerateLimit(main->window->render_window, 120);
 }

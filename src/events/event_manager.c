@@ -9,7 +9,7 @@
 
 void close_window(rpg_t *main)
 {
-    sfRenderWindow_close(main->window->renderWindow);
+    sfRenderWindow_close(main->window->render_window);
 }
 
 static void handle_player_events(rpg_t *main)
@@ -30,7 +30,7 @@ void event_manager(rpg_t *main)
 {
     sfEvent event;
 
-    while (sfRenderWindow_pollEvent(main->window->renderWindow, &event)) {
+    while (sfRenderWindow_pollEvent(main->window->render_window, &event)) {
         if (event.type == sfEvtKeyPressed)
             handle_key_press(main, event.key.code);
         else

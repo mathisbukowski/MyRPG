@@ -29,13 +29,13 @@ typedef struct menu_s {
     sfVector2f size;
     sfColor color;
     button_node_t *buttons;
-    int isHover;
-    int isClicked;
-    int isHidden;
-    int isOpen;
+    int is_hover;
+    int is_clicked;
+    int is_hidden;
+    int is_open;
     int y_index;
-    menu_t *subMenu;
-    menu_t *parentMenu;
+    menu_t *sub_menu;
+    menu_t *parent_menu;
     sfText *text;
 }menu_t;
 
@@ -50,20 +50,20 @@ typedef struct menu_params_s {
     sfVector2f size;
     int y_index;
     sfColor color;
-    char *subMenuName;
+    char *sub_menu_name;
     text_infos_t *text;
-    int isHidden;
+    int is_hidden;
 }menu_params_t;
 
 typedef struct render_bounds_s {
-    int startRow;
-    int endRow;
-    int startCol;
-    int endCol;
+    int start_row;
+    int end_row;
+    int start_col;
+    int end_col;
 }render_bounds_t;
 
-int create_menu(menu_params_t menuParams, scene_t *scene, rpg_t *params);
-void check_menu_hover(menu_t *menu, sfVector2i mousePos);
+int create_menu(menu_params_t menu_params, scene_t *scene, rpg_t *params);
+void check_menu_hover(menu_t *menu, sfVector2i mouse_pos);
 menu_t *find_menu_by_name(const char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
 void handle_menu_hover(const menu_t *menu);
@@ -90,13 +90,13 @@ typedef struct button_s {
     sfRectangleShape *rect;
     sfVector2f pos;
     sfColor color;
-    sfColor hoverColor;
+    sfColor hover_color;
     sfText *text;
-    int isHover;
-    int isClicked;
-    int isHidden;
-    int isSelected;
-    menu_t *linkedMenu;
+    int is_hover;
+    int is_clicked;
+    int is_hidden;
+    int is_selected;
+    menu_t *linked_menu;
     button_func_t action;
 } button_t;
 
@@ -110,19 +110,19 @@ typedef struct button_params_s {
     sfVector2f pos;
     sfVector2f size;
     sfColor color;
-    sfColor hoverColor;
+    sfColor hover_color;
     text_infos_t *text;
-    char *linkedMenuName;
+    char *linked_menu_name;
     button_func_t action;
 }button_params_t;
 
-int create_button(const button_params_t buttonParams,
+int create_button(const button_params_t button_params,
     const rpg_t *params, scene_t *scene);
-void handle_hover_and_click(const button_node_t *buttonNode,
-    sfVector2i mousePos, rpg_t *params);
+void handle_hover_and_click(const button_node_t *button_node,
+    sfVector2i mouse_pos, rpg_t *params);
 void render_scene(scene_t *scene, rpg_t *params);
-void destroy_menu(menu_node_t *menuNode);
-void destroy_button(button_node_t *buttonNode);
+void destroy_menu(menu_node_t *menu_node);
+void destroy_button(button_node_t *button_node);
 
 //texts
 typedef struct text_infos_s {

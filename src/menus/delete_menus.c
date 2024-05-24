@@ -7,28 +7,28 @@
 
 #include "rpg.h"
 
-void destroy_button(button_node_t *buttonNode)
+void destroy_button(button_node_t *button_node)
 {
-    if (buttonNode == NULL)
+    if (button_node == NULL)
         return;
-    if (buttonNode->button != NULL) {
-        if (buttonNode->button->rect != NULL)
-            sfRectangleShape_destroy(buttonNode->button->rect);
-        if (buttonNode->button->text != NULL)
-            sfText_destroy(buttonNode->button->text);
-        free(buttonNode->button);
+    if (button_node->button != NULL) {
+        if (button_node->button->rect != NULL)
+            sfRectangleShape_destroy(button_node->button->rect);
+        if (button_node->button->text != NULL)
+            sfText_destroy(button_node->button->text);
+        free(button_node->button);
     }
-    destroy_button(buttonNode->next);
-    free(buttonNode);
+    destroy_button(button_node->next);
+    free(button_node);
 }
 
-void destroy_menu(menu_node_t *menuNode)
+void destroy_menu(menu_node_t *menu_node)
 {
     menu_t *menu;
 
-    if (menuNode == NULL)
+    if (menu_node == NULL)
         return;
-    menu = menuNode->menu;
+    menu = menu_node->menu;
     if (menu != NULL) {
         if (menu->rect != NULL)
             sfRectangleShape_destroy(menu->rect);
@@ -38,6 +38,6 @@ void destroy_menu(menu_node_t *menuNode)
             destroy_button(menu->buttons);
         free(menu);
     }
-    destroy_menu(menuNode->next);
-    free(menuNode);
+    destroy_menu(menu_node->next);
+    free(menu_node);
 }

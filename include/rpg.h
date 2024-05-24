@@ -159,13 +159,13 @@ typedef struct event_s {
 
 // Window Structure
 typedef struct window_s {
-    sfRenderWindow *renderWindow;
+    sfRenderWindow *render_window;
     sfTexture *texture;
     sfVideoMode mode;
     char *title;
     unsigned int style;
-    sfBool isFullscreen;
-    sfBool isActive;
+    sfBool is_fullscreen;
+    sfBool is_active;
 } window_t;
 
 typedef struct util_s {

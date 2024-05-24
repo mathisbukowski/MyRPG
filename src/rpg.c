@@ -29,7 +29,7 @@ void screen_manager(rpg_t *main)
     init_game_scene(main);
     init_player_sprite(main);
     player = find_entity(main, "player");
-    while (sfRenderWindow_isOpen(main->window->renderWindow)) {
+    while (sfRenderWindow_isOpen(main->window->render_window)) {
         event_manager(main);
         set_view(main, player);
         display_window(main);

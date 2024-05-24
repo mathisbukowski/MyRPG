@@ -9,35 +9,35 @@
 
 static int add_menu_to_scene(scene_t *scene, menu_t *menu)
 {
-    menu_node_t *newNode = malloc(sizeof(menu_node_t));
+    menu_node_t *new_node = malloc(sizeof(menu_node_t));
     menu_node_t *current = NULL;
 
-    if (newNode == NULL)
+    if (new_node == NULL)
         return 84;
-    newNode->menu = menu;
-    newNode->next = NULL;
+    new_node->menu = menu;
+    new_node->next = NULL;
     if (scene->menus == NULL)
-        scene->menus = newNode;
+        scene->menus = new_node;
     else {
         current = scene->menus;
         while (current->next != NULL)
             current = current->next;
-        current->next = newNode;
+        current->next = new_node;
     }
     sort_menus(&scene->menus);
     return 0;
 }
 
-void check_menu_hover(menu_t *menu, const sfVector2i mousePos)
+void check_menu_hover(menu_t *menu, const sfVector2i mouse_pos)
 {
     const sfFloatRect rect = sfRectangleShape_getGlobalBounds(menu->rect);
-    const sfVector2i pos = (sfVector2i){mousePos.x, mousePos.y};
+    const sfVector2i pos = (sfVector2i){mouse_pos.x, mouse_pos.y};
 
     if (sfFloatRect_contains(&rect, (float)pos.x, (float)pos.y) ||
-        (menu->subMenu != NULL && menu->subMenu->isHover == 1)) {
-        menu->isHover = 1;
+        (menu->sub_menu != NULL && menu->sub_menu->is_hover == 1)) {
+        menu->is_hover = 1;
     } else {
-        menu->isHover = 0;
+        menu->is_hover = 0;
     }
 }
 
@@ -53,81 +53,81 @@ menu_t *find_menu_by_name(const char *name, menu_node_t *head)
     return NULL;
 }
 
-static int create_menu_text(menu_t *menu, const menu_params_t menuParams)
+static int create_menu_text(menu_t *menu, const menu_params_t menu_params)
 {
-    const sfVector2f textPos = (sfVector2f){menuParams.pos.x +
-        menuParams.text->pos.x, menuParams.pos.y + menuParams.text->pos.y};
+    const sfVector2f text_pos = (sfVector2f){menu_params.pos.x +
+        menu_params.text->pos.x, menu_params.pos.y + menu_params.text->pos.y};
 
     menu->text = sfText_create();
     if (menu->text == NULL)
         return 84;
-    sfText_setString(menu->text, menuParams.text->text);
-    sfText_setFont(menu->text, menuParams.text->font);
-    sfText_setCharacterSize(menu->text, menuParams.text->size);
-    sfText_setPosition(menu->text, textPos);
-    sfText_setColor(menu->text, menuParams.text->color);
+    sfText_setString(menu->text, menu_params.text->text);
+    sfText_setFont(menu->text, menu_params.text->font);
+    sfText_setCharacterSize(menu->text, menu_params.text->size);
+    sfText_setPosition(menu->text, text_pos);
+    sfText_setColor(menu->text, menu_params.text->color);
     return 0;
 }
 
-static void init_variables(menu_t *menu, const menu_params_t menuParams,
+static void init_variables(menu_t *menu, const menu_params_t menu_params,
     rpg_t *params, scene_t *scene)
 {
-    menu->name = menuParams.name;
-    menu->pos = menuParams.pos;
-    menu->size = menuParams.size;
-    menu->y_index = menuParams.y_index;
-    menu->isHover = 0;
-    menu->isClicked = 0;
-    menu->isHidden = menuParams.isHidden;
-    menu->isOpen = 0;
+    menu->name = menu_params.name;
+    menu->pos = menu_params.pos;
+    menu->size = menu_params.size;
+    menu->y_index = menu_params.y_index;
+    menu->is_hover = 0;
+    menu->is_clicked = 0;
+    menu->is_hidden = menu_params.is_hidden;
+    menu->is_open = 0;
     menu->buttons = NULL;
     menu->rect = sfRectangleShape_create();
     menu->text = NULL;
-    if (menuParams.text != NULL)
-        create_menu_text(menu, menuParams);
-    menu->subMenu = NULL;
-    if (menuParams.subMenuName != NULL)
-        menu->subMenu = find_menu_by_name(menuParams.subMenuName,
+    if (menu_params.text != NULL)
+        create_menu_text(menu, menu_params);
+    menu->sub_menu = NULL;
+    if (menu_params.sub_menu_name != NULL)
+        menu->sub_menu = find_menu_by_name(menu_params.sub_menu_name,
     scene->menus);
-    sfRectangleShape_setPosition(menu->rect, menuParams.pos);
-    sfRectangleShape_setSize(menu->rect, menuParams.size);
-    sfRectangleShape_setFillColor(menu->rect, menuParams.color);
+    sfRectangleShape_setPosition(menu->rect, menu_params.pos);
+    sfRectangleShape_setSize(menu->rect, menu_params.size);
+    sfRectangleShape_setFillColor(menu->rect, menu_params.color);
 }
 
 void handle_menu_hover(const menu_t *menu)
 {
-    if (menu->isHover == 1) {
-        if (menu->subMenu != NULL)
-            menu->subMenu->isHidden = 0;
+    if (menu->is_hover == 1) {
+        if (menu->sub_menu != NULL)
+            menu->sub_menu->is_hidden = 0;
     } else {
-        if (menu->subMenu != NULL)
-            menu->subMenu->isHidden = 1;
+        if (menu->sub_menu != NULL)
+            menu->sub_menu->is_hidden = 1;
     }
 }
 
-static void set_submenu(menu_t *menu)
+static void set_sub_menu(menu_t *menu)
 {
-    const sfVector2f subMenuPos = (sfVector2f){menu->subMenu->pos.x,
-        menu->subMenu->pos.y};
-    const sfVector2f subMenuTextPos = (sfVector2f){subMenuPos.x + 5,
-        subMenuPos.y + 15};
+    const sfVector2f sub_menu_pos = (sfVector2f){menu->sub_menu->pos.x,
+        menu->sub_menu->pos.y};
+    const sfVector2f sub_menutext_pos = (sfVector2f){sub_menu_pos.x + 5,
+        sub_menu_pos.y + 15};
 
-    menu->subMenu->parentMenu = menu;
-    menu->subMenu->pos.x += menu->pos.x;
-    menu->subMenu->pos.y += menu->pos.y;
-    sfText_setPosition(menu->subMenu->text, subMenuTextPos);
-    sfRectangleShape_setPosition(menu->subMenu->rect, menu->subMenu->pos);
+    menu->sub_menu->parent_menu = menu;
+    menu->sub_menu->pos.x += menu->pos.x;
+    menu->sub_menu->pos.y += menu->pos.y;
+    sfText_setPosition(menu->sub_menu->text, sub_menutext_pos);
+    sfRectangleShape_setPosition(menu->sub_menu->rect, menu->sub_menu->pos);
 }
 
-int create_menu(const menu_params_t menuParams, scene_t *scene, rpg_t *params)
+int create_menu(const menu_params_t menu_params, scene_t *scene, rpg_t *params)
 {
     menu_t *menu = malloc(sizeof(menu_t));
 
     if (menu == NULL)
         return 84;
-    init_variables(menu, menuParams, params, scene);
-    if (menu->subMenu != NULL)
-        set_submenu(menu);
+    init_variables(menu, menu_params, params, scene);
+    if (menu->sub_menu != NULL)
+        set_sub_menu(menu);
     add_menu_to_scene(scene, menu);
     return 0;
 }

@@ -11,7 +11,7 @@ void update_button_positions_and_sizes(rpg_t *main, scene_t *scene)
 {
     button_node_t *button = scene->menus->menu->buttons;
     sfVector2u window_size = sfRenderWindow_getSize(
-        main->window->renderWindow);
+        main->window->render_window);
     sfVector2f new_position;
     sfVector2f new_size;
 

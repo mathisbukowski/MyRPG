@@ -39,7 +39,7 @@ void define_exit_button(rpg_t *main,
 
 static void draw_start_menu(scene_t *current, rpg_t *main)
 {
-    sfRenderWindow_drawSprite(main->window->renderWindow,
+    sfRenderWindow_drawSprite(main->window->render_window,
     main->background_sprite, NULL);
     render_scene(current, main);
 }

@@ -26,17 +26,17 @@ static void swap_nodes(menu_node_t **head, menu_node_t *node1,
     node1->next = temp;
 }
 
-static int bubble_sort(menu_node_t **head, menu_node_t *lastPtr)
+static int bubble_sort(menu_node_t **head, menu_node_t *last_ptr)
 {
     int swapped = 0;
-    menu_node_t *currPtr = *head;
+    menu_node_t *curr_ptr = *head;
 
-    while (currPtr != NULL && currPtr->next != lastPtr) {
-        if (currPtr->menu->y_index > currPtr->next->menu->y_index) {
-            swap_nodes(head, currPtr, currPtr->next);
+    while (curr_ptr != NULL && curr_ptr->next != last_ptr) {
+        if (curr_ptr->menu->y_index > curr_ptr->next->menu->y_index) {
+            swap_nodes(head, curr_ptr, curr_ptr->next);
             swapped = 1;
         }
-        currPtr = currPtr->next;
+        curr_ptr = curr_ptr->next;
     }
     return swapped;
 }
@@ -44,12 +44,12 @@ static int bubble_sort(menu_node_t **head, menu_node_t *lastPtr)
 void sort_menus(menu_node_t **head)
 {
     int swapped;
-    menu_node_t *lastPtr = NULL;
+    menu_node_t *last_ptr = NULL;
 
     if (head == NULL)
         return;
     do {
-        swapped = bubble_sort(head, lastPtr);
-        lastPtr = (*head)->next;
+        swapped = bubble_sort(head, last_ptr);
+        last_ptr = (*head)->next;
     } while (swapped);
 }

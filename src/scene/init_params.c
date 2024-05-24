@@ -47,8 +47,8 @@ static void set_window_size_to_full(rpg_t *main)
 {
     main->window->mode.width = 1920;
     main->window->mode.height = 1080;
-    sfRenderWindow_destroy(main->window->renderWindow);
-    main->window->renderWindow = sfRenderWindow_create(main->window->mode,
+    sfRenderWindow_destroy(main->window->render_window);
+    main->window->render_window = sfRenderWindow_create(main->window->mode,
         "RPGLand", sfDefaultStyle, NULL);
     update_button_positions_and_sizes(main, main->scene_manager->current);
 }
@@ -57,8 +57,8 @@ static void set_window_size_to_windowed(rpg_t *main)
 {
     main->window->mode.width = 1280;
     main->window->mode.height = 720;
-    sfRenderWindow_destroy(main->window->renderWindow);
-    main->window->renderWindow = sfRenderWindow_create(main->window->mode,
+    sfRenderWindow_destroy(main->window->render_window);
+    main->window->render_window = sfRenderWindow_create(main->window->mode,
         "RPGLand", sfDefaultStyle, NULL);
     update_button_positions_and_sizes(main, main->scene_manager->current);
 }
@@ -112,7 +112,7 @@ void define_exit_params_button(rpg_t *main,
 
 void render_params(scene_t *scene, rpg_t *main)
 {
-    sfRenderWindow_drawSprite(main->window->renderWindow,
+    sfRenderWindow_drawSprite(main->window->render_window,
     main->background_sprite, NULL);
     render_scene(scene, main);
 }
