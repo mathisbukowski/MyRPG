@@ -31,6 +31,9 @@ int configure_tiles(layer_t *layer, char **tile_data, sfTexture *texture)
     int index = 0;
     tile_config_t config = { .layer = layer, .texture = texture };
 
+    layer->coords = malloc(sizeof(tile_t *) * layer->height);
+    for (int x = 0; x < layer->height; x++)
+        layer->coords[x] = malloc(sizeof(tile_t) * layer->width);
     for (int i = 0; i < layer->height; i++)
         for (int j = 0; j < layer->width; j++) {
             tile_id = (int)strtol(tile_data[index], NULL, 10);
@@ -38,6 +41,8 @@ int configure_tiles(layer_t *layer, char **tile_data, sfTexture *texture)
             config.i = i;
             config.j = j;
             configure_tile(&config);
+            layer->coords[i][j].x = config.j * 16;
+            layer->coords[i][j].y = config.i * 16;
             index++;
         }
     return 0;
