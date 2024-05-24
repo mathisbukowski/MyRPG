@@ -20,7 +20,7 @@ void screen_manager(rpg_t *main)
     entity_t *player;
 
     add_event_to_list(main, &close_window, sfEvtClosed);
-    add_key_to_keymap(&(main->keymap), sfKeyEscape, &close_window);
+    add_key_to_keymap(&(main->keymap), sfKeyEscape, &open_params);
     add_entity_to_list(main, (entity_params_t){"player",
     (sfVector2f){928, 508}, PLAYER}, "assets/player/player.png");
     define_background(main);

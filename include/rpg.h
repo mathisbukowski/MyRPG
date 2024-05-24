@@ -7,7 +7,7 @@
 
 #ifndef RPG_H
     #define RPG_H
-    #define PLAYER_SPEED 1
+    #define PLAYER_SPEED 75
     #include <SFML/System.h>
     #include <SFML/Window.h>
     #include <SFML/Graphics.h>
@@ -192,6 +192,8 @@ struct rpg_s {
     sfClock *fps_clock;
     sfSprite *background_sprite;
     sfTexture *background_texture;
+    sfClock *global;
+    float elapsed;
 };
 
 // Main Category
@@ -301,4 +303,5 @@ void init_background(rpg_t *main);
 
 void update_button_positions_and_sizes(rpg_t *main, scene_t *scene);
 void set_view(rpg_t *main, entity_t *player);
+float get_elapsed_time(rpg_t *main);
 #endif //RPG_H
