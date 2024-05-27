@@ -70,7 +70,7 @@ static int create_menu_text(menu_t *menu, const menu_params_t menuParams)
 }
 
 static void init_variables(menu_t *menu, const menu_params_t menuParams,
-    rpg_t *params, scene_t *scene)
+    scene_t *scene)
 {
     menu->name = menuParams.name;
     menu->pos = menuParams.pos;
@@ -119,13 +119,13 @@ static void set_submenu(menu_t *menu)
     sfRectangleShape_setPosition(menu->subMenu->rect, menu->subMenu->pos);
 }
 
-int create_menu(const menu_params_t menuParams, scene_t *scene, rpg_t *params)
+int create_menu(const menu_params_t menuParams, scene_t *scene)
 {
     menu_t *menu = malloc(sizeof(menu_t));
 
     if (menu == NULL)
         return 84;
-    init_variables(menu, menuParams, params, scene);
+    init_variables(menu, menuParams, scene);
     if (menu->subMenu != NULL)
         set_submenu(menu);
     add_menu_to_scene(scene, menu);

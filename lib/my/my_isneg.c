@@ -13,4 +13,5 @@ int my_isneg(int n)
     } else {
         my_putchar(78);
     }
+    return (0);
 }

@@ -18,18 +18,18 @@ static void create_fps_button(const rpg_t *main, sfVector2f *button_size,
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"60", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
-        sfBlack, 30}, "paramsMenu", set_window_fps_to_sixty}, main, scene);
+        sfBlack, 30}, "paramsMenu", set_window_fps_to_sixty}, scene);
     create_button((button_params_t){"100", hundred_twenty_fps_pos,
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"100", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
-        sfBlack, 30}, "paramsMenu", set_window_fps_to_hundred}, main, scene);
+        sfBlack, 30}, "paramsMenu", set_window_fps_to_hundred}, scene);
     create_button((button_params_t){"120", two_hundred_fourty_fps_pos,
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"120", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
         sfBlack, 30}, "paramsMenu", set_window_fps_to_hundred_twenty},
-        main, scene);
+        scene);
 }
 
 void define_fps_button(rpg_t *main,
@@ -39,7 +39,7 @@ void define_fps_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"FPS", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "paramsMenu", NULL}, main, scene);
+    sfBlack, 30}, "paramsMenu", NULL}, scene);
     create_fps_button(main, &button_size, scene, fps_pos);
 }
 
@@ -72,20 +72,20 @@ static void create_screen_size_button(const rpg_t *main,
         &(text_infos_t){"Fullscreen", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
         sfBlack, 30}, "paramsMenu",
-        set_window_size_to_full}, main, scene);
+        set_window_size_to_full}, scene);
     create_button((button_params_t){"Windowed",
         (sfVector2f){(*options_pos).x, (*options_pos).y + 150},
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"Windowed", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
-        sfBlack, 30}, "paramsMenu", set_window_size_to_windowed}, main, scene);
+        sfBlack, 30}, "paramsMenu", set_window_size_to_windowed}, scene);
     create_button((button_params_t){"Borderless",
         (sfVector2f){(*options_pos).x + 500, (*options_pos).y + 150},
         (*button_size), sfBlue, sfBlue,
         &(text_infos_t){"Borderless", main->utils->font,
         (sfVector2f){(*button_size).x / 10, (*button_size).y / 4},
         sfBlack, 30}, "paramsMenu",
-        set_window_size_to_full}, main, scene);
+        set_window_size_to_full}, scene);
 }
 
 void define_screen_button(rpg_t *main,
@@ -95,7 +95,7 @@ void define_screen_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Screen size", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "paramsMenu", NULL}, main, scene);
+    sfBlack, 30}, "paramsMenu", NULL}, scene);
     create_screen_size_button(main, &button_size, &options_pos, scene);
 }
 
@@ -107,7 +107,7 @@ void define_exit_params_button(rpg_t *main,
         button_size, sfBlue, sfBlue,
         &(text_infos_t){"Go to main menu", main->utils->font,
         (sfVector2f){button_size.x / 10, button_size.y / 4},
-        sfBlack, 30}, "paramsMenu", &open_start}, main, scene);
+        sfBlack, 30}, "paramsMenu", &open_start}, scene);
 }
 
 void render_params(scene_t *scene, rpg_t *main)
@@ -139,7 +139,7 @@ void init_params_scene(rpg_t *main)
         return;
     scene = memset(scene, 0, sizeof(scene_t));
     create_menu((menu_params_t){"paramsMenu", menu_pos,
-    msize, 0, sfTransparent, NULL, NULL, 0}, scene, main);
+    msize, 0, sfTransparent, NULL, NULL, 0}, scene);
     define_fps_button(main, bsize, fps_pos, scene);
     define_screen_button(main, bsize, options_pos, scene);
     define_exit_params_button(main, bsize, exit_pos, scene);

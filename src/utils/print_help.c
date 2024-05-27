@@ -12,7 +12,7 @@ static void help(void)
     printf("Help Panel of RPG");
 }
 
-int print_help(int ac, char **av)
+int print_help(char **av)
 {
     if (av[1] == NULL)
         return 1;
