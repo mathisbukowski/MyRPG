@@ -24,6 +24,8 @@ static int destroy_and_recreate_sprite(entity_t *entity, char const *path)
 
 static int already_in(entity_t *current, char const *name, char const *path)
 {
+    if (path == NULL)
+        return 1;
     while (current != NULL) {
         if (current->name != NULL && strcmp(current->name, name) == 0)
             return destroy_and_recreate_sprite(current, path);
@@ -47,13 +49,20 @@ static void add_to_linked(entity_t **head, entity_t *new_node)
 
 static void destroy_if_no_texture(entity_t *new_node)
 {
-    if (new_node->sprite)
+    if (new_node->sprite) {
         sfSprite_destroy(new_node->sprite);
-    if (new_node->texture)
+        new_node->sprite = NULL;
+    }
+    if (new_node->texture) {
         sfTexture_destroy(new_node->texture);
-    if (new_node->name)
+        new_node->texture = NULL;
+    }
+    if (new_node->name) {
         free(new_node->name);
+        new_node->name = NULL;
+    }
     free(new_node);
+    new_node = NULL;
 }
 
 static sfIntRect init_rect(void)
@@ -74,6 +83,7 @@ static entity_t *create_new_sprite(const entity_params_t *params,
 
     if (new_node == NULL)
         return NULL;
+    memset(new_node, 0, sizeof(entity_t));
     new_node->sprite = sfSprite_create();
     new_node->texture = sfTexture_createFromFile(path, NULL);
     if (check_texture(new_node->sprite, new_node->texture)) {
@@ -105,6 +115,7 @@ void add_entity_to_list(rpg_t *main, entity_params_t params, char const *path,
     }
     new_node->name = strdup(params.name);
     if (new_node->name == NULL) {
+        new_node->name = NULL;
         fprintf(stderr, "Failed to allocate memory for the entity name.\n");
         destroy_if_no_texture(new_node);
         return;

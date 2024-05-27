@@ -13,6 +13,8 @@ void init_player_sprite(rpg_t *main)
     sfVector2u textureSize;
 
     player = find_entity(main, "player");
+    if (player == NULL)
+        return;
     player->pos.x = 1200;
     player->pos.y = 380;
     player->speed = PLAYER_SPEED;

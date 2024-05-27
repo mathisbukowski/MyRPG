@@ -29,6 +29,8 @@ void left_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
+    if (player == NULL)
+        return;
     move_entity(main, player, LEFT);
     if (player->type != L_ANIMATED) {
         player->rect.top = 64;
@@ -47,6 +49,8 @@ void right_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
+    if (player == NULL)
+        return;
     move_entity(main, player, RIGHT);
     if (player->type != R_ANIMATED) {
         player->rect.top = 192;
@@ -65,6 +69,8 @@ void up_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
+    if (player == NULL)
+        return;
     move_entity(main, player, UP);
     if (player->type != U_ANIMATED) {
         player->rect.top = 0;
@@ -83,6 +89,8 @@ void down_action(rpg_t *main)
 {
     entity_t *player = find_entity(main, "player");
 
+    if (player == NULL)
+        return;
     move_entity(main, player, DOWN);
     if (player->type != D_ANIMATED) {
         player->rect.top = 128;
