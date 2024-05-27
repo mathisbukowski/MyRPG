@@ -57,7 +57,7 @@ FILE *load_map_file(const char *path, struct stat *st)
     return map_file;
 }
 
-char *read_map_data(const char *path, FILE *map_file, size_t size)
+char *read_map_data(FILE *map_file, size_t size)
 {
     char *buffer = allocate_buffer(size);
 
@@ -81,5 +81,5 @@ char *load_map_from_disk(const char *path)
 
     if (map_file == NULL)
         return NULL;
-    return read_map_data(path, map_file, st.st_size);
+    return read_map_data(map_file, st.st_size);
 }

@@ -11,6 +11,7 @@ void display_window(rpg_t *main)
 {
     float elapsed = get_elapsed_time(main);
 
+    UNUSED(elapsed);
     sfRenderWindow_clear(main->window->renderWindow, sfBlack);
     draw_map(main, main->map);
     sfRenderWindow_setView(main->window->renderWindow,

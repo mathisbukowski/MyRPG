@@ -20,6 +20,7 @@ int p_flag(va_list arg)
 
 int pc_flag(va_list arg)
 {
+    (void)arg;
     write(1, "%", 1);
     return 0;
 }

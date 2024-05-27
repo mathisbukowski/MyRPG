@@ -14,7 +14,7 @@ void define_start_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Start Game", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "mainMenu", &open_game}, main, scene);
+    sfBlack, 30}, "mainMenu", &open_game}, scene);
 }
 
 void define_options_button(rpg_t *main,
@@ -24,7 +24,7 @@ void define_options_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Settings", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "mainMenu", &open_params}, main, scene);
+    sfBlack, 30}, "mainMenu", &open_params}, scene);
 }
 
 void define_exit_button(rpg_t *main,
@@ -34,7 +34,7 @@ void define_exit_button(rpg_t *main,
     button_size, sfBlue, sfBlue,
     &(text_infos_t){"Exit", main->utils->font,
     (sfVector2f){button_size.x / 10, button_size.y / 4},
-    sfBlack, 30}, "mainMenu", &close_window}, main, scene);
+    sfBlack, 30}, "mainMenu", &close_window}, scene);
 }
 
 static void draw_start_menu(scene_t *current, rpg_t *main)
@@ -67,7 +67,7 @@ void init_start_scene(rpg_t *main)
         return;
     memset(scene, 0, sizeof(scene_t));
     create_menu((menu_params_t){"mainMenu", menu_pos,
-    msize, 0, sfTransparent, NULL, NULL, 0}, scene, main);
+    msize, 0, sfTransparent, NULL, NULL, 0}, scene);
     define_start_button(main, bsize, start_pos, scene);
     define_options_button(main, bsize, options_pos, scene);
     define_exit_button(main, bsize, exit_pos, scene);

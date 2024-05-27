@@ -62,7 +62,7 @@ typedef struct render_bounds_s {
     int endCol;
 }render_bounds_t;
 
-int create_menu(menu_params_t menuParams, scene_t *scene, rpg_t *params);
+int create_menu(menu_params_t menuParams, scene_t *scene);
 void check_menu_hover(menu_t *menu, sfVector2i mousePos);
 menu_t *find_menu_by_name(const char *name, menu_node_t *head);
 void sort_menus(menu_node_t **head);
@@ -117,7 +117,7 @@ typedef struct button_params_s {
 }button_params_t;
 
 int create_button(const button_params_t buttonParams,
-    const rpg_t *params, scene_t *scene);
+    scene_t *scene);
 void handle_hover_and_click(const button_node_t *buttonNode,
     sfVector2i mousePos, rpg_t *params);
 void render_scene(scene_t *scene, rpg_t *params);

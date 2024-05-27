@@ -87,7 +87,7 @@ void set_button_position(button_t *button, const sfVector2f linkedMenuPos,
 }
 
 int set_text_and_linked_menu(button_t *button, button_params_t buttonParams,
-    const rpg_t *params, scene_t *scene)
+    scene_t *scene)
 {
     button->text = NULL;
     if (buttonParams.text != NULL)
@@ -103,7 +103,7 @@ int set_text_and_linked_menu(button_t *button, button_params_t buttonParams,
 }
 
 int create_button(const button_params_t buttonParams,
-    const rpg_t *params, scene_t *scene)
+    scene_t *scene)
 {
     button_t *button = malloc(sizeof(button_t));
     menu_t *linkedMenu =
@@ -119,7 +119,7 @@ int create_button(const button_params_t buttonParams,
     linkedMenuPos = sfRectangleShape_getPosition(linkedMenu->rect);
     init_button(button, buttonParams);
     set_button_position(button, linkedMenuPos, buttonParams);
-    if (set_text_and_linked_menu(button, buttonParams, params, scene) == 84)
+    if (set_text_and_linked_menu(button, buttonParams, scene) == 84)
         return 84;
     if (add_button_to_menu(button, linkedMenu) == 84)
         return 84;

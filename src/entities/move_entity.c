@@ -7,8 +7,7 @@
 
 #include "rpg.h"
 
-static void handle_diagonal_movement(rpg_t *main, entity_t *entity,
-    float *speed)
+static void handle_diagonal_movement(float *speed)
 {
     if ((sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS)) &&
         (sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))) {
@@ -23,7 +22,7 @@ void move_entity(rpg_t *main, entity_t *entity, int direction)
     int tile_x;
     int tile_y;
 
-    handle_diagonal_movement(main, entity, &speed);
+    handle_diagonal_movement(&speed);
     if (direction == UP)
         next_pos.y -= speed;
     if (direction == DOWN)

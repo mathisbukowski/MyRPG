@@ -39,7 +39,7 @@ void screen_manager(rpg_t *main)
     }
 }
 
-int game_logic(int ac, char **av)
+int game_logic(char **av)
 {
     rpg_t *main = init_structure();
 

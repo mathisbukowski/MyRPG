@@ -10,7 +10,6 @@ void init_player_sprite(rpg_t *main)
 {
     entity_t *player = NULL;
     sfIntRect rect = {320, 128, 64, 64};
-    sfVector2u textureSize;
 
     player = find_entity(main, "player");
     if (player == NULL)

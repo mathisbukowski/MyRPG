@@ -33,6 +33,7 @@
     #include "my.h"
     #include "my_printf.h"
     #include "map.h"
+    #define UNUSED(x) (void)(x)
 
 typedef struct rpg_s rpg_t;
 typedef struct entity_s entity_t;
@@ -201,7 +202,7 @@ struct rpg_s {
 };
 
 // Main Category
-int game_logic(int ac, char **av);
+int game_logic(char **av);
 
 // Utils
 int check_tty(char **env);
@@ -220,7 +221,7 @@ void display_window(rpg_t *main);
 void destroy_window(rpg_t *main);
 
 // Help Category
-int print_help(int ac, char **av);
+int print_help(char **av);
 
 // Event Manager
 void add_event_to_list(rpg_t *main, void (*function)(rpg_t *),
