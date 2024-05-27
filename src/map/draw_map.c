@@ -13,6 +13,8 @@ void set_view(rpg_t *main, entity_t *player)
     sfVector2f size = {(float)main->window->mode.width / 4.0f,
         (float)main->window->mode.height / 4.0f};
 
+    if (player == NULL)
+        return;
     center.x = player->pos.x;
     center.y = player->pos.y;
     sfView_setCenter(main->view, center);
@@ -44,6 +46,8 @@ render_bounds_t set_render_boundaries(int tileSize, sfVector2f *viewSize,
 
 static void display_player(rpg_t *main, entity_t *player)
 {
+    if (player == NULL)
+        return;
     if (player->sprite && player->state) {
         manage_clock(player);
         sfRenderWindow_drawSprite(main->window->renderWindow,

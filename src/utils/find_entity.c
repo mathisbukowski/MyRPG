@@ -10,7 +10,9 @@ entity_t *find_entity(rpg_t *main, char *entity_name)
 {
     entity_t *current = main->entities;
 
-    while (my_strcmp(entity_name, current->name) != 0) {
+    if (entity_name == NULL)
+        return NULL;
+    while (current != NULL && my_strcmp(entity_name, current->name) != 0) {
         current = current->next;
     }
     return current;
