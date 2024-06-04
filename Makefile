@@ -62,7 +62,12 @@ SRC = 	src/main.c 								\
 		src/player/player_move_functions.c 		\
 		src/player/player_stand_function.c 		\
 		src/scene/game/init_game.c		 		\
-
+		src/inventory/add_item.c 				\
+		src/inventory/display_inventory.c 		\
+		src/inventory/rm_item.c 			\
+		src/inventory/init_inventory.c 			\
+		src/inventory/is_in_inventory.c 		\
+		src/inventory/set_item.c
 OBJ = $(SRC:.c=.o)
 
 NAME = my_rpg

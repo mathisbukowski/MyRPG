@@ -29,6 +29,7 @@ void screen_manager(rpg_t *main)
     init_params_scene(main);
     init_game_scene(main);
     init_player_sprite(main);
+    init_inventory_sprite(main);
     create_npc(main, "black-smith", (sfVector2f){816, 337},
         (sfIntRect){0, 0, 64, 64});
     player = find_entity(main, "player");

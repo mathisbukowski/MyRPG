@@ -250,8 +250,8 @@ void player_no_action(entity_t *player);
 void manage_clock(entity_t *entity);
 
 // Inventory
-int delete_inventory(rpg_t *main, char *name, int nb);
-int add_inventory(rpg_t *main, char *name, int nb);
+int rm_item(rpg_t *main, char *name, int nb);
+int add_item(rpg_t *main, char *name, int nb);
 int is_in_inventory(rpg_t *main, char *item, int nb);
 int find_id(char *item);
 void display_inventory(rpg_t *main);
@@ -272,7 +272,7 @@ entity_t *init_entity(void);
 scene_list_t *init_scene(void);
 void init_fps(rpg_t *main);
 void init_bank_item_sprite(inventory_t *inventory);
-inventory_t *init_inventory_sprite(rpg_t *main);
+void init_inventory_sprite(rpg_t *main);
 
 
 // Scenes
